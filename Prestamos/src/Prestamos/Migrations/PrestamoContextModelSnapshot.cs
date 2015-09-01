@@ -15,10 +15,25 @@ namespace PrestamosMigrations
                 .Annotation("ProductVersion", "7.0.0-beta6-13815")
                 .Annotation("SqlServer:ValueGenerationStrategy", "IdentityColumn");
 
-            builder.Entity("Prestamos.Models.Prueba", b =>
+            builder.Entity("Negocios.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Cedula")
+                        .Required();
+
+                    b.Property<string>("PrimerApellido")
+                        .Required();
+
+                    b.Property<string>("PrimerNombre")
+                        .Required();
+
+                    b.Property<string>("SegundoApellido")
+                        .Required();
+
+                    b.Property<string>("SegundoNombre")
+                        .Required();
 
                     b.Key("Id");
                 });
