@@ -1,0 +1,20 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Negocios Class Library",
+  "authors": [ "Roy" ],
+  "tags": [ "" ],
+  "projectUrl": "https://github.com/roysanchez/Prestamos",
+  "licenseUrl": "https://github.com/roysanchez/Prestamos.git",
+
+  "dependencies": {
+    "System.Collections": "4.0.10-beta-23109",
+    "System.Linq": "4.0.0-beta-23109",
+    "System.Threading": "4.0.10-beta-23109",
+    "System.Runtime": "4.0.10-beta-23109",
+    "Microsoft.CSharp": "4.0.0-beta-23109"
+  },
+
+  "frameworks": {
+    "dnxcore50" : { }
+  }
+}

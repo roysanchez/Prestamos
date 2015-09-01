@@ -53,8 +53,12 @@ namespace Prestamos
             // Add Entity Framework services to the services container.
             services.AddEntityFramework()
                 .AddSqlServer()
+                .AddDbContext<PrestamoContext>(options =>
+                    options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]))
                 .AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+                
+
 
             // Add Identity services to the services container.
             services.AddIdentity<ApplicationUser, IdentityRole>()
