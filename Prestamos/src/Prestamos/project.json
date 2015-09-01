@@ -35,6 +35,7 @@
   },
 
   "frameworks": {
+    "dnx451": { },//TODO Borrar, se dejo pq sino, no colorea los tag helpers 
     "dnxcore50": { }
   },
 
