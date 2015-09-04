@@ -24,5 +24,40 @@ namespace Prestamos.Controllers
             var clientes = db.Clientes.ToList();
             return View(clientes);
         }
+
+        //TODO Buscar un patron de EF7 para no tener que repetir el mismo query, talvez el patro repositorio?
+        public IActionResult Details(int? id)
+        {
+            if(id.HasValue)
+            {
+                //TODO CORECLR Cambiar de where a Find cuando este implementado
+                var cliente = db.Clientes.Where(c => c.Id == id).FirstOrDefault();
+                if (cliente == null)
+                    return base.HttpNotFound();
+
+                return View(cliente);
+            }
+            else
+            {
+                return base.HttpBadRequest();
+            }
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if(id.HasValue)
+            {
+                //TODO CORECLR Cambiar de where a Find cuando este implementado
+                var cliente = db.Clientes.Where(c => c.Id == id).FirstOrDefault();
+                if (cliente == null)
+                    return base.HttpNotFound();
+
+                return View(cliente);
+            }
+            else
+            {
+                return base.HttpBadRequest();
+            }
+        }
     }
 }

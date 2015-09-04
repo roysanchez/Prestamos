@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,22 +16,28 @@ namespace Negocios
 
         public int Id { get; set; }
 
+        [Display(Name = "Cédula")]
         public string Cedula { get; set; }
 
+        [Display(Name = "Primer nombre")]
         public string PrimerNombre { get; set; }
 
+        [Display(Name = "Segundo nombre")]
         public string SegundoNombre { get; set; }
 
+        [Display(Name = "Primer apellido")]
         public string PrimerApellido { get; set; }
 
+        [Display(Name = "Segundo apellido")]
         public string SegundoApellido { get; set; }
 
+        [Display(Name = "Nombre largo")]
         public string NombreCompleto
         {
             get { return PrimerNombre + " " + SegundoNombre + " " + PrimerApellido + " " + SegundoApellido; }
         }
 
-        //[Display]
+        [Display(Name = "Nombre")]
         public string NombreTitular
         {
             get { return PrimerNombre + " " + PrimerApellido; }

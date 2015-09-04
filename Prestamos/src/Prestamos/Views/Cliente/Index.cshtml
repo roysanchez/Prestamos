@@ -8,22 +8,28 @@
 @{
     //TODO Verificar que exista un tag helper para este caso
 }
-<table>
+<table class="table-bordered">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Cedula)</th>
             <th>@Html.DisplayNameFor(model => model.NombreTitular)</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var i in Model)
+        @foreach(var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayTextFor(model => i.Cedula)
+                    @Html.DisplayTextFor(model => item.Cedula)
                 </td>
                 <td>
-                    @Html.DisplayTextFor(model => i.NombreTitular)
+                    @Html.DisplayTextFor(model => item.NombreTitular)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-Id="@item.Id">Editar</a>
+                    <a asp-action="Details" asp-route-Id="@item.Id">Detalles</a>
+                    <a asp-action="Delete" asp-route-Id="@item.Id">Borrar</a>
                 </td>
             </tr>
         }
