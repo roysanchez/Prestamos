@@ -30,7 +30,7 @@ namespace Negocios
             get { return PrimerNombre + " " + SegundoNombre + " " + PrimerApellido + " " + SegundoApellido; }
         }
 
-        [Display]
+        //[Display]
         public string NombreTitular
         {
             get { return PrimerNombre + " " + PrimerApellido; }

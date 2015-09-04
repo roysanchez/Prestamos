@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Prestamos.TagHelpers
 {
+    /*
     [TargetElement("th", Attributes = DisplayNameAttributeName)]
     public class DisplayNameTagHelper : TagHelper
     {
@@ -29,4 +30,5 @@ namespace Prestamos.TagHelpers
 
         }
     }
+    */
 }

@@ -11,17 +11,18 @@ namespace Prestamos.Controllers
 {
     public class ClienteController : Controller
     {
-        private readonly PrestamoContext _prestamoContext;
+        private readonly PrestamoContext db;
 
         public ClienteController(PrestamoContext prestamoContext)
         {
-            _prestamoContext = prestamoContext;
+            db = prestamoContext;
         }
 
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            var clientes = db.Clientes.ToList();
+            return View(clientes);
         }
     }
 }
