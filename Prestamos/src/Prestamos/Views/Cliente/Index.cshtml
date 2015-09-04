@@ -1,8 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    // ViewBag.Title = "Home Page";
-}
+﻿@model IEnumerable<Negocios.Cliente>
 
-Listado de clientes
+@{
+    ViewBag.Title = "Clientes";
+
+}
+<p>Listado de clientes</p>
+@{
+    //TODO Verificar que exista un tag helper para este caso
+}
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Cedula)</th>
+            <th>@Html.DisplayNameFor(model => model.NombreTitular)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var i in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayText(i.Cedula)
+                </td>
+                <td>
+                    @Html.DisplayText(i.NombreTitular)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
