@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 using Prestamos.Models;
+using Negocios;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,20 +20,24 @@ namespace Prestamos.Controllers
             db = prestamoContext;
         }
 
-        // GET: /<controller>/
-        public IActionResult Index()
+        //TODO Sustituir todos los sitios donde se llame esto por Find, cuando se implemente
+        public async Task<Cliente> BuscarClienteId(int? id)
         {
-            var clientes = db.Clientes.ToList();
+            return await db.Clientes.Where(c => c.Id == id).FirstOrDefaultAsync();
+        }
+
+        // GET: /<controller>/
+        public async Task<IActionResult> Index()
+        {
+            var clientes = await db.Clientes.ToListAsync();
             return View(clientes);
         }
-
-        //TODO Buscar un patron de EF7 para no tener que repetir el mismo query, talvez el patro repositorio?
-        public IActionResult Details(int? id)
+        
+        public async Task<IActionResult> Details(int? id)
         {
             if(id.HasValue)
             {
-                //TODO CORECLR Cambiar de where a Find cuando este implementado
-                var cliente = db.Clientes.Where(c => c.Id == id).FirstOrDefault();
+                var cliente = await BuscarClienteId(id);
                 if (cliente == null)
                     return base.HttpNotFound();
 
@@ -43,12 +49,11 @@ namespace Prestamos.Controllers
             }
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if(id.HasValue)
             {
-                //TODO CORECLR Cambiar de where a Find cuando este implementado
-                var cliente = db.Clientes.Where(c => c.Id == id).FirstOrDefault();
+                var cliente = await BuscarClienteId(id);
                 if (cliente == null)
                     return base.HttpNotFound();
 
@@ -58,6 +63,22 @@ namespace Prestamos.Controllers
             {
                 return base.HttpBadRequest();
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Cliente cliente)
+        {
+            if(ModelState.IsValid)
+            {
+                db.Entry(cliente).State = EntityState.Modified;
+                db.Entry(cliente).Property("Cedula").IsModified = false;
+
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View(cliente);
         }
     }
 }

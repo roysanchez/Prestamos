@@ -1,6 +1,62 @@
 ﻿@model Negocios.Cliente
 
-@{ 
+@{
     ViewBag.Title = "Editar " + Model.PrimerNombre;
 }
 
+<h2>Editar @Model.NombreTitular</h2>
+
+<form asp-action="Edit" method="post" class="form-horizontal" role="form">
+    <h4>Cliente</h4>
+    <hr />
+    <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Cedula" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Cedula" class="form-control" readonly />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PrimerNombre" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="PrimerNombre" class="form-control" />
+            <span asp-validation-for="PrimerNombre" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SegundoNombre" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="SegundoNombre" class="form-control" />
+            <span asp-validation-for="SegundoNombre" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PrimerApellido" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="PrimerApellido" class="form-control" />
+            <span asp-validation-for="PrimerApellido" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SegundoApellido" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="SegundoApellido" class="form-control" />
+            <span asp-validation-for="SegundoApellido" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Volver</a>
+</div>
