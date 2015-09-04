@@ -67,7 +67,7 @@ namespace Prestamos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Cliente cliente)
+        public async Task<IActionResult> Edit([Bind()]Cliente cliente)
         {
             if(ModelState.IsValid)
             {
@@ -79,6 +79,11 @@ namespace Prestamos.Controllers
             }
 
             return View(cliente);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }

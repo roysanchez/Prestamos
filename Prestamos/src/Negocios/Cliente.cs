@@ -17,18 +17,23 @@ namespace Negocios
         public int Id { get; set; }
 
         [Display(Name = "Cédula")]
+        [Required(ErrorMessage = "La cédula es obligatoria")]
         public string Cedula { get; set; }
 
         [Display(Name = "Primer nombre")]
+        [Required(ErrorMessage = "El primer nombre es obligatorio")]
         public string PrimerNombre { get; set; }
 
         [Display(Name = "Segundo nombre")]
+        [Required(ErrorMessage = "El segundo nombre es obligatorio")]
         public string SegundoNombre { get; set; }
 
         [Display(Name = "Primer apellido")]
+        [Required(ErrorMessage = "El primer apellido es obligatorio")]
         public string PrimerApellido { get; set; }
 
         [Display(Name = "Segundo apellido")]
+        [Required(ErrorMessage = "El segundo apellido es obligatorio")]
         public string SegundoApellido { get; set; }
 
         [Display(Name = "Nombre largo")]
