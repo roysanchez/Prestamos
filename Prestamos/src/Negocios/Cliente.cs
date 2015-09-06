@@ -18,6 +18,7 @@ namespace Negocios
 
         [Display(Name = "Cédula")]
         [Required(ErrorMessage = "La cédula es obligatoria")]
+        [StringLength(11, ErrorMessage = "La cédula no puede tener mas de 11 caracteres")]
         public string Cedula { get; set; }
 
         [Display(Name = "Primer nombre")]
@@ -34,7 +35,7 @@ namespace Negocios
         [Display(Name = "Segundo apellido")]
         public string SegundoApellido { get; set; }
 
-        [Display(Name = "Nombre largo")]
+        [Display(Name = "Nombre")]
         public string NombreCompleto
         {
             get { return PrimerNombre + " " + SegundoNombre + " " + PrimerApellido + " " + SegundoApellido; }
