@@ -18,8 +18,8 @@ namespace Negocios
 
         }
 
-        public Moneda moneda { get; set; }
+        public Moneda Moneda { get; set; }
 
-        public decimal monto { get; set; }
+        public decimal Monto { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,15 +20,22 @@ namespace Negocios
 
         }
 
+        public int Id { get; set; }
+
         /// <summary>
         /// Porcentaje del prestamo
         /// </summary>
         public int Porciento { get; set; }
 
+        //TODO Habilitar cuando EF7 tenga habilitado Complex Types / Value Objects y eliminar las otras 2 propiedades
         /// <summary>
         /// Monto prestado
         /// </summary>
-        public Dinero Monto { get; set; }
+        //public Dinero Monto { get; set; }
+
+        public Moneda Moneda { get; set; }
+
+        public decimal Monto { get; set; }
 
         public Periodo FormaPago { get; set; }
 
@@ -58,16 +66,19 @@ namespace Negocios
         /// <summary>
         /// Fecha se entrego el dinero
         /// </summary>
+        [Required]
         public DateTime FechaDesembolso { get; set; }
 
         /// <summary>
         /// Fecha de inicio del prestamo
         /// </summary>
+        [Required]
         public DateTime FechaInicio { get; set; }
 
         /// <summary>
         /// Fecha final de prestamo
         /// </summary>
+        [Required]
         public DateTime FechaFin { get; set; }
 
         /// <summary>
@@ -78,6 +89,7 @@ namespace Negocios
         /// <summary>
         /// Cliente con la deuda
         /// </summary>
+        [Required]
         public Cliente Deudor { get; set; }
 
         /// <summary>
