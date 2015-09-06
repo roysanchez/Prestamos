@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,40 +44,18 @@ namespace Negocios
         public int CantCuotas { get; set; }
 
         /// <summary>
-        /// Cantidad de meses del prestamo
-        /// </summary>
-        public double CantMesesAprox
-        {
-            get
-            {
-                return this.CantDias / (365.25 / 12);
-            }
-        }
-
-        public int CantDias
-        {
-            get
-            {
-                return (FechaFin - FechaInicio).Days;
-            }
-        }
-
-        /// <summary>
         /// Fecha se entrego el dinero
         /// </summary>
-        [Required]
         public DateTime FechaDesembolso { get; set; }
 
         /// <summary>
         /// Fecha de inicio del prestamo
         /// </summary>
-        [Required]
         public DateTime FechaInicio { get; set; }
 
         /// <summary>
         /// Fecha final de prestamo
         /// </summary>
-        [Required]
         public DateTime FechaFin { get; set; }
 
         /// <summary>
@@ -89,7 +66,6 @@ namespace Negocios
         /// <summary>
         /// Cliente con la deuda
         /// </summary>
-        [Required]
         public Cliente Deudor { get; set; }
 
         /// <summary>
