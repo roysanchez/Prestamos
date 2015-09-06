@@ -67,7 +67,7 @@ namespace Prestamos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind()]Cliente cliente)
+        public async Task<IActionResult> Edit(Cliente cliente)
         {
             if(ModelState.IsValid)
             {
@@ -84,6 +84,22 @@ namespace Prestamos.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Cliente cliente)
+        {
+            if(ModelState.IsValid)
+            {
+                cliente.Id = 0;
+                db.Entry(cliente).State = EntityState.Added;
+
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View(cliente);
         }
     }
 }

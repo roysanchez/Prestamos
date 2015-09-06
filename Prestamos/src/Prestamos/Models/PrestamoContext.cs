@@ -17,10 +17,11 @@ namespace Prestamos.Models
 
         public DbSet<Cliente> Clientes { get; set; }
 
+        //TODO Borrar cuando EF7 implemente los data annotations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.Entity<Cliente>()
                 .Property(c => c.Cedula)
                 .Required();
@@ -30,15 +31,7 @@ namespace Prestamos.Models
                 .Required();
 
             modelBuilder.Entity<Cliente>()
-                .Property(c => c.SegundoNombre)
-                .Required();
-
-            modelBuilder.Entity<Cliente>()
                 .Property(c => c.PrimerApellido)
-                .Required();
-
-            modelBuilder.Entity<Cliente>()
-                .Property(c => c.SegundoApellido)
                 .Required();
         }
     }

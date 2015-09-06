@@ -5,7 +5,7 @@ using Microsoft.Data.Entity.Migrations.Operations;
 
 namespace PrestamosMigrations
 {
-    public partial class PrestamosMigration : Migration
+    public partial class PrestamoMigration : Migration
     {
         public override void Up(MigrationBuilder migration)
         {
@@ -18,8 +18,8 @@ namespace PrestamosMigrations
                     Cedula = table.Column(type: "nvarchar(max)", nullable: false),
                     PrimerApellido = table.Column(type: "nvarchar(max)", nullable: false),
                     PrimerNombre = table.Column(type: "nvarchar(max)", nullable: false),
-                    SegundoApellido = table.Column(type: "nvarchar(max)", nullable: false),
-                    SegundoNombre = table.Column(type: "nvarchar(max)", nullable: false)
+                    SegundoApellido = table.Column(type: "nvarchar(max)", nullable: true),
+                    SegundoNombre = table.Column(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

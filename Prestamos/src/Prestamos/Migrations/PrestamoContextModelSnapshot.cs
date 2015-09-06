@@ -29,11 +29,9 @@ namespace PrestamosMigrations
                     b.Property<string>("PrimerNombre")
                         .Required();
 
-                    b.Property<string>("SegundoApellido")
-                        .Required();
+                    b.Property<string>("SegundoApellido");
 
-                    b.Property<string>("SegundoNombre")
-                        .Required();
+                    b.Property<string>("SegundoNombre");
 
                     b.Key("Id");
                 });

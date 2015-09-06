@@ -7,11 +7,11 @@ using Prestamos.Models;
 namespace PrestamosMigrations
 {
     [ContextType(typeof(PrestamoContext))]
-    partial class PrestamosMigration
+    partial class PrestamoMigration
     {
         public override string Id
         {
-            get { return "20150901204700_PrestamosMigration"; }
+            get { return "20150906145015_PrestamoMigration"; }
         }
 
         public override string ProductVersion
@@ -39,11 +39,9 @@ namespace PrestamosMigrations
                     b.Property<string>("PrimerNombre")
                         .Required();
 
-                    b.Property<string>("SegundoApellido")
-                        .Required();
+                    b.Property<string>("SegundoApellido");
 
-                    b.Property<string>("SegundoNombre")
-                        .Required();
+                    b.Property<string>("SegundoNombre");
 
                     b.Key("Id");
                 });

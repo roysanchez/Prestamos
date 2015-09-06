@@ -25,7 +25,6 @@ namespace Negocios
         public string PrimerNombre { get; set; }
 
         [Display(Name = "Segundo nombre")]
-        [Required(ErrorMessage = "El segundo nombre es obligatorio")]
         public string SegundoNombre { get; set; }
 
         [Display(Name = "Primer apellido")]
@@ -33,7 +32,6 @@ namespace Negocios
         public string PrimerApellido { get; set; }
 
         [Display(Name = "Segundo apellido")]
-        [Required(ErrorMessage = "El segundo apellido es obligatorio")]
         public string SegundoApellido { get; set; }
 
         [Display(Name = "Nombre largo")]
