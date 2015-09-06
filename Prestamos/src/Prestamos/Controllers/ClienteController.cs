@@ -101,5 +101,41 @@ namespace Prestamos.Controllers
 
             return View(cliente);
         }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id.HasValue)
+            {
+                var cliente = await BuscarClienteId(id);
+                if (cliente == null)
+                {
+                    return base.HttpNotFound();
+                }
+
+                return View(cliente);
+            }
+            else
+            {
+                return base.HttpBadRequest();
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCofirmed(int? id)
+        {
+            if(id.HasValue)
+            {
+                var cliente = await BuscarClienteId(id);
+                db.Clientes.Remove(cliente);
+
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return base.HttpBadRequest();
+            }
+        }
     }
 }

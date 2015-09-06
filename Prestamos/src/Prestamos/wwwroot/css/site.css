@@ -32,3 +32,11 @@ textarea {
         z-index: 10 !important;
     }
 }
+
+.espaciado a {
+    padding-left: 0.9em;
+}
+
+.espaciado:last-child {
+    padding-right: 0.9em;
+}

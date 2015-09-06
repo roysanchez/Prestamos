@@ -24,7 +24,12 @@ namespace Prestamos.Models
 
             modelBuilder.Entity<Cliente>()
                 .Property(c => c.Cedula)
+                .MaxLength(11)
                 .Required();
+
+            modelBuilder.Entity<Cliente>()
+                .Index(c => c.Cedula)
+                .Unique();
 
             modelBuilder.Entity<Cliente>()
                 .Property(c => c.PrimerNombre)

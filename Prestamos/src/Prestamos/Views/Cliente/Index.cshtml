@@ -2,15 +2,25 @@
 
 @{
     ViewBag.Title = "Clientes";
-
 }
+
+<environment names="Development">
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+</environment>
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+          asp-fallback-href="~/lib/font-awesome/css/font-awesome.css"
+          asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+</environment>
+
 <h2>Listado de clientes</h2>
 
 <p>
-    <a asp-action="Create">Crear cliente</a>
+    <a asp-action="Create"><i class="fa fa-plus-square-o fa-lg"></i> Crear cliente</a>
 </p>
 @{
-    //TODO Verificar que exista un tag helper para este caso
+//TODO Verificar que exista un tag helper para este caso
+//TODO arreglar formato de la cédula
 }
 <table class="table-bordered">
     <thead>
@@ -21,7 +31,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -30,10 +40,11 @@
                 <td>
                     @Html.DisplayTextFor(model => item.NombreTitular)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-Id="@item.Id">Editar</a>
-                    <a asp-action="Details" asp-route-Id="@item.Id">Detalles</a>
-                    <a asp-action="Delete" asp-route-Id="@item.Id">Borrar</a>
+                <td class="espaciado">
+                    <a asp-action="Edit" asp-route-Id="@item.Id"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+
+                    <a asp-action="Details" asp-route-Id="@item.Id"><i class="fa fa-info fa-lg"></i></a>
+                    <a asp-action="Delete" asp-route-Id="@item.Id"><i class="fa fa-trash-o fa-lg"></i></a>
                 </td>
             </tr>
         }

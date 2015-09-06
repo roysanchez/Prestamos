@@ -1,0 +1,62 @@
+﻿@model Negocios.Cliente
+
+@{
+    ViewBag.Title = "Borrar " + Model.NombreTitular;
+}
+
+<h2>Borrar</h2>
+
+<h3>Estas seguro que desea borrar este cliente?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreTitular)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreTitular)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete" method="post" class="form-horizontal" role="form">
+        <div class="form-actions">
+            <button class="btn btn-warning col-md-offset-4" data-bind="click: BorrarCliente">Borrar</button>
+        </div>
+    </form>
+</div>
+
+<a asp-action="Index">Volver</a>
+
+@section Scripts{
+    <environment names="Development">
+        <script type="text/javascript" src="~/lib/knockout/dist/knockout.debug.js"></script>
+    </environment>
+    <environment names="Staging, Production">
+        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"
+                asp-fallback-src="~/lib/knockout/dist/knockout.js"
+                asp-fallback-test="window.ko">
+        </script>
+    </environment>
+
+    <script type="text/javascript">
+        $(function () {
+            var viewModel = function () {
+                var self = this;
+                self.BorrarCliente = function () {
+                    if(window.confirm("Esta seguro que desea borrarlo?")){
+                        return true;
+                    }
+                };
+            };
+
+            ko.applyBindings(viewModel);
+        });
+    </script>
+}
