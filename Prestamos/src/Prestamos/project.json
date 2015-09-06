@@ -27,6 +27,7 @@
     "Microsoft.Framework.Logging": "1.0.0-beta6",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta6",
+    "AutoMapper": "4.0.4",
     "Negocios": ""
   },
 

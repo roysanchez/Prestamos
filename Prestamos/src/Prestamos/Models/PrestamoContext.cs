@@ -14,8 +14,9 @@ namespace Prestamos.Models
             :base(options)
         {
         }
-
+        
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Prestamo> Prestamos { get; set; }
 
         //TODO Borrar cuando EF7 implemente los data annotations
         protected override void OnModelCreating(ModelBuilder modelBuilder)

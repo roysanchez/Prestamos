@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Prestamos.Models;
 using Negocios;
+using AutoMapper;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,7 +30,7 @@ namespace Prestamos.Controllers
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {
-            var clientes = await db.Clientes.ToListAsync();
+            var clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
             return View(clientes);
         }
         
@@ -41,7 +42,7 @@ namespace Prestamos.Controllers
                 if (cliente == null)
                     return base.HttpNotFound();
 
-                return View(cliente);
+                return View(Mapper.Map<ClienteViewModel>(cliente));
             }
             else
             {
@@ -57,7 +58,7 @@ namespace Prestamos.Controllers
                 if (cliente == null)
                     return base.HttpNotFound();
 
-                return View(cliente);
+                return View(Mapper.Map<ClienteViewModel>(cliente));
             }
             else
             {
@@ -67,10 +68,12 @@ namespace Prestamos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Cliente cliente)
+        public async Task<IActionResult> Edit(ClienteViewModel model)
         {
             if(ModelState.IsValid)
             {
+                var cliente = Mapper.Map<Cliente>(model);
+
                 db.Entry(cliente).State = EntityState.Modified;
                 db.Entry(cliente).Property("Cedula").IsModified = false;
 
@@ -78,7 +81,7 @@ namespace Prestamos.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(cliente);
+            return View(model);
         }
 
         public IActionResult Create()
@@ -88,18 +91,18 @@ namespace Prestamos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Cliente cliente)
+        public async Task<IActionResult> Create(ClienteViewModel model)
         {
             if(ModelState.IsValid)
             {
-                cliente.Id = 0;
+                var cliente = Mapper.Map<Cliente>(model);
                 db.Entry(cliente).State = EntityState.Added;
 
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(cliente);
+            return View(model);
         }
 
         public async Task<IActionResult> Delete(int? id)
@@ -108,11 +111,9 @@ namespace Prestamos.Controllers
             {
                 var cliente = await BuscarClienteId(id);
                 if (cliente == null)
-                {
                     return base.HttpNotFound();
-                }
 
-                return View(cliente);
+                return View(Mapper.Map<ClienteViewModel>(cliente));
             }
             else
             {
