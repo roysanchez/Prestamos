@@ -1,4 +1,5 @@
-﻿using Negocios;
+﻿using AutoMapper;
+using Negocios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,6 +19,16 @@ namespace Prestamos.Models
 
     public class PrestamoViewModel
     {
+        private static bool _mapperCreado;
+
+        public PrestamoViewModel()
+        {
+            if(!_mapperCreado)
+            {
+                _mapperCreado = true;
+                Mapper.CreateMap<PrestamoViewModel, Prestamo>().ReverseMap();
+            }
+        }
 
         public int Id { get; set; }
 
