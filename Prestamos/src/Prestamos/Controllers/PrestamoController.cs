@@ -26,5 +26,10 @@ namespace Prestamos.Controllers
             var prest = Mapper.Map<IEnumerable<PrestamoViewModel>>(await db.Prestamos.ToListAsync());
             return View(prest);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

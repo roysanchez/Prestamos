@@ -34,7 +34,7 @@ namespace Prestamos.Models
         /// <summary>
         /// Monto prestado
         /// </summary>
-        public Dinero Monto { get; set; }
+        public Dinero  Monto { get; set; }
 
         [Display(Name = "Forma de pago")]
         public Periodo FormaPago { get; set; }
@@ -49,7 +49,7 @@ namespace Prestamos.Models
         /// Fecha se entrego el dinero
         /// </summary>
         [Required]
-        [Display(Name ="Fecha Desembolso")]
+        [Display(Name = "Fecha Desembolso")]
         public DateTime FechaDesembolso { get; set; }
 
         /// <summary>
