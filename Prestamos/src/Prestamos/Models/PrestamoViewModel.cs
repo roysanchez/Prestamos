@@ -19,8 +19,6 @@ namespace Prestamos.Models
 
     public class PrestamoViewModel
     {
-        private static bool _mapperCreado;
-
         public PrestamoViewModel()
         {
         }
