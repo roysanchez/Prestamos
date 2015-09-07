@@ -23,11 +23,6 @@ namespace Prestamos.Models
 
         public PrestamoViewModel()
         {
-            if(!_mapperCreado)
-            {
-                _mapperCreado = true;
-                Mapper.CreateMap<PrestamoViewModel, Prestamo>().ReverseMap();
-            }
         }
 
         public int Id { get; set; }

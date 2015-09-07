@@ -1,7 +1,7 @@
-﻿@model IEnumerable<ClienteViewModel>
+﻿@model IEnumerable<PrestamoViewModel>
 
 @{
-    ViewBag.Title = "Clientes";
+    ViewBag.Title = "Prestamos";
 }
 
 <environment names="Development">
@@ -13,20 +13,22 @@
           asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
 </environment>
 
-<h2>Listado de clientes</h2>
+<h2>Listado de prestamos</h2>
 
 <p>
-    <a asp-action="Create"><i class="fa fa-plus-square-o fa-lg"></i> Crear cliente</a>
+    <a asp-action="Create"><i class="fa fa-plus-square-o fa-lg"></i> Crear prestamo</a>
 </p>
 @{
 //TODO Verificar que exista un tag helper para este caso
-//TODO arreglar formato de la cédula
 }
 <table class="table-bordered">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Cedula)</th>
-            <th>@Html.DisplayNameFor(model => model.NombreTitular)</th>
+            <th>@Html.DisplayNameFor(model => model.Deudor.NombreTitular)</th>
+            <th>@Html.DisplayNameFor(model => model.Monto)</th>
+            <th>@Html.DisplayNameFor(model => model.Porciento)</th>
+            <th>@Html.DisplayNameFor(model => model.FechaInicio)</th>
+            <th>@Html.DisplayNameFor(model => model.FechaFin)</th>
             <th></th>
         </tr>
     </thead>
@@ -35,10 +37,19 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayTextFor(model => item.Cedula)
+                    @Html.DisplayTextFor(model => item.Deudor.NombreTitular)
                 </td>
                 <td>
-                    @Html.DisplayTextFor(model => item.NombreTitular)
+                    @Html.DisplayTextFor(model => item.Monto)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(model => item.Porciento)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(model => item.FechaInicio)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(model => item.FechaFin)
                 </td>
                 <td class="espaciado">
                     <a asp-action="Edit" asp-route-Id="@item.Id"><i class="fa fa-pencil-square-o fa-lg"></i></a>

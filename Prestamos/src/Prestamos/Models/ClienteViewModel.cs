@@ -10,15 +10,10 @@ namespace Prestamos.Models
 {
     public class ClienteViewModel
     {
-        private static bool _mapperCreado;
         public ClienteViewModel()
         {
-            if (!_mapperCreado)
-            {
-                _mapperCreado = true;
-                Mapper.CreateMap<ClienteViewModel, Cliente>().ReverseMap();
-            }
         }
+
         public int Id { get; set; }
 
         [Display(Name = "Cédula")]

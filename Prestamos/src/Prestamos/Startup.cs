@@ -22,6 +22,7 @@ using Microsoft.Framework.Logging.Console;
 using Microsoft.Framework.Runtime;
 using Prestamos.Models;
 using Prestamos.Services;
+using Negocios;
 
 namespace Prestamos
 {
@@ -43,6 +44,8 @@ namespace Prestamos
             }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            ConfigureMapper();
         }
 
         public IConfiguration Configuration { get; set; }
@@ -57,7 +60,7 @@ namespace Prestamos
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]))
                 .AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
-                
+
 
 
             // Add Identity services to the services container.
@@ -90,6 +93,7 @@ namespace Prestamos
             // Register application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
         }
 
         // Configure is called after ConfigureServices is called.
@@ -137,6 +141,13 @@ namespace Prestamos
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
+
+        }
+
+        void ConfigureMapper()
+        {
+            AutoMapper.Mapper.CreateMap<ClienteViewModel, Cliente>().ReverseMap();
+            AutoMapper.Mapper.CreateMap<PrestamoViewModel, Prestamo>().ReverseMap();
         }
     }
 }
