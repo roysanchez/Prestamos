@@ -25,7 +25,7 @@
     "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta7",
     "Microsoft.Framework.Logging": "1.0.0-beta7",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta7",
-    "Microsoft.Framework.Logging.Debug" : "1.0.0-beta7",
+    "Microsoft.Framework.Logging.Debug": "1.0.0-beta7",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta7",
     "AutoMapper": "4.0.4",
     "Negocios": ""
@@ -37,6 +37,7 @@
   },
 
   "frameworks": {
+    "dnx451": { },
     "dnxcore50": { }
   },
 

@@ -5,7 +5,8 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNET_ENV": "Development"
-      }
+      },
+      "sdkVersion": "dnx-clr-win-x64.1.0.0-beta7"
     }
   }
 }

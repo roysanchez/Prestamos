@@ -23,16 +23,16 @@ namespace Prestamos.Models
         {
             
             base.OnModelCreating(modelBuilder);
-
+            /*
             modelBuilder.Entity<Cliente>()
                 .Property(c => c.Cedula)
                 .MaxLength(11)
                 .Required();
-
+            */
             modelBuilder.Entity<Cliente>()
                 .Index(c => c.Cedula)
                 .Unique();
-
+            /*
             modelBuilder.Entity<Cliente>()
                 .Property(c => c.PrimerNombre)
                 .Required();
@@ -44,6 +44,7 @@ namespace Prestamos.Models
             modelBuilder.Entity<Prestamo>()
                 .Property(c => c.Deudor)
                 .Required();
+            */
         }
     }
 }
