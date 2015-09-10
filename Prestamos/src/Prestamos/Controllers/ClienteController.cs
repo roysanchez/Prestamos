@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Prestamos.Models;
+using Prestamos.ViewModels.Cliente;
 using Negocios;
 using AutoMapper;
 

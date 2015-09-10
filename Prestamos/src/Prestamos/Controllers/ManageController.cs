@@ -10,6 +10,7 @@ using Microsoft.AspNet.Mvc;
 using Prestamos;
 using Prestamos.Models;
 using Prestamos.Services;
+using Prestamos.ViewModels.Manage;
 
 namespace Prestamos.Controllers
 {

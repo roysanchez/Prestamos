@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Prestamos.Models;
+using Prestamos.ViewModels.Prestamo;
 using AutoMapper;
 using Microsoft.Data.Entity;
 

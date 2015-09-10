@@ -57,8 +57,8 @@ namespace Prestamos.Controllers
             if (!_databaseChecked)
             {
                 _databaseChecked = true;
-                _appcontext.Database.ApplyMigrations();
-                _prescontext.Database.ApplyMigrations();
+                _appcontext.Database.Migrate();
+                _prescontext.Database.Migrate();
             }
         }
     }

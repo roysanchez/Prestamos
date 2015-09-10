@@ -7,15 +7,14 @@
   "licenseUrl": "https://github.com/roysanchez/Prestamos.git",
 
   "dependencies": {
-    "System.Collections": "4.0.10-beta-23109",
-    "System.Linq": "4.0.0-beta-23109",
-    "System.Threading": "4.0.10-beta-23109",
-    "System.Runtime": "4.0.10-beta-23109",
-    "Microsoft.CSharp": "4.0.0-beta-23109",
-    "Microsoft.AspNet.Mvc.DataAnnotations": "6.0.0-beta6"
+    "System.Collections": "4.0.11-beta-23225",
+    "System.Linq": "4.0.1-beta-23225",
+    "System.Threading": "4.0.11-beta-23225",
+    "System.Runtime": "4.0.21-beta-23225",
+    "Microsoft.CSharp": "4.0.1-beta-23225",
+    "Microsoft.AspNet.Mvc.DataAnnotations": "6.0.0-beta7"
   },
   "frameworks": {
-    "dnxcore50": { },
-    "dnx451": { }
+    "dnxcore50": { }
   }
 }

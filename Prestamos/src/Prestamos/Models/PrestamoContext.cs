@@ -21,6 +21,7 @@ namespace Prestamos.Models
         //TODO Borrar cuando EF7 implemente los data annotations
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Cliente>()
@@ -38,6 +39,10 @@ namespace Prestamos.Models
 
             modelBuilder.Entity<Cliente>()
                 .Property(c => c.PrimerApellido)
+                .Required();
+
+            modelBuilder.Entity<Prestamo>()
+                .Property(c => c.Deudor)
                 .Required();
         }
     }
