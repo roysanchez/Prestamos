@@ -13,7 +13,7 @@ namespace Prestamos.Migrations
     {
         public override string Id
         {
-            get { return "20150910014200_PrestamoMigration"; }
+            get { return "20150910043658_PrestamoMigration"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
