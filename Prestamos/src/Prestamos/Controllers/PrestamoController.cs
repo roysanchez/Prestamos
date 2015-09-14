@@ -32,5 +32,16 @@ namespace Prestamos.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(PrestamoViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+
+            }
+
+            return View(model);
+        }
     }
 }

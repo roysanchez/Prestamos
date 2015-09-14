@@ -5,6 +5,8 @@ var gulp = require("gulp"),
     concat = require("gulp-concat"),
     cssmin = require("gulp-cssmin"),
     uglify = require("gulp-uglify"),
+    debug = require('gulp-debug'),
+    rename = require('gulp-rename'),
     project = require("./project.json");
 
 var paths = {
@@ -28,8 +30,20 @@ gulp.task("clean:css", function (cb) {
 
 gulp.task("clean", ["clean:js", "clean:css"]);
 
+/*
+//TODO Habilitar cuando tengan soporte de development & production
+gulp.task('compress', function () {
+    console.log(paths.js);
+    return gulp.src(paths.js, { base: '.' })
+      .pipe(debug('vamos a ver:'))
+      .pipe(uglify())
+      .pipe(rename({ extname: ".min.js" }))
+      .pipe(gulp.dest('.'));
+});
+*/
+
 gulp.task("min:js", function () {
-    gulp.src([paths.js, "!" + paths.minJs], { base: "." })
+    var x = gulp.src([paths.js, "!" + paths.minJs], { base: "." })
         .pipe(concat(paths.concatJsDest))
         .pipe(uglify())
         .pipe(gulp.dest("."));
