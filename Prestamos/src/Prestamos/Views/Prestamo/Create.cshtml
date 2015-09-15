@@ -1,7 +1,10 @@
-﻿@model PrestamoViewModel
+﻿@using Newtonsoft.Json
+@model PrestamoViewModel
 
 @{
     ViewBag.Title = "Crear prestamo";
+
+    var monedas = Html.GetEnumSelectList(typeof(Negocios.Moneda));
 }
 
 @section Css{
@@ -34,10 +37,11 @@
     <div class="form-group">
         <label asp-for="Monto.Moneda" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Monto.Moneda, Html.GetEnumSelectList(typeof(Negocios.Moneda)),
+            @Html.DropDownListFor(model => model.Monto.Moneda, monedas,
            new
            {
-               @class = "form-control"
+               @class = "form-control",
+               data_bind = "value: Moneda"
            })
             <span asp-validation-for="Monto.Moneda" class="text-danger"></span>
         </div>
@@ -45,26 +49,30 @@
 
     <div class="form-group">
         <label asp-for="Monto.Monto" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Monto.Monto" type="number" data-bind="value: Monto" inputmode="numeric" class="form-control" />
+        <div class="col-md-4">
+            <input asp-for="Monto.Monto" type="number" data-bind="textInput: Monto" min="0"
+                   inputmode="numeric" class="form-control" />
             <span asp-validation-for="Monto.Monto" class="text-danger"></span>
         </div>
+            <span class="col-md-2" data-bind="text: TextoMonto"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="PorcMora" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Porciento" min="0" max="100" class="form-control" />
+        <label asp-for="Porciento" class="col-md-2 control-label"></label>
+        <div class="col-md-4">
+            <input asp-for="Porciento" min="0" max="100" data-bind="textInput: Tasa" class="form-control" />
             <span asp-validation-for="Porciento" class="text-danger"></span>
         </div>
+        <span class="col-md-2" data-bind="text: TextoTasa"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="PorcMora" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="PorcMora" class="form-control" />
+        <div class="col-md-4">
+            <input asp-for="PorcMora" min="0" max="100" data-bind="textInput: Mora" class="form-control" />
             <span asp-validation-for="PorcMora" class="text-danger"></span>
         </div>
+        <span class="col-md-2" data-bind="text: TextoMora"></span>
     </div>
 
     <div class="form-group">
@@ -105,10 +113,11 @@
 
     <div class="form-group">
         <label asp-for="CantCuotas" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="CantCuotas" class="form-control" />
+        <div class="col-md-4">
+            <input asp-for="CantCuotas" data-bind="textInput: Cuotas" class="form-control" />
             <span asp-validation-for="CantCuotas" class="text-danger"></span>
         </div>
+        <span class="col-md-2" data-bind="text: TextoCuotas"></span>
     </div>
 
     <div class="form-group">
@@ -134,6 +143,7 @@
         <script type="text/javascript" src="~/lib/accounting/accounting.js"></script>
         <script type="text/javascript" src="~/lib/knockout/dist/knockout.debug.js"></script>
         <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
+        @*<script type="text/javascript" src="~/lib/requirejs/require.js" data-main="/js/Prestamo/main.js"></script>*@
     </environment>
     <environment names="Staging,Production">
         <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js"
@@ -158,6 +168,10 @@
                 asp-fallback-src="~/lib/knockout/dist/knockout.js"
                 asp-fallback-test="window.ko">
         </script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.min.js"
+                asp-fallback-src="~/lib/requirejs/require.min.js"
+                asp-fallback-test="window.requirejs">
+        </script>
     </environment>
 
     <script type="text/javascript">
@@ -170,7 +184,7 @@
                     }
                 });
             }
-
+            /*
             if (!Modernizr.inputtypes.number) {
                 $('[type="number"]').change(function (e) {
                     e.target.value = accounting.formatNumber(e.target.value, 2);
@@ -178,8 +192,11 @@
 
                 $('[type="number"]').attr('type', 'text');
             }
+            */
+            var model = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model))');
+            var monedas = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(monedas.Select(c=> c.Text)))');
 
-            ko.applyBindings(new PR.PrestamoViewModel());
-        });
+            ko.applyBindings(new PR.PrestamoViewModel(model, monedas));
+            });
     </script>
 }
