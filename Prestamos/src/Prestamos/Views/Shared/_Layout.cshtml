@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNet.Hosting.IHostingEnvironment HostingEnvironment
+@inject Microsoft.Dnx.Runtime.IApplicationEnvironment ApplicationEnvironment
+
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -87,3 +90,5 @@
         @RenderSection("scripts", required: false)
     </body>
 </html>
+<!-- Environment: @HostingEnvironment.EnvironmentName -->
+<!-- Framework: @ApplicationEnvironment.RuntimeFramework -->
