@@ -2,7 +2,7 @@
   "Data": {
     "Sqlite": {
       "Filename": "pre",
-      "Location": "/data"
+      "Location": "db"
     },
     "DefaultConnection": {
       "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=Prestamos;Trusted_Connection=True;MultipleActiveResultSets=true"

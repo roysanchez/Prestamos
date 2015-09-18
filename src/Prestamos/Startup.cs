@@ -17,6 +17,7 @@ using Prestamos.ViewModels.Prestamo;
 using Prestamos.Services;
 using Negocios;
 using Microsoft.Dnx.Runtime.Infrastructure;
+using System.IO;
 
 namespace Prestamos
 {
@@ -38,7 +39,7 @@ namespace Prestamos
             }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-            
+
             ConfigureMapper();
         }
 
@@ -48,10 +49,10 @@ namespace Prestamos
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Entity Framework services to the services container.
-            var env = CallContextServiceLocator.Locator.ServiceProvider.GetRequiredService<IApplicationEnvironment>();
+            var directory = CrearDirectorio();
             var filename = Configuration["Data:Sqlite:Filename"];
-            var location = Configuration["Data:Sqlite:Location"];
-            var stringdb = $"Data Source={env.ApplicationBasePath}/{location}/{filename}.db";
+
+            var stringdb = $"Data Source={directory}/{filename}.db";
 
             services.AddEntityFramework()
                 .AddSqlite()
@@ -61,37 +62,11 @@ namespace Prestamos
                 .AddDbContext<ApplicationDbContext>(
                     option => option.UseSqlite(stringdb)
                 );
-            /*
-            services.AddEntityFramework()
-                .AddSqlServer()
-                .AddDbContext<PrestamoContext>(options =>
-                    options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]))
-                .AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
-            */
-
 
             // Add Identity services to the services container.
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
-            /*
-            // Configure the options for the authentication middleware.
-            // You can add options for Google, Twitter and other middleware as shown below.
-            // For more information see http://go.microsoft.com/fwlink/?LinkID=532715
-            services.Configure<FacebookAuthenticationOptions>(options =>
-            {
-                options.AppId = Configuration["Authentication:Facebook:AppId"];
-                options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            });
-
-            services.Configure<MicrosoftAccountAuthenticationOptions>(options =>
-            {
-                options.ClientId = Configuration["Authentication:MicrosoftAccount:ClientId"];
-                options.ClientSecret = Configuration["Authentication:MicrosoftAccount:ClientSecret"];
-            });
-            */
 
             // Add MVC services to the services container.
             services.AddMvc();
@@ -112,7 +87,7 @@ namespace Prestamos
             loggerFactory.MinimumLevel = LogLevel.Information;
             loggerFactory.AddConsole();
 
-            if(env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 loggerFactory.AddDebug();
             }
@@ -152,6 +127,17 @@ namespace Prestamos
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
 
+        }
+
+        string CrearDirectorio()
+        {
+            var env = CallContextServiceLocator.Locator.ServiceProvider.GetRequiredService<IApplicationEnvironment>();
+            var location = Configuration["Data:Sqlite:Location"];
+            var directory = $"{env.ApplicationBasePath}/{location}";
+
+            DirectoryInfo di = Directory.CreateDirectory(directory);
+
+            return di.FullName;
         }
 
         void ConfigureMapper()
