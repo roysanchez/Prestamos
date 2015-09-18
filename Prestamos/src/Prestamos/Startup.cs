@@ -16,6 +16,7 @@ using Prestamos.ViewModels.Cliente;
 using Prestamos.ViewModels.Prestamo;
 using Prestamos.Services;
 using Negocios;
+using Microsoft.Dnx.Runtime.Infrastructure;
 
 namespace Prestamos
 {
@@ -37,7 +38,7 @@ namespace Prestamos
             }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-
+            
             ConfigureMapper();
         }
 
@@ -47,13 +48,27 @@ namespace Prestamos
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Entity Framework services to the services container.
+            var env = CallContextServiceLocator.Locator.ServiceProvider.GetRequiredService<IApplicationEnvironment>();
+            var filename = Configuration["Data:Sqlite:Filename"];
+            var location = Configuration["Data:Sqlite:Location"];
+            var stringdb = $"Data Source={env.ApplicationBasePath}/{location}/{filename}.db";
+
+            services.AddEntityFramework()
+                .AddSqlite()
+                .AddDbContext<PrestamoContext>(
+                    option => option.UseSqlite(stringdb)
+                )
+                .AddDbContext<ApplicationDbContext>(
+                    option => option.UseSqlite(stringdb)
+                );
+            /*
             services.AddEntityFramework()
                 .AddSqlServer()
                 .AddDbContext<PrestamoContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]))
                 .AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
-
+            */
 
 
             // Add Identity services to the services container.
@@ -125,13 +140,6 @@ namespace Prestamos
 
             // Add cookie-based authentication to the request pipeline.
             app.UseIdentity();
-
-            // Add authentication middleware to the request pipeline. You can configure options such as Id and Secret in the ConfigureServices method.
-            // For more information see http://go.microsoft.com/fwlink/?LinkID=532715
-            // app.UseFacebookAuthentication();
-            // app.UseGoogleAuthentication();
-            // app.UseMicrosoftAccountAuthentication();
-            // app.UseTwitterAuthentication();
 
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
