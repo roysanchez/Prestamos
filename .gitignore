@@ -32,3 +32,4 @@ version.h
 
 node_modules/
 src/*/wwwroot/lib/
+Publish/
