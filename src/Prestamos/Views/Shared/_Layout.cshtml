@@ -1,6 +1,7 @@
 ﻿@inject Microsoft.AspNet.Hosting.IHostingEnvironment HostingEnvironment
 @inject Microsoft.Dnx.Runtime.IApplicationEnvironment ApplicationEnvironment
 @inject Microsoft.Framework.Configuration.IConfiguration Configuration
+@inject Microsoft.Framework.OptionsModel.IOptions<Prestamos.AppSettings> options
 
 <!DOCTYPE html>
 <html>
@@ -101,3 +102,4 @@
 
     }
     -->
+<!-- ROY: @options.Options.Roy -->

@@ -54,8 +54,8 @@ namespace Prestamos
         public void ConfigureServices(IServiceCollection services)
         {
             
-            // Add Entity Framework services to the services container.
-            var directory = CrearDirectorio();
+               // Add Entity Framework services to the services container.
+               var directory = CrearDirectorio();
             var filename = Configuration["Data:Sqlite:Filename"];
 
             var stringdb = $"Data Source={directory}/{filename}.db";
@@ -87,7 +87,8 @@ namespace Prestamos
 
             // Add Application settings to the services container.
             services.AddSingleton<IConfiguration>(c => Configuration);
-            //services.Configure<string>(Configuration.GetSection("Roy"), "Roy");
+            services.AddOptions();
+            services.Configure<AppSettings>(Configuration.GetSection("AppSetting"));
         }
 
         // Configure is called after ConfigureServices is called.
