@@ -1,5 +1,6 @@
 ﻿@inject Microsoft.AspNet.Hosting.IHostingEnvironment HostingEnvironment
 @inject Microsoft.Dnx.Runtime.IApplicationEnvironment ApplicationEnvironment
+@inject Microsoft.Framework.Configuration.IConfiguration Configuration
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +28,7 @@
             <link rel="stylesheet" href="~/css/site.css" />
         </environment>
         <environment names="Staging,Production">
-            <link rel="stylesheet" href="~/css/site.css" asp-file-version="true" />
+            <link rel="stylesheet" href="~/css/site.min.css" asp-file-version="true" />
         </environment>
     </head>
     <body>
@@ -92,3 +93,11 @@
 </html>
 <!-- Environment: @HostingEnvironment.EnvironmentName -->
 <!-- Framework: @ApplicationEnvironment.RuntimeFramework -->
+<!-- Prueba: @ApplicationEnvironment.GetData("Roy") -->
+<!-- Configuration: 
+    @foreach(var x in Configuration.GetChildren())
+    {
+        <span>@x.Key : @x.Value</span>
+
+    }
+    -->

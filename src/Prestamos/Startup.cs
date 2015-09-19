@@ -21,6 +21,11 @@ using System.IO;
 
 namespace Prestamos
 {
+    public class AppSettings
+    {
+        public string Roy { get; set; }
+    }
+
     public class Startup
     {
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
@@ -36,7 +41,7 @@ namespace Prestamos
                 // This reads the configuration keys from the secret store.
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets();
-            }
+            }   
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
@@ -48,6 +53,7 @@ namespace Prestamos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             // Add Entity Framework services to the services container.
             var directory = CrearDirectorio();
             var filename = Configuration["Data:Sqlite:Filename"];
@@ -79,6 +85,9 @@ namespace Prestamos
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
+            // Add Application settings to the services container.
+            services.AddSingleton<IConfiguration>(c => Configuration);
+            //services.Configure<string>(Configuration.GetSection("Roy"), "Roy");
         }
 
         // Configure is called after ConfigureServices is called.
