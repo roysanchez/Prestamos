@@ -87,12 +87,12 @@ namespace Prestamos
 
             // Add Application settings to the services container.
             services.AddSingleton<IConfiguration>(c => Configuration);
-            services.AddOptions();
-            services.Configure<AppSettings>(Configuration.GetSection("AppSetting"));
-            services.Configure<AppSettings>(c =>
+            //services.AddOptions();
+            services.Configure<AppSettings>(Configuration);
+            /*services.Configure<AppSettings>(c =>
             {
                 c.Roy = Configuration["Roy"];
-            });
+            });*/
 
         }
 
