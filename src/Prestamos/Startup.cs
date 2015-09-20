@@ -89,6 +89,11 @@ namespace Prestamos
             services.AddSingleton<IConfiguration>(c => Configuration);
             services.AddOptions();
             services.Configure<AppSettings>(Configuration.GetSection("AppSetting"));
+            services.Configure<AppSettings>(c =>
+            {
+                c.Roy = Configuration["Roy"];
+            });
+
         }
 
         // Configure is called after ConfigureServices is called.
