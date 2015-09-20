@@ -1,5 +1,7 @@
 {
-  "Roy": "prueba roy",
+  "AppSetting": {
+    "Roy": "prueba roy"
+  },
   "Data": {
     "Sqlite": {
       "Filename": "pre",
