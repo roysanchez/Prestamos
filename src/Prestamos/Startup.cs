@@ -98,17 +98,15 @@ namespace Prestamos
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
-                //app.UseErrorPage();
-                //app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
+                app.UseErrorPage();
+                app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
             }
             else
             {
                 // Add Error handling middleware which catches all application specific errors and
                 // sends the request to the following path or controller action.
-                //app.UseErrorHandler("/Home/Error");
+                app.UseErrorHandler("/Home/Error");
             }
-            app.UseErrorPage();
-            app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
 
             // Add static files to the request pipeline.
             app.UseStaticFiles();

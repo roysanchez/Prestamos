@@ -25,9 +25,9 @@
 
 }
 
-<h2>Crear Prestamo</h2>
+<h2 v-data="">Crear Prestamo</h2>
 
-<form asp-action="Crear" method="post" class="form-horizontal" role="form">
+<form asp-action="Crear" method="post" class="form-horizontal" role="form" id="crearPrestamoForm">
     <h4>Prestamo</h4>
     <hr />
     <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
@@ -50,20 +50,20 @@
     <div class="form-group">
         <label asp-for="Monto.Monto" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="Monto.Monto" type="number" data-bind="textInput: Monto" min="0"
+            <input asp-for="Monto.Monto" type="number" data-bind="textInput: Monto" v-model="monto" min="0"
                    inputmode="numeric" class="form-control" />
             <span asp-validation-for="Monto.Monto" class="text-danger"></span>
         </div>
-            <span class="col-md-2" data-bind="text: TextoMonto"></span>
+        <pre class="col-md-2" data-bind="text: TextoMonto" v-text="textoMonto"></pre>
     </div>
 
     <div class="form-group">
         <label asp-for="Porciento" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="Porciento" min="0" max="100" data-bind="textInput: Tasa" class="form-control" />
+            <input asp-for="Porciento" min="0" max="100" maxlength="2" data-bind="textInput: Tasa" v-model="tasa" class="form-control" />
             <span asp-validation-for="Porciento" class="text-danger"></span>
         </div>
-        <span class="col-md-2" data-bind="text: TextoTasa"></span>
+        <pre class="col-md-2" data-bind="text: TextoTasa" v-text="textoTasa"></pre>
     </div>
 
     <div class="form-group">
@@ -72,7 +72,7 @@
             <input asp-for="PorcMora" min="0" max="100" data-bind="textInput: Mora" class="form-control" />
             <span asp-validation-for="PorcMora" class="text-danger"></span>
         </div>
-        <span class="col-md-2" data-bind="text: TextoMora"></span>
+        <pre class="col-md-2" data-bind="text: TextoMora"></pre>
     </div>
 
     <div class="form-group">
@@ -117,7 +117,7 @@
             <input asp-for="CantCuotas" data-bind="textInput: Cuotas" class="form-control" />
             <span asp-validation-for="CantCuotas" class="text-danger"></span>
         </div>
-        <span class="col-md-2" data-bind="text: TextoCuotas"></span>
+        <pre class="col-md-2" data-bind="text: TextoCuotas"></pre>
     </div>
 
     <div class="form-group">
@@ -141,9 +141,9 @@
         <script type="text/javascript" src="~/lib/pickadate/lib/translations/es_ES.js"></script>
         <script type="text/javascript" src="~/libext/modernizr/modernizr-input.js"></script>
         <script type="text/javascript" src="~/lib/accounting/accounting.js"></script>
-        <script type="text/javascript" src="~/lib/knockout/dist/knockout.debug.js"></script>
+        @*<script type="text/javascript" src="~/lib/knockout/dist/knockout.debug.js"></script>*@
+        <script type="text/javascript" src="~/lib/vue/dist/vue.js"></script>
         <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
-        @*<script type="text/javascript" src="~/lib/requirejs/require.js" data-main="/js/Prestamo/main.js"></script>*@
     </environment>
     <environment names="Staging,Production">
         <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js"
@@ -164,13 +164,13 @@
                 asp-fallback-src="~/lib/accounting/accounting.min.js"
                 asp-fallback-test="window.accounting">
         </script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"
-                asp-fallback-src="~/lib/knockout/dist/knockout.js"
-                asp-fallback-test="window.ko">
-        </script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.min.js"
-                asp-fallback-src="~/lib/requirejs/require.min.js"
-                asp-fallback-test="window.requirejs">
+        @*<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"
+                    asp-fallback-src="~/lib/knockout/dist/knockout.js"
+                    asp-fallback-test="window.ko">
+            </script>*@
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js"
+                asp-fallback-src="~/lib/vue/dist/vue.min.js"
+                asp-fallback-test="Vue">
         </script>
     </environment>
 
@@ -196,7 +196,46 @@
             var model = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model))');
             var monedas = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(monedas.Select(c=> c.Text)))');
 
-            ko.applyBindings(new PR.PrestamoViewModel(model, monedas));
+            //ko.applyBindings(new PR.PrestamoViewModel(model, monedas));
+
+            var demo = new Vue({
+                el: '#crearPrestamoForm',
+                name: 'Creacion-Prestamos',
+                data: {
+                    monto: 4,
+                    textoMonto: 4,
+                    tasa: 4,
+                    textoTasa: 4
+                },
+                watch: {
+                    monto: {
+                        handler: function (monto) {
+                            this.textoMonto = monto;
+                        }
+                    },
+                    tasa: {
+                        handler: function (tasa, a, b, c, d) {
+                            if (tasa.length > 2) {
+                                demo.tasa = a;
+                            } else {
+                                this.textoTasa = tasa;
+                            }
+                        }
+                    }
+                }
             });
+
+            //demo.$watch('monto + textMonto')
+            demo.$watch(
+                function () {
+                    return [this.monto, this.tasa];
+                },
+                function (newVal, oldVal) {
+                    var valores = accounting.formatColumn(newVal, { format: "%s %v" });
+                    this.textoMonto = valores[0];
+                    this.textoTasa = valores[1];
+                }
+            );
+        });
     </script>
 }
