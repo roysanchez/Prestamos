@@ -37,12 +37,7 @@
     <div class="form-group">
         <label asp-for="Monto.Moneda" class="col-md-2 control-label"></label>
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Monto.Moneda, monedas,
-           new
-           {
-               @class = "form-control",
-               data_bind = "value: Moneda"
-           })
+            @Html.DropDownListFor(model => model.Monto.Moneda, monedas, new { @class = "form-control" })
             <span asp-validation-for="Monto.Moneda" class="text-danger"></span>
         </div>
     </div>
@@ -50,29 +45,28 @@
     <div class="form-group">
         <label asp-for="Monto.Monto" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="Monto.Monto" type="number" data-bind="textInput: Monto" v-model="monto" min="0"
-                   inputmode="numeric" class="form-control" />
+            <input asp-for="Monto.Monto" type="number" v-model="monto" min="0" max="10000000" inputmode="numeric" class="form-control" />
             <span asp-validation-for="Monto.Monto" class="text-danger"></span>
         </div>
-        <pre class="col-md-2" data-bind="text: TextoMonto" v-text="textoMonto"></pre>
+        <pre class="col-md-2" v-text="textoMonto"></pre>
     </div>
 
     <div class="form-group">
         <label asp-for="Porciento" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="Porciento" min="0" max="100" maxlength="2" data-bind="textInput: Tasa" v-model="tasa" class="form-control" />
+            <input asp-for="Porciento" min="0" max="100" v-model="tasa" inputmode="numeric" class="form-control" />
             <span asp-validation-for="Porciento" class="text-danger"></span>
         </div>
-        <pre class="col-md-2" data-bind="text: TextoTasa" v-text="textoTasa"></pre>
+        <pre class="col-md-2" v-text="textoTasa"></pre>
     </div>
 
     <div class="form-group">
         <label asp-for="PorcMora" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="PorcMora" min="0" max="100" data-bind="textInput: Mora" class="form-control" />
+            <input asp-for="PorcMora" min="0" max="100" v-model="mora" inputmode="numeric" class="form-control" />
             <span asp-validation-for="PorcMora" class="text-danger"></span>
         </div>
-        <pre class="col-md-2" data-bind="text: TextoMora"></pre>
+        <pre class="col-md-2" v-text="textoMora"></pre>
     </div>
 
     <div class="form-group">
@@ -114,10 +108,10 @@
     <div class="form-group">
         <label asp-for="CantCuotas" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="CantCuotas" data-bind="textInput: Cuotas" class="form-control" />
+            <input asp-for="CantCuotas" v-model="cuotas" class="form-control" />
             <span asp-validation-for="CantCuotas" class="text-danger"></span>
         </div>
-        <pre class="col-md-2" data-bind="text: TextoCuotas"></pre>
+        <pre class="col-md-2" v-text="textoCuotas"></pre>
     </div>
 
     <div class="form-group">
@@ -132,8 +126,17 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+            var PR = PR || {};
+            PR.PrestamoViewModel = {
+                monto: "@Model?.Monto?.Monto",
+                tasa: "@Model?.Porciento",
+                mora: "@Model?.PorcMora",
+                cuotas: "@Model?.CantCuotas"
+            };
+    </script>
 
+    <partial name="_ValidationScriptsPartial" />
     <environment names="Development">
         <script type="text/javascript" src="~/lib/pickadate/lib/picker.js"></script>
         <script type="text/javascript" src="~/lib/pickadate/lib/picker.date.js"></script>
@@ -141,8 +144,8 @@
         <script type="text/javascript" src="~/lib/pickadate/lib/translations/es_ES.js"></script>
         <script type="text/javascript" src="~/libext/modernizr/modernizr-input.js"></script>
         <script type="text/javascript" src="~/lib/accounting/accounting.js"></script>
-        @*<script type="text/javascript" src="~/lib/knockout/dist/knockout.debug.js"></script>*@
         <script type="text/javascript" src="~/lib/vue/dist/vue.js"></script>
+
         <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
     </environment>
     <environment names="Staging,Production">
@@ -164,78 +167,10 @@
                 asp-fallback-src="~/lib/accounting/accounting.min.js"
                 asp-fallback-test="window.accounting">
         </script>
-        @*<script src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"
-                    asp-fallback-src="~/lib/knockout/dist/knockout.js"
-                    asp-fallback-test="window.ko">
-            </script>*@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js"
                 asp-fallback-src="~/lib/vue/dist/vue.min.js"
                 asp-fallback-test="Vue">
         </script>
+        <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.min.js"></script>
     </environment>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            //https://github.com/amsul/pickadate.js/issues/160
-            if (!Modernizr.inputtypes.date) {
-                $('[type="date"]').pickadate({
-                    onClose: function () {
-                        $('.datepicker').blur();
-                    }
-                });
-            }
-            /*
-            if (!Modernizr.inputtypes.number) {
-                $('[type="number"]').change(function (e) {
-                    e.target.value = accounting.formatNumber(e.target.value, 2);
-                });
-
-                $('[type="number"]').attr('type', 'text');
-            }
-            */
-            var model = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(Model))');
-            var monedas = JSON.parse('@Html.Raw(JsonConvert.SerializeObject(monedas.Select(c=> c.Text)))');
-
-            //ko.applyBindings(new PR.PrestamoViewModel(model, monedas));
-
-            var demo = new Vue({
-                el: '#crearPrestamoForm',
-                name: 'Creacion-Prestamos',
-                data: {
-                    monto: 4,
-                    textoMonto: 4,
-                    tasa: 4,
-                    textoTasa: 4
-                },
-                watch: {
-                    monto: {
-                        handler: function (monto) {
-                            this.textoMonto = monto;
-                        }
-                    },
-                    tasa: {
-                        handler: function (tasa, a, b, c, d) {
-                            if (tasa.length > 2) {
-                                demo.tasa = a;
-                            } else {
-                                this.textoTasa = tasa;
-                            }
-                        }
-                    }
-                }
-            });
-
-            //demo.$watch('monto + textMonto')
-            demo.$watch(
-                function () {
-                    return [this.monto, this.tasa];
-                },
-                function (newVal, oldVal) {
-                    var valores = accounting.formatColumn(newVal, { format: "%s %v" });
-                    this.textoMonto = valores[0];
-                    this.textoTasa = valores[1];
-                }
-            );
-        });
-    </script>
 }

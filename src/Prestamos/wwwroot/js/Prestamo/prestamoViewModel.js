@@ -1,44 +1,49 @@
-﻿/// <reference path="../../lib/accounting/accounting.js"/>
-/// <reference path="../../lib/knockout/dist/knockout.js"/>
+﻿/// <reference path="../../lib/jquery/dist/jquery.js"/>
+/// <reference path="../../lib/vue/dist/vue.js"/>
+/// <reference path="../../lib/accounting/accounting.js"/>
 
-var PR = PR || {};
+(function (window, $, PR, Vue, accounting) {
 
-(function (window, ko, accounting) {
-
-    PR.PrestamoViewModel = function (model, monedas) {
-        model = model || {};
-
-        var self = this;
-        self.Moneda = ko.observable(model.Monto != null ? model.Monto.Moneda : null);
-        self.Monto = ko.observable(model.Monto != null ? model.Monto.Monto : null);
-        self.Tasa = ko.observable(model.Porciento);
-        self.Mora = ko.observable(model.PorcMora);
-        self.Cuotas = ko.observable(model.CantCuotas);
-        self.Labels = ko.observableArray([self.Moneda, self.Monto, self.Tasa, self.Mora, self.Cuotas]);
-
-        self.Labels.subscribe(function () {
-            console.log("entro");
+    //https://github.com/amsul/pickadate.js/issues/160
+    if (!Modernizr.inputtypes.date) {
+        $('[type="date"]').pickadate({
+            onClose: function () {
+                $('.datepicker').blur();
+            }
         });
+    }
 
-        self.TextoMonto = ko.computed(function () {
-            self.Labels.valueHasMutated();
-            return accounting.formatMoney(self.Monto(), monedas[self.Moneda()] + "$", 2);
-        });
+    var model = PR.PrestamoViewModel;
 
-        
-        self.TextoTasa = ko.computed(function () {
-            return accounting.formatMoney(self.Tasa(), '%', 2);
-        });
+    var demo = new Vue({
+        el: '#crearPrestamoForm',
+        name: 'Creacion-Prestamos',
+        data: {
+            monto: model.monto,
+            textoMonto: "",
+            tasa: model.tasa,
+            textoTasa: "",
+            mora: model.mora,
+            textoMora: "",
+            cuotas: model.cuotas,
+            textoCuotas: ""
+        }
+    });
 
-        
-        self.TextoMora = ko.computed(function () {
-            return accounting.formatMoney(self.Mora(), '%', 2); 
-        });
+    demo.$watch(
+        function () {
+            return [this.monto, this.tasa, this.mora, this.cuotas];
+        },
+        function (nuevo, viejo) {
+            var valores = accounting.formatColumn(nuevo, { format: "%s %v" });
+            this.textoMonto = valores[0];
+            this.textoTasa = valores[1].replace('$', '%');
+            this.textoMora = valores[2].replace('$', '%');
+            this.textoCuotas = valores[3].replace('$', ' ');
+        },
+        {
+            immediate: true
+        }
+    );
 
-        
-        self.TextoCuotas = ko.computed(function () {
-            return accounting.formatNumber(self.Cuotas());
-        });
-    };
-
-}(this.window, this.ko, this.accounting));
+}(this.window, this.jQuery, this.PR, this.Vue, this.accounting));
