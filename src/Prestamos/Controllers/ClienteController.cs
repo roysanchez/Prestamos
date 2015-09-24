@@ -23,9 +23,18 @@ namespace Prestamos.Controllers
         }
 
         //TODO Sustituir todos los sitios donde se llame esto por Find, cuando se implemente
-        public async Task<Cliente> BuscarClienteId(int? id)
+        private async Task<Cliente> BuscarClienteId(int? id)
         {
             return await db.Clientes.Where(c => c.Id == id).FirstOrDefaultAsync();
+        }
+
+
+        public async Task<IActionResult> BuscarClientes(string cedula, string nombre)
+        {
+            var clientes = await db.Clientes.Where(c => c.Cedula == cedula || c.PrimerNombre.Contains(nombre) || c.SegundoNombre.Contains(nombre))
+                                            .ToListAsync();
+
+            return View(Mapper.Map<IEnumerable<ClienteViewModel>>(clientes));
         }
 
         // GET: /<controller>/
