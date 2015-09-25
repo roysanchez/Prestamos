@@ -46,5 +46,13 @@ namespace Prestamos.ViewModels.Cliente
         {
             get { return PrimerNombre + " " + PrimerApellido; }
         }
+
+        [Display(Name = "Fecha nacimiento")]
+        public DateTime FechaNacimiento { get; set; }
+
+        public int Edad
+        {
+            get { return DateTime.Now.Year - FechaNacimiento.Year; }
+        }
     }
 }

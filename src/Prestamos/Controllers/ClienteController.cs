@@ -28,13 +28,29 @@ namespace Prestamos.Controllers
             return await db.Clientes.Where(c => c.Id == id).FirstOrDefaultAsync();
         }
 
-
-        public async Task<IActionResult> BuscarClientes(string cedula, string nombre)
+        public async Task<IActionResult> BuscarCliente(string cedula)
         {
-            var clientes = await db.Clientes.Where(c => c.Cedula == cedula || c.PrimerNombre.Contains(nombre) || c.SegundoNombre.Contains(nombre))
-                                            .ToListAsync();
+            var cliente = await db.Clientes.Where(c => c.Cedula == cedula)
+                                           .FirstOrDefaultAsync();
 
-            return View(Mapper.Map<IEnumerable<ClienteViewModel>>(clientes));
+            return Json(cliente);
+        }
+
+        public async Task<IActionResult> BuscarClientes(BuscarClienteViewModel model)
+        {
+            var clientes = db.Clientes;
+
+            if (!String.IsNullOrEmpty(model.cedula))
+                clientes.Where(c => c.Cedula.Contains(model.cedula));
+
+            if (!String.IsNullOrEmpty(model.nombre))
+                clientes.Where(c => c.PrimerNombre.Contains(model.nombre) || c.SegundoNombre.Contains(model.nombre));
+
+            if (!String.IsNullOrEmpty(model.apellido))
+                clientes.Where(c => c.PrimerApellido.Contains(model.apellido) || c.SegundoApellido.Contains(model.apellido));
+
+            ViewBag.clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync());
+            return View(model);
         }
 
         // GET: /<controller>/

@@ -26,7 +26,11 @@
             mora: model.mora,
             textoMora: "",
             cuotas: model.cuotas,
-            textoCuotas: ""
+            textoCuotas: "",
+            cedula : model.deudorCedula
+        },
+        methods: {
+            BuscarCliente: BuscarClientePorCedula
         }
     });
 
@@ -45,5 +49,15 @@
             immediate: true
         }
     );
+
+    function BuscarClientePorCedula(event) {
+        var cedula = this.cedula;
+        var url = PR.PrestamoViewModel.urlBuscarCliente;
+
+        var posting = $.post(url, { cedula: cedula });
+        posting.done(function (cliente) {
+            console.debug("cliente", cliente);
+        });
+    }
 
 }(this.window, this.jQuery, this.PR, this.Vue, this.accounting));

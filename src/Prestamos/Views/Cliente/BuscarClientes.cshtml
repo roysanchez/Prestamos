@@ -1,0 +1,28 @@
+﻿@model BuscarClienteViewModel
+
+@{
+    IEnumerable<ClienteViewModel> clientes = ViewBag.clientes;
+}
+
+<h3>Clientes</h3>
+<form asp-action="BuscarClientes" method="get" class="form-horizontal" role="form"></form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Cedula</th>
+            <th>Nombre</th>
+            <th>Edad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in clientes)
+        {
+            <tr>
+                <td>@cliente.Cedula</td>
+                <td>@cliente.NombreCompleto</td>
+                <td>@cliente.Edad</td>
+            </tr>
+        }
+    </tbody>
+</table>
