@@ -27,6 +27,7 @@
         <tr>
             <th>@Html.DisplayNameFor(model => model.Cedula)</th>
             <th>@Html.DisplayNameFor(model => model.NombreTitular)</th>
+            <th>@Html.DisplayNameFor(model => model.Edad)</th>
             <th></th>
         </tr>
     </thead>
@@ -40,10 +41,13 @@
                 <td>
                     @Html.DisplayTextFor(model => item.NombreTitular)
                 </td>
+                <td>
+                    @Html.DisplayTextFor(model => item.Edad)
+                </td>
                 <td class="espaciado">
-                    <a asp-action="Edit" asp-route-Id="@item.Id"><i class="fa fa-pencil-square-o fa-lg"></i></a>
-                    <a asp-action="Details" asp-route-Id="@item.Id"><i class="fa fa-info fa-lg"></i></a>
-                    <a asp-action="Delete" asp-route-Id="@item.Id"><i class="fa fa-trash-o fa-lg"></i></a>
+                    <a asp-action="Edit" asp-route-Id="@item.Id"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+                    <a asp-action="Details" asp-route-Id="@item.Id"><i class="fa fa-info fa-2x"></i></a>
+                    <a asp-action="Delete" asp-route-Id="@item.Id"><i class="fa fa-trash-o fa-2x"></i></a>
                 </td>
             </tr>
         }
