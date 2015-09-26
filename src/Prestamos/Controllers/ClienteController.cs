@@ -15,6 +15,8 @@ namespace Prestamos.Controllers
 {
     public class ClienteController : Controller
     {
+        private const string EditBindString = "PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, FechaNacimiento";
+        private const string CreateBindString = "Cedula, " + EditBindString;
         private readonly PrestamoContext db;
 
         public ClienteController(PrestamoContext prestamoContext)
@@ -59,10 +61,10 @@ namespace Prestamos.Controllers
             var clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
             return View(clientes);
         }
-        
+
         public async Task<IActionResult> Details(int? id)
         {
-            if(id.HasValue)
+            if (id.HasValue)
             {
                 var cliente = await BuscarClienteId(id);
                 if (cliente == null)
@@ -78,7 +80,7 @@ namespace Prestamos.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if(id.HasValue)
+            if (id.HasValue)
             {
                 var cliente = await BuscarClienteId(id);
                 if (cliente == null)
@@ -94,9 +96,9 @@ namespace Prestamos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(ClienteViewModel model)
+        public async Task<IActionResult> Edit([Bind(include: EditBindString)]ClienteViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var cliente = Mapper.Map<Cliente>(model);
 
@@ -117,9 +119,9 @@ namespace Prestamos.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ClienteViewModel model)
+        public async Task<IActionResult> Create([Bind(include: CreateBindString)]ClienteViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var cliente = Mapper.Map<Cliente>(model);
                 db.Entry(cliente).State = EntityState.Added;
@@ -151,7 +153,7 @@ namespace Prestamos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteCofirmed(int? id)
         {
-            if(id.HasValue)
+            if (id.HasValue)
             {
                 var cliente = await BuscarClienteId(id);
                 db.Clientes.Remove(cliente);
