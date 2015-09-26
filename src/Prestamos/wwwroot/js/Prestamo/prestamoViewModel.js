@@ -1,6 +1,8 @@
 ﻿/// <reference path="../../lib/jquery/dist/jquery.js"/>
 /// <reference path="../../lib/vue/dist/vue.js"/>
 /// <reference path="../../lib/accounting/accounting.js"/>
+/// <reference path="../../lib/pickadate/lib/picker.js"/>
+/// <reference path="../../lib/pickadate/lib/picker.date.js"/>
 
 (function (window, $, PR, Vue, accounting) {
 

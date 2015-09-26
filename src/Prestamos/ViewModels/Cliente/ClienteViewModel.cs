@@ -35,16 +35,28 @@ namespace Prestamos.ViewModels.Cliente
         [Display(Name = "Segundo apellido")]
         public string SegundoApellido { get; set; }
 
-        [Display(Name = "Nombre")]
+        [Display(Name = "Nombre completo")]
         public string NombreCompleto
         {
             get { return PrimerNombre + " " + SegundoNombre + " " + PrimerApellido + " " + SegundoApellido; }
         }
 
-        [Display(Name = "Nombre")]
+        [Display(Name = "Nombre titular")]
         public string NombreTitular
         {
             get { return PrimerNombre + " " + PrimerApellido; }
+        }
+
+        [Display(Name = "Nombres")]
+        public string Nombres
+        {
+            get { return PrimerNombre + " " + SegundoNombre; }
+        }
+
+        [Display(Name = "Apellidos")]
+        public string Apellidos
+        {
+            get { return PrimerApellido + " " + SegundoApellido; }
         }
 
         [Display(Name = "Fecha nacimiento")]

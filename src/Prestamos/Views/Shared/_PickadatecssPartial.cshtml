@@ -1,0 +1,14 @@
+﻿<environment names="Development">
+    <link rel="stylesheet" href="~/lib/pickadate/lib/themes/default.css" />
+    <link rel="stylesheet" href="~/lib/pickadate/lib/themes/default.date.css" />
+</environment>
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/themes/default.css"
+          asp-fallback-href="~/lib/pickadate/lib/compressed/themes/default.css"
+          asp-fallback-test-class="picker__input.picker__input--active"
+          asp-fallback-test-property="border-color" asp-fallback-test-value="#0089ec" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/themes/default.date.css"
+          asp-fallback-href="~/lib/pickadate/lib/compressed/themes/default.date.css"
+          asp-fallback-test-class="picker__footer" asp-fallback-test-property="text-align" asp-fallback-test-value="center" />
+</environment>

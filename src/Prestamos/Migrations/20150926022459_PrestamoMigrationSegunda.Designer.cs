@@ -8,9 +8,14 @@ using Prestamos.Models;
 namespace Prestamos.Migrations
 {
     [DbContext(typeof(PrestamoContext))]
-    partial class PrestamoContextModelSnapshot : ModelSnapshot
+    partial class PrestamoMigrationSegunda
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        public override string Id
+        {
+            get { return "20150926022459_PrestamoMigrationSegunda"; }
+        }
+
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Annotation("ProductVersion", "7.0.0-beta7-15540");

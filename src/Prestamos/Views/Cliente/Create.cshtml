@@ -4,6 +4,10 @@
     ViewBag.Title = "Crear cliente";
 }
 
+@section Css{
+    <partial name="_PickadatecssPartial" />
+}
+
 <h2>Crear cliente</h2>
 
 <form asp-action="Create" method="post" class="form-horizontal" role="form">
@@ -13,7 +17,7 @@
 
     <div class="form-group">
         <label asp-for="Cedula" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
+        <div class="col-md-4">
             <input asp-for="Cedula" class="form-control" />
             <span asp-validation-for="Cedula" class="text-danger"></span>
         </div>
@@ -21,7 +25,7 @@
 
     <div class="form-group">
         <label asp-for="PrimerNombre" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
+        <div class="col-md-4">
             <input asp-for="PrimerNombre" class="form-control" />
             <span asp-validation-for="PrimerNombre" class="text-danger"></span>
         </div>
@@ -29,7 +33,7 @@
 
     <div class="form-group">
         <label asp-for="SegundoNombre" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
+        <div class="col-md-4">
             <input asp-for="SegundoNombre" class="form-control" />
             <span asp-validation-for="SegundoNombre" class="text-danger"></span>
         </div>
@@ -37,7 +41,7 @@
 
     <div class="form-group">
         <label asp-for="PrimerApellido" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
+        <div class="col-md-4">
             <input asp-for="PrimerApellido" class="form-control" />
             <span asp-validation-for="PrimerApellido" class="text-danger"></span>
         </div>
@@ -45,7 +49,7 @@
 
     <div class="form-group">
         <label asp-for="SegundoApellido" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
+        <div class="col-md-4">
             <input asp-for="SegundoApellido" class="form-control" />
             <span asp-validation-for="SegundoApellido" class="text-danger"></span>
         </div>
@@ -53,8 +57,8 @@
 
     <div class="form-group">
         <label asp-for="FechaNacimiento" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="FechaNacimiento" class="form-control" />
+        <div class="col-md-4">
+            <input asp-for="FechaNacimiento" type="date" class="form-control" />
             <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
         </div>
     </div>
@@ -74,31 +78,14 @@
 }
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <partial name="_PickadatejsPartial" />
 
     <environment names="Development">
-        <script type="text/javascript" src="~/lib/pickadate/lib/picker.js"></script>
-        <script type="text/javascript" src="~/lib/pickadate/lib/picker.date.js"></script>
-        <script type="text/javascript" src="~/js/PickADateFix.js"></script>
-        <script type="text/javascript" src="~/lib/pickadate/lib/translations/es_ES.js"></script>
         <script type="text/javascript" src="~/libext/modernizr/modernizr-input.js"></script>
-
-        <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
+        <script type="text/javascript" src="~/js/Cliente/clienteViewModel.js"></script>
     </environment>
     <environment names="Staging,Production">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js"
-                asp-fallback-src="~/lib/pickadate/lib/compressed/picker.js"
-                asp-fallback-test="window.Picker">
-        </script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.date.js"
-                asp-fallback-src="~/lib/pickadate/lib/compressed/picker.date.js"
-                asp-fallback-test="window.jQuery && jQuery().pickadate">
-        </script>
-        <script type="text/javascript" src="~/js/PickADateFix.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/translations/es_ES.js"
-                asp-fallback-src="~/lib/pickadate/lib/compressed/translations/es_ES.js"
-                asp-fallback-test="jQuery.fn.pickadate.defaults.today === 'hoy'">
-        </script>
         <script type="text/javascript" src="~/libext/modernizr/modernizr-input.min.js"></script>
-        @*<script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.min.js"></script>*@
+        <script type="text/javascript" src="~/js/Cliente/clienteViewModel.min.js"></script>
     </environment>
 }

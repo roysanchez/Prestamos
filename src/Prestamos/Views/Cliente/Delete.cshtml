@@ -1,7 +1,7 @@
 ﻿@model ClienteViewModel
 
 @{
-    ViewBag.Title = "Borrar " + Model.NombreTitular;
+    ViewBag.Title = "Borrar " + Model.NombreCompleto;
 }
 
 <h2>Borrar</h2>
@@ -18,10 +18,10 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NombreTitular)
+            @Html.DisplayNameFor(model => model.NombreCompleto)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.NombreTitular)
+            @Html.DisplayFor(model => model.NombreCompleto)
         </dd>
     </dl>
 
