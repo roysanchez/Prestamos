@@ -102,9 +102,6 @@ namespace Prestamos.Controllers
             {
                 var cliente = Mapper.Map<Cliente>(model);
 
-                db.Entry(cliente).State = EntityState.Modified;
-                db.Entry(cliente).Property("Cedula").IsModified = false;
-
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
