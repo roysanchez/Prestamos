@@ -8,6 +8,7 @@ using Prestamos.Models;
 using Prestamos.ViewModels.Cliente;
 using Negocios;
 using AutoMapper;
+using Prestamos.Extensions;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,8 +16,9 @@ namespace Prestamos.Controllers
 {
     public class ClienteController : Controller
     {
-        private const string EditBindString = "PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, FechaNacimiento";
-        private const string CreateBindString = "Cedula, " + EditBindString;
+        private const string BaseBindString = "PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, FechaNacimiento";
+        private const string EditBindString = "Id, " + BaseBindString;
+        private const string CreateBindString = "Cedula, " + BaseBindString;
         private readonly PrestamoContext db;
 
         public ClienteController(PrestamoContext prestamoContext)
@@ -100,7 +102,8 @@ namespace Prestamos.Controllers
         {
             if (ModelState.IsValid)
             {
-                var cliente = Mapper.Map<Cliente>(model);
+                var cliente = await BuscarClienteId(model.Id);
+                cliente.MergeWith(Mapper.Map<Cliente>(model));
 
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
