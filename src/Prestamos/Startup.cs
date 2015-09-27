@@ -18,6 +18,8 @@ using Prestamos.Services;
 using Negocios;
 using Microsoft.Dnx.Runtime.Infrastructure;
 using System.IO;
+using Microsoft.AspNet.Mvc.Razor;
+using Prestamos.Config.Views.LocationExpander;
 
 namespace Prestamos
 {
@@ -78,6 +80,8 @@ namespace Prestamos
             // Register application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.Configure<RazorViewEngineOptions>(c => c.ViewLocationExpanders.Add(new PrestamoLocationExpander()));
 
         }
 
