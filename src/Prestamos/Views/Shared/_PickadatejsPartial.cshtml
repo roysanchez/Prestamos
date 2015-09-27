@@ -1,8 +1,10 @@
 ﻿<environment names="Development">
     <script type="text/javascript" src="~/lib/pickadate/lib/picker.js"></script>
     <script type="text/javascript" src="~/lib/pickadate/lib/picker.date.js"></script>
-    <script type="text/javascript" src="~/js/PickADateFix.js"></script>
+    <script type="text/javascript" src="~/libext/modernizr/modernizr-input.js"></script>
+    <script type="text/javascript" src="~/js/Comun/PickaDateTranslationFix.js"></script>
     <script type="text/javascript" src="~/lib/pickadate/lib/translations/es_ES.js"></script>
+    <script type="text/javascript" src="~/js/Comun/PickaDate.js"></script>
 </environment>
 <environment names="Staging,Production">
     <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/picker.js"
@@ -13,9 +15,12 @@
             asp-fallback-src="~/lib/pickadate/lib/compressed/picker.date.js"
             asp-fallback-test="window.jQuery && jQuery().pickadate">
     </script>
-    <script type="text/javascript" src="~/js/PickADateFix.min.js"></script>
+    <script type="text/javascript" src="~/libext/modernizr/modernizr-input.min.js"></script>
+    <script type="text/javascript" src="~/js/Comun/PickaDateTranslationFix.min.js"></script>                                                         
     <script src="//cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/compressed/translations/es_ES.js"
             asp-fallback-src="~/lib/pickadate/lib/compressed/translations/es_ES.js"
             asp-fallback-test="jQuery.fn.pickadate.defaults.today === 'hoy'">
     </script>
+    <script type="text/javascript" src="~/js/Comun/PickaDate.min.js"></script>
 </environment>
+}
