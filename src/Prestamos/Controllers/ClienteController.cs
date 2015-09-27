@@ -42,17 +42,17 @@ namespace Prestamos.Controllers
 
         public async Task<IActionResult> BuscarClientes(BuscarClienteViewModel model)
         {
-            var clientes = db.Clientes;
+            var clientes = db.Clientes as IQueryable<Cliente>;
 
-            if (!String.IsNullOrEmpty(model.cedula))
-                clientes.Where(c => c.Cedula.Contains(model.cedula));
+            if (!String.IsNullOrEmpty(model.Cedula))
+                clientes = clientes.Where(c => c.Cedula.Contains(model.Cedula));
+            
+            if (!String.IsNullOrEmpty(model.Nombre))
+                clientes = clientes.Where(c => c.PrimerNombre.Contains(model.Nombre) || c.SegundoNombre.Contains(model.Nombre));
 
-            if (!String.IsNullOrEmpty(model.nombre))
-                clientes.Where(c => c.PrimerNombre.Contains(model.nombre) || c.SegundoNombre.Contains(model.nombre));
-
-            if (!String.IsNullOrEmpty(model.apellido))
-                clientes.Where(c => c.PrimerApellido.Contains(model.apellido) || c.SegundoApellido.Contains(model.apellido));
-
+            if (!String.IsNullOrEmpty(model.Apellido))
+                clientes = clientes.Where(c => c.PrimerApellido.Contains(model.Apellido) || c.SegundoApellido.Contains(model.Apellido));
+            
             ViewBag.clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync());
             return View(model);
         }
