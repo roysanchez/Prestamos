@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,11 @@ namespace Prestamos.ViewModels.Cliente
 {
     public class BuscarClienteViewModel
     {
-        public string cedula { get; set; }
-        public string nombre { get; set; }
-        public string apellido { get; set; }
+        [Display(Name = "Cédula")]
+        public string Cedula { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        
     }
+
 }
