@@ -57,7 +57,7 @@
     <div class="form-group">
         <label asp-for="FechaNacimiento" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="FechaNacimiento" type="date" class="form-control" />
+            <input asp-for="FechaNacimiento" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
             <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
         </div>
     </div>
