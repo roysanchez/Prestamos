@@ -8,7 +8,7 @@
 
 <h3>Clientes</h3>
 
-<form asp-action="BuscarClientes" method="get" class="form-horizontal" role="form">
+<form asp-action="BuscarClientes" method="get" class="form-horizontal" role="form" id="BuscadorClientes">
     <h4>Buscar cliente</h4>
     <hr />
     <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
@@ -56,3 +56,17 @@
         }
     </tbody>
 </table>
+
+@section Scripts{
+    <environment names="Development">
+        <script type="text/javascript" src="~/lib/vue/dist/vue.js"></script>
+        <script type="text/javascript" src="~/js/Cliente/buscarClienteViewModel.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js"
+                asp-fallback-src="~/lib/vue/dist/vue.min.js"
+                asp-fallback-test="Vue">
+        </script>
+        <script type="text/javascript" src="~/js/Cliente/buscarClienteViewModel.min.js"></script>
+    </environment>
+}

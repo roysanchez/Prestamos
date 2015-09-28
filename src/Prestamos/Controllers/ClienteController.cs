@@ -54,7 +54,7 @@ namespace Prestamos.Controllers
                 clientes = clientes.Where(c => c.PrimerApellido.Contains(model.Apellido) || c.SegundoApellido.Contains(model.Apellido));
             
             ViewBag.clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync());
-            return View(model);
+            return PartialView(model);
         }
 
         // GET: /<controller>/
