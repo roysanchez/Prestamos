@@ -21,17 +21,32 @@
 //TODO Verificar si el select tagHelper puede manejar los enum
     }
 
-    <input asp-for="Deudor.Id" hidden="hidden" />
+    <input asp-for="Deudor.Id" v-model="deudorId" hidden="hidden" />
 
+    @{
+        //TODO Agregar el icono de exitoso y erroneo, para la busqueda del cliente
+    }
     <div class="form-group">
         <label asp-for="Deudor.Cedula" class="col-md-2 control-label"></label>
         <div class="col-md-4">
             <div class="input-group">
                 <input asp-for="Deudor.Cedula" type="number" v-model="cedula" class="form-control" />
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" v-on="click: BuscarCliente">Buscar</button>
+                    <button class="btn btn-default" type="button"
+                            data-modal="modalBuscarCliente" data-url="@Url.Action("BuscarClienteCedula", "Cliente")"
+                            v-on="click: BuscarCliente">
+                        Buscar
+                    </button>
                 </span>
             </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Deudor.NombreTitular" class="col-md-2 control-label"></label>
+        <div class="col-md-4">
+            <input asp-for="Deudor.NombreTitular" v-model="nombre" class="form-control" disabled="disabled" />
+
         </div>
     </div>
 
@@ -135,29 +150,21 @@ new
     <a asp-action="Index">Volver</a>
 </div>
 
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Launch demo modal
-</button>
-
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modalBuscarCliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">Buscar cliente</h4>
             </div>
             <div class="modal-body">
-                <div class="container">
-                    @await Component.InvokeAsync("BuscarCliente")
-                </div>
+                @await Component.InvokeAsync("BuscarCliente")
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>*@
         </div>
     </div>
 </div>
@@ -167,13 +174,14 @@ new
     <script type="text/javascript">
         var PR = PR || {};
         PR.PrestamoViewModel = {
+            deudorId: '@Model?.Deudor?.Id',
             monto: '@Model?.Monto?.Monto',
             tasa: '@Model?.Porciento',
             mora: '@Model?.PorcMora',
             cuotas: '@Model?.CantCuotas',
             deudorId: '@Model?.Deudor?.Id',
             deudorCedula: '@Model?.Deudor?.Cedula',
-            urlBuscarCliente: '@Url.Action("BuscarCliente", "Cliente")'
+            deudorNombre: '@Model?.Deudor?.NombreTitular'
         };
     </script>
 
@@ -186,6 +194,7 @@ new
         <script type="text/javascript" src="~/lib/vue/dist/vue.js"></script>
 
         <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
+        <script type="text/javascript" src="~/js/Cliente/buscarClienteViewModel.js"></script>
     </environment>
     <environment names="Staging,Production">
         <script type="text/javascript" src="~/libext/modernizr/modernizr-input.min.js"></script>
