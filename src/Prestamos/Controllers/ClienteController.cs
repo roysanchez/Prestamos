@@ -32,29 +32,12 @@ namespace Prestamos.Controllers
             return await db.Clientes.Where(c => c.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<IActionResult> BuscarCliente(string cedula)
+        public async Task<IActionResult> BuscarClienteCedula(string cedula)
         {
             var cliente = await db.Clientes.Where(c => c.Cedula == cedula)
                                            .FirstOrDefaultAsync();
 
-            return Json(cliente);
-        }
-
-        public async Task<IActionResult> BuscarClientes(BuscarClienteViewModel model)
-        {
-            var clientes = db.Clientes as IQueryable<Cliente>;
-
-            if (!String.IsNullOrEmpty(model.Cedula))
-                clientes = clientes.Where(c => c.Cedula.Contains(model.Cedula));
-            
-            if (!String.IsNullOrEmpty(model.Nombre))
-                clientes = clientes.Where(c => c.PrimerNombre.Contains(model.Nombre) || c.SegundoNombre.Contains(model.Nombre));
-
-            if (!String.IsNullOrEmpty(model.Apellido))
-                clientes = clientes.Where(c => c.PrimerApellido.Contains(model.Apellido) || c.SegundoApellido.Contains(model.Apellido));
-            
-            ViewBag.clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync());
-            return PartialView(model);
+            return Json(Mapper.Map<ClienteViewModel>(cliente));
         }
 
         // GET: /<controller>/
