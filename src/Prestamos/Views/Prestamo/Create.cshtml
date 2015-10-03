@@ -9,6 +9,13 @@
 
 @section Css{
     <partial name="_PickadatecssPartial" />
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/Cliente/buscarcliente.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/Cliente/buscarcliente.min.css" />
+    </environment>
 }
 
 <h2 v-data="">Crear Prestamo</h2>
@@ -24,7 +31,7 @@
     <input asp-for="Deudor.Id" v-model="deudorId" hidden="hidden" />
 
     @{
-        //TODO Agregar el icono de exitoso y erroneo, para la busqueda del cliente
+//TODO Agregar el icono de exitoso y erroneo, para la busqueda del cliente
     }
     <div class="form-group">
         <label asp-for="Deudor.Cedula" class="col-md-2 control-label"></label>
@@ -149,7 +156,7 @@ new
 <div>
     <a asp-action="Index">Volver</a>
 </div>
-
+@await Component.InvokeAsync("BuscarCliente")
 <!-- Modal -->
 <div class="modal fade" id="modalBuscarCliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -159,7 +166,7 @@ new
                 <h4 class="modal-title" id="myModalLabel">Buscar cliente</h4>
             </div>
             <div class="modal-body">
-                @await Component.InvokeAsync("BuscarCliente")
+
             </div>
             @*<div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

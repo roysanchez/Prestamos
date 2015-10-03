@@ -2,36 +2,34 @@
 
 @{
     IEnumerable<ClienteViewModel> clientes = ViewBag.clientes;
-    //TODO Verificar si se tomo en cuenta el bug que levante para los placeholders
-    //github.com/aspnet/Mvc/issues/3213
 }
 
 <div class="container" id="BuscadorClientes">
     <h3>Clientes</h3>
 
-    <form asp-action="BuscarClientes" method="get" class="form-horizontal" role="form">
+    <form asp-action="BuscarClientes" method="get" class="form-inline" role="form">
         <h4>Buscar cliente</h4>
         <hr />
         <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
 
         <div class="form-group col-md-12">
-            <label asp-for="Cedula" class="sr-only"></label>
-            <input asp-for="Cedula" placeholder="@Html.DisplayNameFor(model => model.Cedula)" v-model="cedula" class="form-control" />
+            <label asp-for="Cedula" class="input-label"></label>
+            <input asp-for="Cedula" placeholder="@Html.DisplayNameFor(model => model.Cedula)" v-model="cedula" class="input-inline" />
         </div>
 
         <div class="form-group col-md-12">
-            <label asp-for="Nombre" class="sr-only"></label>
-            <input asp-for="Nombre" placeholder="@Html.DisplayNameFor(model => model.Nombre)" v-model="nombres" class="form-control" />
+            <label asp-for="Nombre" class="control-label"></label>
+            <input asp-for="Nombre" placeholder="@Html.DisplayNameFor(model => model.Nombre)" v-model="nombres" class="input-inline" />
         </div>
 
-        <div class="form-group col-md-12">
-            <label asp-for="Apellido" class="sr-only"></label>
+        @*<div class="form-group col-md-12">
+            <label asp-for="Apellido" class="control-label"></label>
             <input asp-for="Apellido" placeholder="@Html.DisplayNameFor(model => model.Apellido)" v-model="apellidos" class="form-control" />
         </div>
 
         <div class="form-group col-md-12">
             <button type="button" v-on="click: BuscarClientes" class="btn btn-default">Buscar</button>
-        </div>
+        </div>*@
     </form>
     <!--TODO Mover esta pagina a una vista partial, al igual que esta tabla, para crear un llamado en cadena
         que se puede utilizar para agregar una busqueda de clientes (Verificar como se mostraria en la pagina de prestamos)-->
@@ -42,6 +40,7 @@
                 <th>Cedula</th>
                 <th>Nombre</th>
                 <th>Edad</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -51,6 +50,7 @@
                     <td>@cliente.Cedula</td>
                     <td>@cliente.NombreCompleto</td>
                     <td>@cliente.Edad</td>
+                    <td><button>Click Here<i class="fa fa-hand-grab-o"></i></button></td>
                 </tr>
             }
         </tbody>

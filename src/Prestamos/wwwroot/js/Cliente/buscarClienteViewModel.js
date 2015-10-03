@@ -1,9 +1,9 @@
 ﻿/// <reference path="../../lib/jquery/dist/jquery.js"/>
 /// <reference path="../../lib/vue/dist/vue.js"/>
 
-(function (window, $, PR, Vue, accounting) {
+(function (window, $, PR, Vue) {
 
-    var demo = new Vue({
+    var vm = new Vue({
         el: '#BuscadorClientes',
         name: 'Buscador-Clientes',
         data: {
@@ -19,12 +19,13 @@
     });
 
     function BuscarClientes(event) {
-        var vm = this;
+        //var vm = this;
     }
 
     function SeleccionarCliente(event) {
-        var vm = this;
+        //var vm = this;
+
 
     }
 
-}(this.window, this.jQuery, this.PR, this.Vue, this.accounting));
+}(this.window, this.jQuery, this.PR, this.Vue));
