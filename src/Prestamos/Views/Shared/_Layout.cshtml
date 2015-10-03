@@ -21,6 +21,15 @@
                   asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />
         </environment>
 
+        <environment names="Development">
+            <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+        </environment>
+        <environment names="Staging,Production">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+                  asp-fallback-href="~/lib/font-awesome/css/font-awesome.css"
+                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+        </environment>
+
         @RenderSection("Css", required: false)
 
         <environment names="Development">
