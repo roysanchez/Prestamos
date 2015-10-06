@@ -30,7 +30,7 @@ namespace Prestamos.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            return View(new PrestamoViewModel() { Deudor = new ViewModels.Cliente.ClienteViewModel()});
         }
 
         [HttpPost]

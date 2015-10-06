@@ -1,0 +1,64 @@
+﻿@model BuscarClienteViewModel
+
+@{
+    IEnumerable<ClienteViewModel> clientes = ViewBag.clientes ?? new List<ClienteViewModel>();
+}
+
+<div id="BuscadorClientes">
+    <h3>Clientes</h3>
+
+    <form asp-action="BuscarClientes" method="get" class="form-horizontal" role="form">
+        <h4>Buscar cliente</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+
+        <div class="form-group">
+            <label asp-for="Cedula" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Cedula" placeholder="@Html.DisplayNameFor(model => model.Cedula)" v-model="cedula" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Nombre" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Nombre" placeholder="@Html.DisplayNameFor(model => model.Nombre)" v-model="nombres" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Apellido" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input asp-for="Apellido" placeholder="@Html.DisplayNameFor(model => model.Apellido)" v-model="apellidos" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group col-md-1 col-md-push-10">
+            <button type="button" v-on="click: BuscarClientes" class="btn btn-default">
+                <span>Buscar</span>
+                <i class="fa fa-cog fa-spin" v-show="indBusca"></i>
+            </button>
+        </div>
+    </form>
+    <!--TODO Mover esta pagina a una vista partial, al igual que esta tabla, para crear un llamado en cadena
+        que se puede utilizar para agregar una busqueda de clientes (Verificar como se mostraria en la pagina de prestamos)-->
+
+    <table class="table table-hover buscador">
+        <thead>
+            <tr>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-on="click: SeleccionCliente" v-repeat="clientes" data-clienteId="{{Id}}" data-nombre="{{NombreTitular}}">
+                <td>{{Cedula}}</td>
+                <td>{{NombreCompleto}}</td>
+                <td>{{Edad}}</td>
+                <td><i class="fa fa-arrow-down fa-2x"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

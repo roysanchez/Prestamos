@@ -66,7 +66,9 @@
                     vm.nombre = cliente.NombreTitular;
                 });
         } else {
-            $('#' + data.modal).modal();
+            var modal = $('#' + data.modal);
+            //modal.find('.modal-body').load(model.urlBuscarCliente);
+            modal.modal();
         }
 
         

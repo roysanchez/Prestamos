@@ -40,6 +40,23 @@ namespace Prestamos.Controllers
             return Json(Mapper.Map<ClienteViewModel>(cliente));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> BuscarClientes(BuscarClienteViewModel model)
+        {
+            var clientes = db.Clientes as IQueryable<Cliente>;
+
+            if (!String.IsNullOrEmpty(model.Cedula))
+                clientes = clientes.Where(c => c.Cedula.Contains(model.Cedula));
+
+            if (!String.IsNullOrEmpty(model.Nombre))
+                clientes = clientes.Where(c => c.PrimerNombre.Contains(model.Nombre) || c.SegundoNombre.Contains(model.Nombre));
+
+            if (!String.IsNullOrEmpty(model.Apellido))
+                clientes = clientes.Where(c => c.PrimerApellido.Contains(model.Apellido) || c.SegundoApellido.Contains(model.Apellido));
+            
+            return Json(Mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync()));
+        }
+
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {

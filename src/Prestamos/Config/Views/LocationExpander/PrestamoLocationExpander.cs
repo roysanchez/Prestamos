@@ -11,7 +11,7 @@ namespace Prestamos.Config.Views.LocationExpander
         public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
         {
             var list = viewLocations.ToList();
-            list.Add("/Views/Shared/Partials/{1}/{0}.cshtml");
+            list.Add("/Views/Shared/Partials/{0}.cshtml");
 
             return list;
 

@@ -2,7 +2,7 @@
   "name": "ASP.NET",
   "private": true,
   "dependencies": {
-    "bootstrap": "3.0.0",
+    "bootstrap": "3.3.5",
     "bootstrap-touch-carousel": "0.8.0",
     "hammer.js": "2.0.4",
     "jquery": "2.1.4",
@@ -11,6 +11,7 @@
     "font-awesome": "4.4.0",
     "pickadate": "3.5.6",
     "accounting": "0.3.2",
-    "vue": "0.12.15"
+    "vue": "0.12.15",
+    "requirejs": "2.1.20"
   }
 }

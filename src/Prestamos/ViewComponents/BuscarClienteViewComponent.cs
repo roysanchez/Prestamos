@@ -26,6 +26,7 @@ namespace Prestamos.ViewComponents
             return await InvokeAsync(new BuscarClienteViewModel());
         }
 
+        //TODO Eliminar
         public async Task<IViewComponentResult> InvokeAsync(BuscarClienteViewModel model)
         {
             var clientes = db.Clientes as IQueryable<Cliente>;

@@ -9,7 +9,10 @@
         data: {
             cedula: '',
             nombres: '',
-            apellidos: ''
+            apellidos: '',
+            clientes: [],
+            url: '/Cliente/BuscarClientes',
+            indBusca: false
 
         },
         methods: {
@@ -19,12 +22,19 @@
     });
 
     function BuscarClientes(event) {
-        //var vm = this;
+        var model = this;
+
+        model.indBusca = true;
+        $.post(model.url, { cedula: model.cedula })
+            .done(function (data) {
+                model.clientes = data;
+                model.indBusca = false;
+            });
     }
 
     function SeleccionarCliente(event) {
         //var vm = this;
-
+        var x = 2;
 
     }
 
