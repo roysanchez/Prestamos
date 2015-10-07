@@ -4,6 +4,22 @@
 /// <reference path="../../lib/pickadate/lib/picker.js"/>
 /// <reference path="../../lib/pickadate/lib/picker.date.js"/>
 
+define(['jquery', 'module', 'require'], function ($, module, require) {
+    //console.debug("entro");
+    //var x = $("body");
+    var model = module.config();
+    require(['Modernizr'], function (M) {
+        console.debug(M);
+    });
+    console.debug("entro");
+    console.debug($);
+    console.debug(module.id);
+    console.debug(model);
+    //console.debug(module.config());
+    //console.debug(module.config().model);
+});
+
+/*
 (function (window, $, PR, Vue, accounting) {
 
     ////https://github.com/amsul/pickadate.js/issues/160
@@ -75,3 +91,5 @@
     }
 
 }(this.window, this.jQuery, this.PR, this.Vue, this.accounting));
+
+*/

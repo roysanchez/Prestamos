@@ -181,8 +181,8 @@ new
 
 @section Scripts {
     <script type="text/javascript">
-        var PR = PR || {};
-        PR.PrestamoViewModel = {
+        //var PR = PR || {};
+        @*PR.PrestamoViewModel = {
             deudorId: '@Model?.Deudor?.Id',
             monto: '@Model?.Monto?.Monto',
             tasa: '@Model?.Porciento',
@@ -192,30 +192,65 @@ new
             deudorCedula: '@Model?.Deudor?.Cedula',
             deudorNombre: '@Model?.Deudor?.NombreTitular',
             urlBuscarCliente: '@Url.Action("BuscarClientes", "Cliente")'
-        };
+        };*@
+
+        requirejs.config({
+            shim: {
+                '/libext/modernizr/modernizr-input.js': {
+                    exports: 'Modernizr',
+                    init: function () {
+                        var ret = this.Modernizr;
+                        this.Modernizr = undefined;
+                        return ret;
+                    }
+                }
+            },
+            map:{
+                'Prestamo/prestamoViewModel' : {
+                    'Modernizr' : '/libext/modernizr/modernizr-input.js'
+                }
+            },
+            config: {
+                'Prestamo/prestamoViewModel': {
+                    deudorId: '@Model?.Deudor?.Id',
+                    monto: '@Model?.Monto?.Monto',
+                    tasa: '@Model?.Porciento',
+                    mora: '@Model?.PorcMora',
+                    cuotas: '@Model?.CantCuotas',
+                    deudorId: '@Model?.Deudor?.Id',
+                    deudorCedula: '@Model?.Deudor?.Cedula',
+                    deudorNombre: '@Model?.Deudor?.NombreTitular',
+                    urlBuscarCliente: '@Url.Action("BuscarClientes", "Cliente")'
+                }
+            }
+        });
+
+        requirejs(['Prestamo/prestamoViewModel']);
     </script>
+    @*<script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>*@
 
-    <partial name="_ValidationScriptsPartial" />
-    <partial name="_PickadatejsPartial" />
+    @*<partial name="_ValidationScriptsPartial" />
+        <partial name="_PickadatejsPartial" />
 
-    <environment names="Development">
-        <script type="text/javascript" src="~/libext/modernizr/modernizr-input.js"></script>
-        <script type="text/javascript" src="~/lib/accounting/accounting.js"></script>
-        <script type="text/javascript" src="~/lib/vue/dist/vue.js"></script>
+        <environment names="Development">
+            <script type="text/javascript" src="~/libext/modernizr/modernizr-input.js"></script>
+            <script type="text/javascript" src="~/lib/accounting/accounting.js"></script>
+            <script type="text/javascript" src="~/lib/vue/dist/vue.js"></script>
 
-        <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
-        <script type="text/javascript" src="~/js/Cliente/buscarClienteViewModel.js"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script type="text/javascript" src="~/libext/modernizr/modernizr-input.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js"
-                asp-fallback-src="~/lib/accounting/accounting.min.js"
-                asp-fallback-test="window.accounting">
-        </script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js"
-                asp-fallback-src="~/lib/vue/dist/vue.min.js"
-                asp-fallback-test="Vue">
-        </script>
-        <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.min.js"></script>
-    </environment>
+            <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
+            <script type="text/javascript" src="~/js/Cliente/buscarClienteViewModel.js"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script type="text/javascript" src="~/libext/modernizr/modernizr-input.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js"
+                    asp-fallback-src="~/lib/accounting/accounting.min.js"
+                    asp-fallback-test="window.accounting">
+            </script>
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js"
+                    asp-fallback-src="~/lib/vue/dist/vue.min.js"
+                    asp-fallback-test="Vue">
+            </script>
+            <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.min.js"></script>
+        </environment>
+    *@
 }
