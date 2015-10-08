@@ -187,8 +187,7 @@ new
                     'Modernizr': 'libext/modernizr/modernizr-input',
                     'vuejs': 'lib/vue/dist/vue',
                     'accounting': 'lib/accounting/accounting',
-                    //'picker': 'lib/pickadate/lib/picker',
-                    //'pickadate': 'lib/pickadate/lib/picker.date'
+                    'pickerES': 'lib/pickadate/lib/translations/es_ES'
                 }
             },
             shim: {
@@ -199,6 +198,10 @@ new
                         this.Modernizr = undefined;
                         return ret;
                     }
+                },
+                'lib/pickadate/lib/translations/es_ES': {
+                    deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
+                    exports: 'jQuery.fn.pickadate.defaults'
                 }
             },
             paths: {
