@@ -181,33 +181,23 @@ new
 
 @section Scripts {
     <script type="text/javascript">
-        //var PR = PR || {};
-        @*PR.PrestamoViewModel = {
-            deudorId: '@Model?.Deudor?.Id',
-            monto: '@Model?.Monto?.Monto',
-            tasa: '@Model?.Porciento',
-            mora: '@Model?.PorcMora',
-            cuotas: '@Model?.CantCuotas',
-            deudorId: '@Model?.Deudor?.Id',
-            deudorCedula: '@Model?.Deudor?.Cedula',
-            deudorNombre: '@Model?.Deudor?.NombreTitular',
-            urlBuscarCliente: '@Url.Action("BuscarClientes", "Cliente")'
-        };*@
-
         requirejs.config({
+            map:{
+                'Prestamo/prestamoViewModel' : {
+                    'Modernizr': 'libext/modernizr/modernizr-input',
+                    'vuejs': 'lib/vue/dist/vue',
+                    'accounting': 'lib/accounting/accounting',
+                    //'pickadate': 'lib/pickadate/lib/picker.date'
+                }
+            },
             shim: {
-                '/libext/modernizr/modernizr-input.js': {
+                'libext/modernizr/modernizr-input': {
                     exports: 'Modernizr',
                     init: function () {
                         var ret = this.Modernizr;
                         this.Modernizr = undefined;
                         return ret;
                     }
-                }
-            },
-            map:{
-                'Prestamo/prestamoViewModel' : {
-                    'Modernizr' : '/libext/modernizr/modernizr-input.js'
                 }
             },
             config: {
