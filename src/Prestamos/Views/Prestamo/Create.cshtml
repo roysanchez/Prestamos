@@ -182,11 +182,12 @@ new
 @section Scripts {
     <script type="text/javascript">
         requirejs.config({
-            map:{
-                'Prestamo/prestamoViewModel' : {
+            map: {
+                'Prestamo/prestamoViewModel': {
                     'Modernizr': 'libext/modernizr/modernizr-input',
                     'vuejs': 'lib/vue/dist/vue',
                     'accounting': 'lib/accounting/accounting',
+                    //'picker': 'lib/pickadate/lib/picker',
                     //'pickadate': 'lib/pickadate/lib/picker.date'
                 }
             },
@@ -199,6 +200,10 @@ new
                         return ret;
                     }
                 }
+            },
+            paths: {
+                picker: '../lib/pickadate/lib/picker',
+                pickadate: '../lib/pickadate/lib/picker.date'
             },
             config: {
                 'Prestamo/prestamoViewModel': {

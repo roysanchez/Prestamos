@@ -4,29 +4,20 @@
 /// <reference path="../../lib/pickadate/lib/picker.js"/>
 /// <reference path="../../lib/pickadate/lib/picker.date.js"/>
 
-define('roy', [], function () {
-    return "roy";
-})
-
-requirejs(['require', 'roy'], function (require, roy) {
-    require('picker', function (x) {
-        console.debug(x);
-    });
-});
-
 define(['jquery', 'module', 'vuejs', 'accounting', 'Modernizr', 'require'],
     function ($, module, Vue, accounting, Modernizr, require) {
         var model = module.config();
-        /*
-        if (true){//!Modernizr.inputtypes.date) {
-            require(['lib/pickadate/lib/picker.date'], function (pickadate) {
-                console.debug(pickadate);
+        
+        if (!Modernizr.inputtypes.date) {
+            require(['picker', 'pickadate'], function () {
+                $('[type="date"]').pickadate({
+                    onClose: function () {
+                        $('.datepicker').blur();
+                    }
+                });
             });
-            
-            //TODO Agregar la libreria pickadate en requirejs
-            //$('[type="date"]');
         }
-        */
+        
 
         var vm = new Vue({
             el: '#crearPrestamoForm',
@@ -66,7 +57,6 @@ define(['jquery', 'module', 'vuejs', 'accounting', 'Modernizr', 'require'],
         );
 
         function BuscarClientePorCedula(event) {
-            //var vm = this;
             var data = event.target.dataset;
 
             if (vm.cedula !== "") {
@@ -78,7 +68,6 @@ define(['jquery', 'module', 'vuejs', 'accounting', 'Modernizr', 'require'],
                     });
             } else {
                 var modal = $('#' + data.modal);
-                //modal.find('.modal-body').load(model.urlBuscarCliente);
                 modal.modal();
             }
         }
