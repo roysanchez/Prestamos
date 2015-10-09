@@ -28,6 +28,7 @@ define(['jquery', 'module', 'vuejs', 'accounting', 'Modernizr', 'require'],
             */
             require(['picker', 'pickadate', 'pickerES'], function () {
                 $('[type="date"]').pickadate({
+                    format: 'yyyy-mm-dd',
                     onClose: function () {
                         $('.datepicker').blur();
                     }

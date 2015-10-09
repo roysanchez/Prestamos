@@ -25,6 +25,7 @@ define(['jquery', 'module', 'Modernizr', 'require'], function ($, module, Modern
         */
         require(['picker', 'pickadate', 'pickerES'], function () {
             $('[type="date"]').pickadate({
+                format: 'yyyy-mm-dd',
                 onClose: function () {
                     $('.datepicker').blur();
                 }
