@@ -3,114 +3,92 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - Prestamos</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Prestamos</title>
 
-        <environment names="Development">
-            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css" />
-        </environment>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/css/bootstrap.min.css"
-                  asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
-                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
-            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
-                  asp-fallback-href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css"
-                  asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />
-        </environment>
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+              asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+        <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
+              asp-fallback-href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css"
+              asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />
+    </environment>
 
-        <environment names="Development">
-            <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
-        </environment>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
-                  asp-fallback-href="~/lib/font-awesome/css/font-awesome.css"
-                  asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
-        </environment>
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+              asp-fallback-href="~/lib/font-awesome/css/font-awesome.css"
+              asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+    </environment>
 
-        @RenderSection("Css", required: false)
+    @RenderSection("Css", required: false)
 
-        <environment names="Development">
-            <link rel="stylesheet" href="~/css/site.css" />
-        </environment>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" href="~/css/site.css" asp-file-version="true" />
-        </environment>
-    </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">Prestamos</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                        <li><a asp-controller="Cliente" asp-action="Index">Clientes</a></li>
-                        <li><a asp-controller="Prestamo" asp-action="Index">Prestamos</a></li>
-                    </ul>
-                    @await Html.PartialAsync("_LoginPartial")
-                </div>
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/site.css" asp-file-version="true" />
+    </environment>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand">Prestamos</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-controller="Cliente" asp-action="Index">Clientes</a></li>
+                    <li><a asp-controller="Prestamo" asp-action="Index">Prestamos</a></li>
+                </ul>
+                @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2015 - Prestamos</p>
-            </footer>
-        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2015 - Prestamos</p>
+        </footer>
+    </div>
+    <environment names="Development">
         <script type="text/javascript" src="~/js/site.js"></script>
         <script type="text/javascript" src="~/lib/requirejs/require.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script type="text/javascript">
+            //TODO Crear las configuraciones para un ambiente de producción
+            /*Url's de prod de las diferentes librerias
+            site: ~/js/site.min.js
+            jquery: //ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js
+            require: //cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.min.js
+            bootstrap: //ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/bootstrap.min.js
+            hammer: //ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js
+            carousel: //ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/js/bootstrap-touch-carousel.js
+            */
+        </script>
+    </environment>
 
-        @*<script type="text/javascript">
-            requirejs(['jquery'], function (a) {
-                var x = 2;
-            });
-        </script>*@
-
-        @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
-
-        @*<script type="text/javascript" src="~/lib/pickadate/lib/picker.js"></script>*@
-        @*<environment names="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/lib/hammer.js/hammer.js"></script>
-            <script src="~/lib/bootstrap-touch-carousel/dist/js/bootstrap-touch-carousel.js"></script>
-        </environment>
-        <environment names="Staging,Production">
-            <script src="//ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery">
-            </script>
-            <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-            </script>
-            <script src="//ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js"
-                    asp-fallback-src="~/lib/hammer.js/hammer.js"
-                    asp-fallback-test="window.Hammer">
-            </script>
-            <script src="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/js/bootstrap-touch-carousel.js"
-                    asp-fallback-src="~/lib/bootstrap-touch-carousel/dist/js/bootstrap-touch-carousel.js"
-                    asp-fallback-test="window.Hammer && window.Hammer.Instance">
-            </script>
-            <script src="~/js/site.min.js" asp-file-version="true"></script>
-        </environment>*@
-        
-        
-
-        @RenderSection("scripts", required: false)
-    </body>
+    @RenderSection("scripts", required: false)
+</body>
 </html>
 <!-- Environment: @HostingEnvironment.EnvironmentName -->
 <!-- Framework: @ApplicationEnvironment.RuntimeFramework -->

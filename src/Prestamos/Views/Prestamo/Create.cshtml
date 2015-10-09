@@ -127,10 +127,7 @@
         <label asp-for="FormaPago" class="col-md-2 control-label"></label>
         <div class="col-md-4">
             @Html.DropDownListFor(model => model.FormaPago, Html.GetEnumSelectList(typeof(Negocios.Periodo)),
-new
-{
-    @class = "form-control"
-})
+            new { @class = "form-control" })
             <span asp-validation-for="FormaPago" class="text-danger"></span>
         </div>
     </div>
@@ -167,7 +164,6 @@ new
                 <h4 class="modal-title" id="myModalLabel">Buscar cliente</h4>
             </div>
             <div class="modal-body">
-                @*<i class="fa fa-cog fa-spin fa-5x"></i>*@
                 <partial name="_BuscarClientes" model="datosCliente" />
             </div>
             @*<div class="modal-footer">
@@ -180,80 +176,68 @@ new
 
 
 @section Scripts {
-    <script type="text/javascript">
-        requirejs.config({
-            map: {
-                'Prestamo/prestamoViewModel': {
-                    'Modernizr': 'libext/modernizr/modernizr-input',
-                    'vuejs': 'lib/vue/dist/vue',
-                    'accounting': 'lib/accounting/accounting',
-                    'pickerES': 'lib/pickadate/lib/translations/es_ES'
-                }
-            },
-            shim: {
-                'libext/modernizr/modernizr-input': {
-                    exports: 'Modernizr',
-                    init: function () {
-                        var ret = this.Modernizr;
-                        this.Modernizr = undefined;
-                        return ret;
+    <environment names="Development">
+        <script type="text/javascript">
+            //TODO Configurar el modal despues de la migracion a bootstrap 4
+            requirejs.config({
+                map: {
+                    'Prestamo/prestamoViewModel': {
+                        'Modernizr': 'libext/modernizr/modernizr-input',
+                        'vuejs': 'lib/vue/dist/vue',
+                        'accounting': 'lib/accounting/accounting',
+                        'pickerES': 'lib/pickadate/lib/translations/es_ES'
                     }
                 },
-                'lib/pickadate/lib/translations/es_ES': {
-                    deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
-                    exports: 'jQuery.fn.pickadate.defaults'
+                shim: {
+                    'libext/modernizr/modernizr-input': {
+                        exports: 'Modernizr',
+                        init: function () {
+                            var ret = this.Modernizr;
+                            this.Modernizr = undefined;
+                            return ret;
+                        }
+                    },
+                    'lib/pickadate/lib/translations/es_ES': {
+                        deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
+                        exports: 'jQuery.fn.pickadate.defaults'
+                    }
+                },
+                paths: {
+                    picker: '../lib/pickadate/lib/picker',
+                    pickadate: '../lib/pickadate/lib/picker.date',
+                    'jquery.validate': '../lib/jquery-validation/dist/jquery.validate',
+                    'jquery.validate.unobtrusive': '../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
+                    'jquery.validation.unobtrusive.bootstrap': '../libext/jquery-validation-unobtrusive-bootstrap/jquery.validation.unobtrusive.bootstrap'
+                },
+                config: {
+                    'Prestamo/prestamoViewModel': {
+                        deudorId: '@Model?.Deudor?.Id',
+                        monto: '@Model?.Monto?.Monto',
+                        tasa: '@Model?.Porciento',
+                        mora: '@Model?.PorcMora',
+                        cuotas: '@Model?.CantCuotas',
+                        deudorId: '@Model?.Deudor?.Id',
+                        deudorCedula: '@Model?.Deudor?.Cedula',
+                        deudorNombre: '@Model?.Deudor?.NombreTitular',
+                        urlBuscarCliente: '@Url.Action("BuscarClientes", "Cliente")'
+                    }
                 }
-            },
-            paths: {
-                picker: '../lib/pickadate/lib/picker',
-                pickadate: '../lib/pickadate/lib/picker.date',
-                'jquery.validate': '../lib/jquery-validation/dist/jquery.validate',
-                'jquery.validate.unobtrusive': '../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
-                'jquery.validation.unobtrusive.bootstrap': '../libext/jquery-validation-unobtrusive-bootstrap/jquery.validation.unobtrusive.bootstrap'
-            },
-            config: {
-                'Prestamo/prestamoViewModel': {
-                    deudorId: '@Model?.Deudor?.Id',
-                    monto: '@Model?.Monto?.Monto',
-                    tasa: '@Model?.Porciento',
-                    mora: '@Model?.PorcMora',
-                    cuotas: '@Model?.CantCuotas',
-                    deudorId: '@Model?.Deudor?.Id',
-                    deudorCedula: '@Model?.Deudor?.Cedula',
-                    deudorNombre: '@Model?.Deudor?.NombreTitular',
-                    urlBuscarCliente: '@Url.Action("BuscarClientes", "Cliente")'
-                }
-            }
-        });
+            });
 
-        requirejs(['jquery.validation.unobtrusive.bootstrap', 'Prestamo/prestamoViewModel'], function (val) {
-            val.parse(document);
-        });
-    </script>
-    @*<script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>*@
-
-    @*<partial name="_ValidationScriptsPartial" />
-        <partial name="_PickadatejsPartial" />
-
-        <environment names="Development">
-            <script type="text/javascript" src="~/libext/modernizr/modernizr-input.js"></script>
-            <script type="text/javascript" src="~/lib/accounting/accounting.js"></script>
-            <script type="text/javascript" src="~/lib/vue/dist/vue.js"></script>
-
-            <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
-            <script type="text/javascript" src="~/js/Cliente/buscarClienteViewModel.js"></script>
-        </environment>
-        <environment names="Staging,Production">
-            <script type="text/javascript" src="~/libext/modernizr/modernizr-input.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js"
-                    asp-fallback-src="~/lib/accounting/accounting.min.js"
-                    asp-fallback-test="window.accounting">
-            </script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js"
-                    asp-fallback-src="~/lib/vue/dist/vue.min.js"
-                    asp-fallback-test="Vue">
-            </script>
-            <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.min.js"></script>
-        </environment>
-    *@
+            requirejs(['jquery.validation.unobtrusive.bootstrap', 'Prestamo/prestamoViewModel'], function (unobt) {
+                unobt.parse(document);
+            });
+        </script>
+    </environment>
+    <environment names="Staging,Production">
+        <script type="text/javascript">
+            //TODO Crear las configuraciones para un ambiente de producción
+            /*Url's de prod de las diferentes librerias
+            Modernizr: ~/libext/modernizr/modernizr-input.min.js
+            Vue: //cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js
+            Accounting: //cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js
+            Prestamo: js/Prestamo/prestamoViewModel.min.js
+            */
+        </script>
+    </environment>
 }
