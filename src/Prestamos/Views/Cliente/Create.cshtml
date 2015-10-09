@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Crear cliente";
+    //TODO Agregar validación de cedula de cliente por ajax
 }
 
 @section Css{
@@ -74,13 +75,56 @@
     <a asp-action="Index">Volver</a>
 </div>
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    @*<partial name="_PickadatejsPartial" />*@
+<environment names="Development">
+    <script type="text/javascript">
+            requirejs.config({
+                map: {
+                    'Cliente/clienteViewModel': {
+                        'Modernizr': 'libext/modernizr/modernizr-input',
+                        'pickerES': 'lib/pickadate/lib/translations/es_ES'
+                    }
+                },
+                shim: {
+                    'libext/modernizr/modernizr-input': {
+                        exports: 'Modernizr',
+                        init: function () {
+                            var ret = this.Modernizr;
+                            this.Modernizr = undefined;
+                            return ret;
+                        }
+                    },
+                    'lib/pickadate/lib/translations/es_ES': {
+                        deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
+                        exports: 'jQuery.fn.pickadate.defaults'
+                    }
+                },
+                paths: {
+                    picker: '../lib/pickadate/lib/picker',
+                    pickadate: '../lib/pickadate/lib/picker.date',
+                    'jquery.validate': '../lib/jquery-validation/dist/jquery.validate',
+                    'jquery.validate.unobtrusive': '../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
+                    'jquery.validation.unobtrusive.bootstrap': '../libext/jquery-validation-unobtrusive-bootstrap/jquery.validation.unobtrusive.bootstrap'
+                },
+                config: {
+                    'Cliente/clienteViewModel': {
+                    }
+                }
+            });
 
-    <environment names="Development">
-        <script type="text/javascript" src="~/js/Cliente/clienteViewModel.js"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script type="text/javascript" src="~/js/Cliente/clienteViewModel.min.js"></script>
-    </environment>
+            requirejs(['jquery.validation.unobtrusive.bootstrap', 'Cliente/clienteViewModel'], function (unobt) {
+                unobt.parse(document);
+            });
+    </script>
+</environment>
+<environment names="Staging,Production">
+    <script type="text/javascript">
+            //TODO Crear las configuraciones para un ambiente de producción
+            /*Url's de prod de las diferentes librerias
+            Modernizr: ~/libext/modernizr/modernizr-input.min.js
+            Vue: //cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js
+            Accounting: //cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js
+            Prestamo: js/Prestamo/prestamoViewModel.min.js
+            */
+    </script>
+</environment>
 }

@@ -1,6 +1,5 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../gulpfile.js" />
-/// <reference path="js/cliente/buscarclienteviewmodel.js" />
 /// <reference path="js/cliente/clienteviewmodel.js" />
 /// <reference path="js/comun/jquery-private.js" />
 /// <reference path="js/comun/pickadate.js" />
