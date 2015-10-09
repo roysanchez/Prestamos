@@ -206,7 +206,10 @@ new
             },
             paths: {
                 picker: '../lib/pickadate/lib/picker',
-                pickadate: '../lib/pickadate/lib/picker.date'
+                pickadate: '../lib/pickadate/lib/picker.date',
+                'jquery.validate': '../lib/jquery-validation/dist/jquery.validate',
+                'jquery.validate.unobtrusive': '../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
+                'jquery.validation.unobtrusive.bootstrap': '../libext/jquery-validation-unobtrusive-bootstrap/jquery.validation.unobtrusive.bootstrap'
             },
             config: {
                 'Prestamo/prestamoViewModel': {
@@ -223,7 +226,9 @@ new
             }
         });
 
-        requirejs(['Prestamo/prestamoViewModel']);
+        requirejs(['jquery.validation.unobtrusive.bootstrap', 'Prestamo/prestamoViewModel'], function (val) {
+            val.parse(document);
+        });
     </script>
     @*<script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>*@
 

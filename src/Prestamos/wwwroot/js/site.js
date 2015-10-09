@@ -1,5 +1,5 @@
 var require = {
-    baseUrl : '/js',
+    baseUrl: '/js',
     paths: {
         lib: '../lib',
         libext: '../libext',

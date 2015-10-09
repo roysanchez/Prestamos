@@ -2,6 +2,7 @@
 /// <reference path="../gulpfile.js" />
 /// <reference path="js/cliente/buscarclienteviewmodel.js" />
 /// <reference path="js/cliente/clienteviewmodel.js" />
+/// <reference path="js/comun/jquery-private.js" />
 /// <reference path="js/comun/pickadate.js" />
 /// <reference path="js/comun/pickadatetranslationfix.js" />
 /// <reference path="js/prestamo/prestamoviewmodel.js" />
