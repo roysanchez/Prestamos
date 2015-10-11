@@ -1,11 +1,12 @@
-//TODO Agregar lo necesario para boostrap 4
-//de editar
+//TODO Ver como se puede manejar el ambiente de producción
 var require = {
     baseUrl: '/js',
     paths: {
         lib: '../lib',
         libext: '../libext',
+        bootstrap: '../lib/bootstrap/dist/js/umd',
         jquery: '../lib/jquery/dist/jquery',
+        //jquery: 'Comun/jquery-private',
         picker: '../lib/pickadate/lib/picker',
         pickadate: '../lib/pickadate/lib/picker.date',
         'jquery.validate': '../lib/jquery-validation/dist/jquery.validate',
@@ -15,8 +16,10 @@ var require = {
     map:{
         '*':{
             'Modernizr': 'libext/modernizr/modernizr-input',
-            'pickerES': 'lib/pickadate/lib/translations/es_ES'
-        }
+            'pickerES': 'lib/pickadate/lib/translations/es_ES',
+            'jquery': 'Comun/jquery-private'
+        },
+        'Comun/jquery-private': { 'jquery': 'jquery' }
     },
     shim: {
         'libext/modernizr/modernizr-input': {
