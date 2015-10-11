@@ -1,10 +1,7 @@
 /// <reference path="../../lib/jquery/dist/jquery.js"/>
-/// <reference path="../../lib/vue/dist/vue.js"/>
-/// <reference path="../../lib/accounting/accounting.js"/>
+/// <reference path="../../libext/modernizr/modernizr-input.js"/>
 /// <reference path="../../lib/pickadate/lib/picker.js"/>
 /// <reference path="../../lib/pickadate/lib/picker.date.js"/>
-
-//TODO Mover la parte de pickadate a un modulo independiente comun
 
 /**
 * Modulo para configurar el datepicker pickadate

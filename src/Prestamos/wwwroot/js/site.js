@@ -1,4 +1,4 @@
-//TODO Agregar las configuraciones de jquery-validate y de pickadate, ya que se van a utilizar en todas las pantallas
+//TODO Agregar lo necesario para boostrap 4
 //de editar
 var require = {
     baseUrl: '/js',

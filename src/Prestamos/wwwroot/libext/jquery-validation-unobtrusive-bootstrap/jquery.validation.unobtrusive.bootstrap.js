@@ -1,4 +1,4 @@
-﻿// http://stackoverflow.com/questions/18754020/bootstrap-3-with-jquery-validation-plugin
+﻿// //stackoverflow.com/questions/18754020/bootstrap-3-with-jquery-validation-plugin
 // override jquery validate plugin defaults
 /**
 * Modulo para marcar los errores con bootstrap

@@ -75,12 +75,12 @@
     <a asp-action="Index">Volver</a>
 </div>
 @section Scripts {
-<environment names="Development">
-    <script type="text/javascript">
+    <environment names="Development">
+        <script type="text/javascript">
             requirejs.config({
                 map: {
                     'Cliente/clienteViewModel': {
-                        
+
                     }
                 },
                 config: {
@@ -92,10 +92,10 @@
             requirejs(['jquery.validation.unobtrusive.bootstrap', 'Cliente/clienteViewModel'], function (unobt) {
                 unobt.parse(document);
             });
-    </script>
-</environment>
-<environment names="Staging,Production">
-    <script type="text/javascript">
+        </script>
+    </environment>
+    <environment names="Staging,Production">
+        <script type="text/javascript">
             //TODO Crear las configuraciones para un ambiente de producción
             /*Url's de prod de las diferentes librerias
             Modernizr: ~/libext/modernizr/modernizr-input.min.js
@@ -103,6 +103,6 @@
             Accounting: //cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js
             Prestamo: js/Prestamo/prestamoViewModel.min.js
             */
-    </script>
-</environment>
+        </script>
+    </environment>
 }

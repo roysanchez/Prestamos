@@ -4,16 +4,12 @@
 /// <reference path="../../lib/pickadate/lib/picker.js"/>
 /// <reference path="../../lib/pickadate/lib/picker.date.js"/>
 
-//TODO Mover la parte de pickadate a un modulo independiente comun
-
 /**
 * Modulo para configurar la vista de prestamos
 * @module jquery
 * @module module
 * @module vuejs
 * @module accounting
-* @module Modernizr
-* @module require
 * @module Comun/pickadateConfig
 */
 define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'],
