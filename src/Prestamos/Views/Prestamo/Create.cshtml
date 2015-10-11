@@ -102,7 +102,7 @@
     <div class="form-group">
         <label asp-for="FechaInicio" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="FechaInicio" type="date" class="form-control" />
+            <input asp-for="FechaInicio" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
             <span asp-validation-for="FechaInicio" class="text-danger"></span>
         </div>
     </div>
@@ -110,7 +110,7 @@
     <div class="form-group">
         <label asp-for="FechaFin" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="FechaFin" type="date" class="form-control" />
+            <input asp-for="FechaFin" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
             <span asp-validation-for="FechaFin" class="text-danger"></span>
         </div>
     </div>
@@ -118,7 +118,7 @@
     <div class="form-group">
         <label asp-for="FechaDesembolso" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            <input asp-for="FechaDesembolso" type="date" class="form-control" />
+            <input asp-for="FechaDesembolso" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
             <span asp-validation-for="FechaDesembolso" class="text-danger"></span>
         </div>
     </div>
@@ -126,8 +126,7 @@
     <div class="form-group">
         <label asp-for="FormaPago" class="col-md-2 control-label"></label>
         <div class="col-md-4">
-            @Html.DropDownListFor(model => model.FormaPago, Html.GetEnumSelectList(typeof(Negocios.Periodo)),
-            new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.FormaPago, Html.GetEnumSelectList(typeof(Negocios.Periodo)), new { @class = "form-control" })
             <span asp-validation-for="FormaPago" class="text-danger"></span>
         </div>
     </div>
@@ -178,24 +177,8 @@
         requirejs.config({
             map: {
                 'Prestamo/prestamoViewModel': {
-                    'Modernizr': 'libext/modernizr/modernizr-input',
                     'vuejs': 'lib/vue/dist/vue',
-                    'accounting': 'lib/accounting/accounting',
-                    'pickerES': 'lib/pickadate/lib/translations/es_ES'
-                }
-            },
-            shim: {
-                'libext/modernizr/modernizr-input': {
-                    exports: 'Modernizr',
-                    init: function () {
-                        var ret = this.Modernizr;
-                        this.Modernizr = undefined;
-                        return ret;
-                    }
-                },
-                'lib/pickadate/lib/translations/es_ES': {
-                    deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
-                    exports: 'jQuery.fn.pickadate.defaults'
+                    'accounting': 'lib/accounting/accounting'
                 }
             },
             config: {

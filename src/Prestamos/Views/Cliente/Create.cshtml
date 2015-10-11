@@ -80,22 +80,7 @@
             requirejs.config({
                 map: {
                     'Cliente/clienteViewModel': {
-                        'Modernizr': 'libext/modernizr/modernizr-input',
-                        'pickerES': 'lib/pickadate/lib/translations/es_ES'
-                    }
-                },
-                shim: {
-                    'libext/modernizr/modernizr-input': {
-                        exports: 'Modernizr',
-                        init: function () {
-                            var ret = this.Modernizr;
-                            this.Modernizr = undefined;
-                            return ret;
-                        }
-                    },
-                    'lib/pickadate/lib/translations/es_ES': {
-                        deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
-                        exports: 'jQuery.fn.pickadate.defaults'
+                        
                     }
                 },
                 config: {

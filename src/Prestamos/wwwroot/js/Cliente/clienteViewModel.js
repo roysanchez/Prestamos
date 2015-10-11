@@ -12,25 +12,9 @@
 * @module module
 * @module Modernizr
 * @module require
+* @module Comun/pickadateConfig
 */
-define(['jquery', 'module', 'Modernizr', 'require'], function ($, module, Modernizr, require) {
+define(['jquery', 'module', 'Comun/pickadateConfig'], function ($, module) {
     var model = module.config();
-
-    if (!Modernizr.inputtypes.date) {
-        /**
-        * Modulo para cargar los datepicker pickadate
-        * @module picker
-        * @module pickadate
-        * @module pickerES
-        */
-        require(['picker', 'pickadate', 'pickerES'], function () {
-            $('[type="date"]').pickadate({
-                format: 'yyyy-mm-dd',
-                onClose: function () {
-                    $('.datepicker').blur();
-                }
-            });
-        });
-    }
 
 });

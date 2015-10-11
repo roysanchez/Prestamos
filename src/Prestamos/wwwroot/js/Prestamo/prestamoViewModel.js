@@ -14,28 +14,11 @@
 * @module accounting
 * @module Modernizr
 * @module require
+* @module Comun/pickadateConfig
 */
-define(['jquery', 'module', 'vuejs', 'accounting', 'Modernizr', 'require'],
-    function ($, module, Vue, accounting, Modernizr, require) {
+define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'],
+    function ($, module, Vue, accounting) {
         var model = module.config();
-
-        if (!Modernizr.inputtypes.date) {
-            /**
-            * Modulo para cargar los datepicker pickadate
-            * @module picker
-            * @module pickadate
-            * @module pickerES
-            */
-            require(['picker', 'pickadate', 'pickerES'], function () {
-                $('[type="date"]').pickadate({
-                    format: 'yyyy-mm-dd',
-                    onClose: function () {
-                        $('.datepicker').blur();
-                    }
-                });
-            });
-        }
-
 
         var vm = new Vue({
             el: '#crearPrestamoForm',
