@@ -24,7 +24,7 @@ define(['jquery', 'Modernizr', 'require'], function ($, Modernizr, require) {
         require(['picker', 'pickadate', 'pickerES'], function () {
             //https://github.com/amsul/pickadate.js/issues/160
             $('[type="date"]').pickadate({
-                format: 'dd-mm-yyyy',
+                format: 'yyyy-mm-dd',
                 selectYears: 15,
                 selectMonths: true,
                 min: new Date(1960, 0, 1),
