@@ -10,6 +10,7 @@ var require = {
         pickadate: '../lib/pickadate/lib/picker.date',
         'jquery.validate': '../lib/jquery-validation/dist/jquery.validate',
         'jquery.validate.unobtrusive': '../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
+        'jquery.validation.unobtrusive.bootstrap': '../libext/jquery-validation-unobtrusive-bootstrap/jquery.validation.unobtrusive.bootstrap'
     },
     enforceDefine: true
 };

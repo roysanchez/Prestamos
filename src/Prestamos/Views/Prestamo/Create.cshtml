@@ -166,10 +166,6 @@
             <div class="modal-body">
                 <partial name="_BuscarClientes" model="datosCliente" />
             </div>
-            @*<div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>*@
         </div>
     </div>
 </div>
@@ -201,9 +197,6 @@
                     deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
                     exports: 'jQuery.fn.pickadate.defaults'
                 }
-            },
-            paths: {
-                'jquery.validation.unobtrusive.bootstrap': '../libext/jquery-validation-unobtrusive-bootstrap/jquery.validation.unobtrusive.bootstrap'
             },
             config: {
                 'Prestamo/prestamoViewModel': {
