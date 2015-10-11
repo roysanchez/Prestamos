@@ -1,9 +1,7 @@
 ﻿@model BuscarClienteViewModel
-
-@{
-    IEnumerable<ClienteViewModel> clientes = ViewBag.clientes ?? new List<ClienteViewModel>();
+@{ 
+    //TODO Analizar si es mejor eliminar el modelo y poner los campos hard coded.
 }
-
 <div id="BuscadorClientes">
     <h3>Clientes</h3>
 
@@ -40,8 +38,6 @@
             </button>
         </div>
     </form>
-    <!--TODO Mover esta pagina a una vista partial, al igual que esta tabla, para crear un llamado en cadena
-        que se puede utilizar para agregar una busqueda de clientes (Verificar como se mostraria en la pagina de prestamos)-->
 
     <table class="table table-hover buscador">
         <thead>

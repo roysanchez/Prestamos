@@ -127,10 +127,7 @@
         <label asp-for="FormaPago" class="col-md-2 control-label"></label>
         <div class="col-md-4">
             @Html.DropDownListFor(model => model.FormaPago, Html.GetEnumSelectList(typeof(Negocios.Periodo)),
-new
-{
-    @class = "form-control"
-})
+            new { @class = "form-control" })
             <span asp-validation-for="FormaPago" class="text-danger"></span>
         </div>
     </div>
@@ -167,7 +164,6 @@ new
                 <h4 class="modal-title" id="myModalLabel">Buscar cliente</h4>
             </div>
             <div class="modal-body">
-                @*<i class="fa fa-cog fa-spin fa-5x"></i>*@
                 <partial name="_BuscarClientes" model="datosCliente" />
             </div>
             @*<div class="modal-footer">
@@ -180,7 +176,9 @@ new
 
 
 @section Scripts {
+    <environment names="Development">
     <script type="text/javascript">
+            //TODO Configurar el modal despues de la migracion a bootstrap 4
         requirejs.config({
             map: {
                 'Prestamo/prestamoViewModel': {
@@ -222,34 +220,20 @@ new
             }
         });
 
-        requirejs(['jquery.validation.unobtrusive.bootstrap', 'Prestamo/prestamoViewModel'], function (val) {
-            val.parse(document);
+            requirejs(['jquery.validation.unobtrusive.bootstrap', 'Prestamo/prestamoViewModel'], function (unobt) {
+                unobt.parse(document);
         });
     </script>
-    @*<script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>*@
-
-    @*<partial name="_ValidationScriptsPartial" />
-        <partial name="_PickadatejsPartial" />
-
-        <environment names="Development">
-            <script type="text/javascript" src="~/libext/modernizr/modernizr-input.js"></script>
-            <script type="text/javascript" src="~/lib/accounting/accounting.js"></script>
-            <script type="text/javascript" src="~/lib/vue/dist/vue.js"></script>
-
-            <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.js"></script>
-            <script type="text/javascript" src="~/js/Cliente/buscarClienteViewModel.js"></script>
         </environment>
         <environment names="Staging,Production">
-            <script type="text/javascript" src="~/libext/modernizr/modernizr-input.min.js"></script>
-            <script src="//cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js"
-                    asp-fallback-src="~/lib/accounting/accounting.min.js"
-                    asp-fallback-test="window.accounting">
+        <script type="text/javascript">
+            //TODO Crear las configuraciones para un ambiente de producción
+            /*Url's de prod de las diferentes librerias
+            Modernizr: ~/libext/modernizr/modernizr-input.min.js
+            Vue: //cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js
+            Accounting: //cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js
+            Prestamo: js/Prestamo/prestamoViewModel.min.js
+            */
             </script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js"
-                    asp-fallback-src="~/lib/vue/dist/vue.min.js"
-                    asp-fallback-test="Vue">
-            </script>
-            <script type="text/javascript" src="~/js/Prestamo/prestamoViewModel.min.js"></script>
         </environment>
-    *@
 }
