@@ -14,11 +14,9 @@ define(['jquery', 'Modernizr', 'require'], function (jq, Modernizr, require) {
     if (!Modernizr.inputtypes.date) {
         /**
         * Modulo para cargar los datepicker pickadate
-        * @module picker
-        * @module pickadate
         * @module pickerES
         */
-        require(['picker', 'pickadate', 'pickerES'], function () {
+        require(['Comun/pickadateUMDtranslation'], function () {
             //https://github.com/amsul/pickadate.js/issues/160
             jq('[type="date"]').pickadate({
                 format: 'yyyy-mm-dd',

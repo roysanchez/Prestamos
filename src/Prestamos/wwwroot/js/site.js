@@ -15,7 +15,6 @@ var require = {
     map:{
         '*':{
             'Modernizr': 'libext/modernizr/modernizr-input',
-            'pickerES': 'lib/pickadate/lib/translations/es_ES',
             'jquery': 'Comun/jquery-private'
         },
         'Comun/jquery-private': { 'jquery': 'jquery' }
@@ -28,10 +27,6 @@ var require = {
                 this.Modernizr = undefined;
                 return ret;
             }
-        },
-        'lib/pickadate/lib/translations/es_ES': {
-            deps: ['picker', 'pickadate', 'Comun/pickadateTranslationFix'],
-            exports: 'jQuery.fn.pickadate.defaults'
         }
     },
     enforceDefine: true
