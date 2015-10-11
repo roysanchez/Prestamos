@@ -9,7 +9,7 @@
 * @module Modernizr
 * @module require
 */
-define(['jquery', 'Modernizr', 'require'], function ($, Modernizr, require) {
+define(['jquery', 'Modernizr', 'require'], function (jq, Modernizr, require) {
 
     if (!Modernizr.inputtypes.date) {
         /**
@@ -20,13 +20,13 @@ define(['jquery', 'Modernizr', 'require'], function ($, Modernizr, require) {
         */
         require(['picker', 'pickadate', 'pickerES'], function () {
             //https://github.com/amsul/pickadate.js/issues/160
-            $('[type="date"]').pickadate({
+            jq('[type="date"]').pickadate({
                 format: 'yyyy-mm-dd',
                 selectYears: 15,
                 selectMonths: true,
                 min: new Date(1960, 0, 1),
                 onClose: function () {
-                    $('.datepicker').blur();
+                    jq('.datepicker').blur();
                 }
             });
         });

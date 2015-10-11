@@ -12,7 +12,7 @@
 * @module accounting
 * @module Comun/pickadateConfig
 */
-define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'], function ($, module, Vue, accounting) {
+define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'], function (jq, module, Vue, accounting) {
     var model = module.config();
 
     var vm = new Vue({
@@ -56,14 +56,14 @@ define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'], fun
         var data = event.target.dataset;
 
         if (vm.cedula !== "") {
-            $.post(data.url, { cedula: vm.cedula })
+            jq.post(data.url, { cedula: vm.cedula })
                 .done(function (cliente) {
                     console.debug("cliente", cliente);
                     vm.deudorId = cliente.Id;
                     vm.nombre = cliente.NombreTitular;
                 });
         } else {
-            var modal = $('#' + data.modal);
+            var modal = jq('#' + data.modal);
             modal.modal();
         }
     }

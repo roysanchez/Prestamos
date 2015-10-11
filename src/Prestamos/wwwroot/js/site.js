@@ -6,7 +6,6 @@ var require = {
         libext: '../libext',
         bootstrap: '../lib/bootstrap/dist/js/umd',
         jquery: '../lib/jquery/dist/jquery',
-        //jquery: 'Comun/jquery-private',
         picker: '../lib/pickadate/lib/picker',
         pickadate: '../lib/pickadate/lib/picker.date',
         'jquery.validate': '../lib/jquery-validation/dist/jquery.validate',
@@ -31,7 +30,7 @@ var require = {
             }
         },
         'lib/pickadate/lib/translations/es_ES': {
-            deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
+            deps: ['picker', 'pickadate', 'Comun/pickadateTranslationFix'],
             exports: 'jQuery.fn.pickadate.defaults'
         }
     },

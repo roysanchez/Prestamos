@@ -4,6 +4,6 @@
 * @module picker
 * @module pickadate
 */
-define(['jquery', 'picker', 'pickadate'], function () {
-    $.fn.pickatime = { defaults: {} };
+define(['jquery', 'picker', 'pickadate'], function (jq) {
+    jq.fn.pickatime = { defaults: {} };
 });
