@@ -10,5 +10,4 @@
 */
 define(['jquery', 'module', 'Comun/pickadateConfig'], function ($, module) {
     var model = module.config();
-
 });
