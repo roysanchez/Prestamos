@@ -4,10 +4,8 @@
 * Modulo para configurar la vista de prestamos
 * @module jquery
 * @module module
-* @module Modernizr
-* @module require
 * @module Comun/pickadateConfig
 */
-define(['jquery', 'module', 'Comun/pickadateConfig'], function ($, module) {
+define(['jquery', 'module', 'Comun/pickadateConfig'], function (jq, module) {
     var model = module.config();
 });
