@@ -15,52 +15,52 @@
     <hr />
     <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
 
-    <div class="form-group">
-        <label asp-for="Cedula" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="Cedula" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="Cedula" class="form-control" readonly />
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="PrimerNombre" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="PrimerNombre" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="PrimerNombre" class="form-control" />
             <span asp-validation-for="PrimerNombre" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="SegundoNombre" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="SegundoNombre" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="SegundoNombre" class="form-control" />
             <span asp-validation-for="SegundoNombre" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="PrimerApellido" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="PrimerApellido" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="PrimerApellido" class="form-control" />
             <span asp-validation-for="PrimerApellido" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="SegundoApellido" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="SegundoApellido" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="SegundoApellido" class="form-control" />
             <span asp-validation-for="SegundoApellido" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="FechaNacimiento" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="FechaNacimiento" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="FechaNacimiento" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" />
             <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -74,35 +74,12 @@
 </div>
 
 @section Scripts {
-<environment names="Development">
-    <script type="text/javascript">
+    <environment names="Development">
+        <script type="text/javascript">
             requirejs.config({
                 map: {
                     'Cliente/clienteViewModel': {
-                        'Modernizr': 'libext/modernizr/modernizr-input',
-                        'pickerES': 'lib/pickadate/lib/translations/es_ES'
                     }
-                },
-                shim: {
-                    'libext/modernizr/modernizr-input': {
-                        exports: 'Modernizr',
-                        init: function () {
-                            var ret = this.Modernizr;
-                            this.Modernizr = undefined;
-                            return ret;
-                        }
-                    },
-                    'lib/pickadate/lib/translations/es_ES': {
-                        deps: ['picker', 'pickadate', 'Comun/PickaDateTranslationFix'],
-                        exports: 'jQuery.fn.pickadate.defaults'
-                    }
-                },
-                paths: {
-                    picker: '../lib/pickadate/lib/picker',
-                    pickadate: '../lib/pickadate/lib/picker.date',
-                    'jquery.validate': '../lib/jquery-validation/dist/jquery.validate',
-                    'jquery.validate.unobtrusive': '../lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive',
-                    'jquery.validation.unobtrusive.bootstrap': '../libext/jquery-validation-unobtrusive-bootstrap/jquery.validation.unobtrusive.bootstrap'
                 },
                 config: {
                     'Cliente/clienteViewModel': {
@@ -113,10 +90,10 @@
             requirejs(['jquery.validation.unobtrusive.bootstrap', 'Cliente/clienteViewModel'], function (unobt) {
                 unobt.parse(document);
             });
-    </script>
-</environment>
-<environment names="Staging,Production">
-    <script type="text/javascript">
+        </script>
+    </environment>
+    <environment names="Staging,Production">
+        <script type="text/javascript">
             //TODO Crear las configuraciones para un ambiente de producción
             /*Url's de prod de las diferentes librerias
             Modernizr: ~/libext/modernizr/modernizr-input.min.js
@@ -124,6 +101,6 @@
             Accounting: //cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js
             Prestamo: js/Prestamo/prestamoViewModel.min.js
             */
-    </script>
-</environment>
+        </script>
+    </environment>
 }

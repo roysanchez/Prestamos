@@ -16,7 +16,7 @@ define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'], fun
     var model = module.config();
 
     var vm = new Vue({
-        el: '#crearPrestamoForm',
+        el: model.formaPrestamos,
         name: 'Creacion-Prestamos',
         data: {
             deudorId: model.deudorId,

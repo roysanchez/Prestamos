@@ -9,7 +9,7 @@
 <h3>Estas seguro que desea borrar este cliente?</h3>
 <div>
     <hr />
-    <dl class="dl-horizontal">
+    <dl>
         <dt>
             @Html.DisplayNameFor(model => model.Cedula)
         </dt>
@@ -25,38 +25,43 @@
         </dd>
     </dl>
 
-    <form asp-action="Delete" method="post" class="form-horizontal" role="form">
+    <form asp-action="Delete" method="post" class="form-horizontal" role="form" id="borrarCliente">
         <div class="form-actions">
-            <button class="btn btn-warning col-md-offset-4" data-bind="click: BorrarCliente">Borrar</button>
+            <a asp-action="Index">Volver</a>
+            <button class="btn btn-warning col-md-offset-4" v-on="click: borrarCliente">Borrar</button>
         </div>
     </form>
 </div>
 
-<a asp-action="Index">Volver</a>
-
-@section Scripts{
+@section Scripts {
     <environment names="Development">
-        <script type="text/javascript" src="~/lib/knockout/dist/knockout.debug.js"></script>
-    </environment>
-    <environment names="Staging, Production">
-        <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js"
-                asp-fallback-src="~/lib/knockout/dist/knockout.js"
-                asp-fallback-test="window.ko">
+        <script type="text/javascript">
+            requirejs.config({
+                map: {
+                    'Cliente/borrarClienteViewModel': {
+                        'vuejs': 'lib/vue/dist/vue'
+                    }
+                },
+                config: {
+                    'Cliente/borrarClienteViewModel': {
+                        formaBorrar: '#borrarCliente',
+                        mensajeBorrar: '¿Esta seguro que desea borrarlo?'
+                    }
+                }
+            });
+
+            requirejs(['Cliente/borrarClienteViewModel']);
         </script>
     </environment>
-
-    <script type="text/javascript">
-        $(function () {
-            var viewModel = function () {
-                var self = this;
-                self.BorrarCliente = function () {
-                    if(window.confirm("Esta seguro que desea borrarlo?")){
-                        return true;
-                    }
-                };
-            };
-
-            ko.applyBindings(viewModel);
-        });
-    </script>
+    <environment names="Staging,Production">
+        <script type="text/javascript">
+            //TODO Crear las configuraciones para un ambiente de producción
+            /*Url's de prod de las diferentes librerias
+            Modernizr: ~/libext/modernizr/modernizr-input.min.js
+            Vue: //cdnjs.cloudflare.com/ajax/libs/vue/0.12.15/vue.min.js
+            Accounting: //cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js
+            Prestamo: js/Prestamo/prestamoViewModel.min.js
+            */
+        </script>
+    </environment>
 }

@@ -163,7 +163,8 @@ namespace Prestamos.Controllers
             }
             else
             {
-                return base.HttpBadRequest();
+                ModelState.AddModelError("id", "El id es obligatorio");
+                return View(id);
             }
         }
     }

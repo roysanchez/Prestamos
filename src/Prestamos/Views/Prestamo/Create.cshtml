@@ -21,26 +21,26 @@
 
 <h2 v-data="">Crear Prestamo</h2>
 
-<form asp-action="Crear" method="post" class="form-horizontal" role="form" id="crearPrestamoForm">
+<form asp-action="Crear" method="post" class="" role="form" id="crearPrestamoForm">
     <h4>Prestamo</h4>
     <hr />
     <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
     @{
 //TODO Verificar si el select tagHelper puede manejar los enum
+//TODO Agregar el icono de exitoso y erroneo, para la busqueda del cliente
+//TODO Ver campos que son enteros y dibujan el 0, ver como manejar esto
+//TODO Verificar como hacer que la cantidad de cuotas sea un numero entero
     }
 
     <input asp-for="Deudor.Id" v-model="deudorId" hidden="hidden" />
 
-    @{
-//TODO Agregar el icono de exitoso y erroneo, para la busqueda del cliente
-    }
-    <div class="form-group">
-        <label asp-for="Deudor.Cedula" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="Deudor.Cedula" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <div class="input-group">
                 <input asp-for="Deudor.Cedula" type="number" v-model="cedula" class="form-control" />
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"
+                    <button class="btn btn-secondary" type="button"
                             data-modal="modalBuscarCliente" data-url="@Url.Action("BuscarClienteCedula", "Cliente")"
                             v-on="click: BuscarCliente">
                         Buscar
@@ -48,99 +48,98 @@
                 </span>
             </div>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="Deudor.NombreTitular" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="Deudor.NombreTitular" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="Deudor.NombreTitular" v-model="nombre" class="form-control" disabled="disabled" />
-
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="Monto.Moneda" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="Monto.Moneda" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
-            @Html.DropDownListFor(model => model.Monto.Moneda, monedas, new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.Monto.Moneda, monedas, new { @class = "form-control c-select" })
             <span asp-validation-for="Monto.Moneda" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="Monto.Monto" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="Monto.Monto" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="Monto.Monto" type="number" v-model="monto" min="0" max="10000000" inputmode="numeric" class="form-control" />
             <span asp-validation-for="Monto.Monto" class="text-danger"></span>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <pre v-text="textoMonto"></pre>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="Porciento" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="Porciento" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
-            <input asp-for="Porciento" min="0" max="100" v-model="tasa" inputmode="numeric" class="form-control" />
+            <input asp-for="Porciento" type="number" min="0" max="100" v-model="tasa" inputmode="numeric" class="form-control" />
             <span asp-validation-for="Porciento" class="text-danger"></span>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <pre v-text="textoTasa"></pre>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="PorcMora" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="PorcMora" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
             <input asp-for="PorcMora" min="0" max="100" v-model="mora" inputmode="numeric" class="form-control" />
             <span asp-validation-for="PorcMora" class="text-danger"></span>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <pre v-text="textoMora"></pre>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="FechaInicio" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="FechaInicio" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
-            <input asp-for="FechaInicio" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
+            <input asp-for="FechaInicio" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" />
             <span asp-validation-for="FechaInicio" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="FechaFin" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="FechaFin" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
-            <input asp-for="FechaFin" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
+            <input asp-for="FechaFin" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" />
             <span asp-validation-for="FechaFin" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="FechaDesembolso" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="FechaDesembolso" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
-            <input asp-for="FechaDesembolso" type="date" asp-format="{0:dd-MM-yyyy}" class="form-control" />
+            <input asp-for="FechaDesembolso" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" />
             <span asp-validation-for="FechaDesembolso" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="FormaPago" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="FormaPago" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
-            @Html.DropDownListFor(model => model.FormaPago, Html.GetEnumSelectList(typeof(Negocios.Periodo)), new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.FormaPago, Html.GetEnumSelectList(typeof(Negocios.Periodo)), new { @class = "form-control c-select" })
             <span asp-validation-for="FormaPago" class="text-danger"></span>
         </div>
-    </div>
+    </fieldset>
 
-    <div class="form-group">
-        <label asp-for="CantCuotas" class="col-md-2 control-label"></label>
+    <fieldset class="form-group">
+        <label asp-for="CantCuotas" class="col-md-2 form-control-label"></label>
         <div class="col-md-4">
-            <input asp-for="CantCuotas" v-model="cuotas" class="form-control" />
+            <input asp-for="CantCuotas" min="1" max="1000" v-model="cuotas" class="form-control" />
             <span asp-validation-for="CantCuotas" class="text-danger"></span>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
             <pre v-text="textoCuotas"></pre>
         </div>
-    </div>
+    </fieldset>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
@@ -172,36 +171,36 @@
 
 @section Scripts {
     <environment names="Development">
-    <script type="text/javascript">
-            //TODO Configurar el modal despues de la migracion a bootstrap 4
-        requirejs.config({
-            map: {
-                'Prestamo/prestamoViewModel': {
-                    'vuejs': 'lib/vue/dist/vue',
-                    'accounting': 'lib/accounting/accounting'
+        <script type="text/javascript">
+            requirejs.config({
+                map: {
+                    'Prestamo/prestamoViewModel': {
+                        'vuejs': 'lib/vue/dist/vue',
+                        'accounting': 'lib/accounting/accounting'
+                    }
+                },
+                config: {
+                    'Prestamo/prestamoViewModel': {
+                        formaPrestamos: '#crearPrestamoForm',
+                        deudorId: '@Model?.Deudor?.Id',
+                        monto: '@Model?.Monto?.Monto',
+                        tasa: '@Model?.Porciento',
+                        mora: '@Model?.PorcMora',
+                        cuotas: '@Model?.CantCuotas',
+                        deudorId: '@Model?.Deudor?.Id',
+                        deudorCedula: '@Model?.Deudor?.Cedula',
+                        deudorNombre: '@Model?.Deudor?.NombreTitular',
+                        urlBuscarCliente: '@Url.Action("BuscarClientes", "Cliente")'
+                    }
                 }
-            },
-            config: {
-                'Prestamo/prestamoViewModel': {
-                    deudorId: '@Model?.Deudor?.Id',
-                    monto: '@Model?.Monto?.Monto',
-                    tasa: '@Model?.Porciento',
-                    mora: '@Model?.PorcMora',
-                    cuotas: '@Model?.CantCuotas',
-                    deudorId: '@Model?.Deudor?.Id',
-                    deudorCedula: '@Model?.Deudor?.Cedula',
-                    deudorNombre: '@Model?.Deudor?.NombreTitular',
-                    urlBuscarCliente: '@Url.Action("BuscarClientes", "Cliente")'
-                }
-            }
-        });
+            });
 
-            requirejs(['jquery.validation.unobtrusive.bootstrap', 'Prestamo/prestamoViewModel'], function (unobt) {
+            requirejs(['jquery.validation.unobtrusive.bootstrap', 'Prestamo/prestamoViewModel', 'bootstrap/modal'], function (unobt) {
                 unobt.parse(document);
-        });
-    </script>
-        </environment>
-        <environment names="Staging,Production">
+            });
+        </script>
+    </environment>
+    <environment names="Staging,Production">
         <script type="text/javascript">
             //TODO Crear las configuraciones para un ambiente de producción
             /*Url's de prod de las diferentes librerias
@@ -210,6 +209,6 @@
             Accounting: //cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js
             Prestamo: js/Prestamo/prestamoViewModel.min.js
             */
-            </script>
-        </environment>
+        </script>
+    </environment>
 }

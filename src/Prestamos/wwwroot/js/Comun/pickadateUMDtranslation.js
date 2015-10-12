@@ -1,4 +1,5 @@
-﻿/**
+﻿//TODO Verificar si ya la libreria oficial soporta UMD
+/**
 * Modulo que arregla el error de que el objeto defaults no existe, lo saque de un bug no me acuerdo cual
 * @module jquery
 * @module picker
