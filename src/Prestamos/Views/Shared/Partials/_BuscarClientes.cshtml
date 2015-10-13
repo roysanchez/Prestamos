@@ -35,7 +35,7 @@
         <div class="form-group pull-right">
             <button type="button" v-on="click: BuscarClientes" class="btn btn-default">
                 <span>Buscar</span>
-                @*<i class="fa fa-cog fa-spin" v-show="indBusca"></i>*@
+                <i class="fa fa-cog fa-spin" v-show="indBusca"></i>
             </button>
         </div>
     </form>
@@ -50,11 +50,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-on="click: SeleccionCliente" v-repeat="clientes" data-clienteId="{{Id}}" data-nombre="{{NombreTitular}}">
+            <tr v-on="click: SeleccionCliente" v-repeat="clientes">
                 <td>{{Cedula}}</td>
                 <td>{{NombreCompleto}}</td>
                 <td>{{Edad}}</td>
-                <td><i class="fa fa-arrow-down fa-2x"></i></td>
+                <td><i class="fa fa-arrow-down fa-lg"></i></td>
             </tr>
         </tbody>
     </table>

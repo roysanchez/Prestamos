@@ -15,6 +15,7 @@ var require = {
     map:{
         '*':{
             'Modernizr': 'libext/modernizr/modernizr-input',
+            'vuejs': 'lib/vue/dist/vue',
             'jquery': 'Comun/jquery-private'
         },
         'Comun/jquery-private': { 'jquery': 'jquery' }

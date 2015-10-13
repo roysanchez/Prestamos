@@ -12,11 +12,11 @@
 * @module accounting
 * @module Comun/pickadateConfig
 */
-define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'], function (jq, module, Vue, accounting) {
+define(['jquery', 'module', 'vuejs', 'accounting', 'Cliente/buscarClienteViewModel', 'Comun/pickadateConfig'], function (jq, module, Vue, accounting, buscador) {
     var model = module.config();
 
     var vm = new Vue({
-        el: model.formaPrestamos,
+        el: '#app',
         name: 'Creacion-Prestamos',
         data: {
             deudorId: model.deudorId,
@@ -33,6 +33,9 @@ define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'], fun
         },
         methods: {
             BuscarCliente: BuscarClientePorCedula
+        },
+        components: {
+            buscadorCliente: buscador
         }
     });
 
@@ -53,19 +56,27 @@ define(['jquery', 'module', 'vuejs', 'accounting', 'Comun/pickadateConfig'], fun
     );
 
     function BuscarClientePorCedula(event) {
-        var data = event.target.dataset;
-
+        var vm = this;
         if (vm.cedula !== "") {
-            jq.post(data.url, { cedula: vm.cedula })
+            //TODO Verificar si hacer un servicio que busque solo los datos que se necesitan aquí
+            jq.post(vm.url, { cedula: vm.cedula })
                 .done(function (cliente) {
                     console.debug("cliente", cliente);
                     vm.deudorId = cliente.Id;
                     vm.nombre = cliente.NombreTitular;
                 });
         } else {
-            var modal = jq('#' + data.modal);
-            modal.modal();
+            jq(model.elModal).modal();
         }
     }
 
+    vm.$on('cliente-seleccionado', function (cliente) {
+        var vm = this;
+        vm.deudorId = cliente.id;
+        vm.cedula = cliente.cedula;
+        vm.nombre = cliente.nombre;
+        jq(model.elModal).modal('hide');
+    });
+
+    return vm;
 });
