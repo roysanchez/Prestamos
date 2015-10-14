@@ -29,12 +29,14 @@ namespace Prestamos.ViewModels.Prestamo
         /// <summary>
         /// Porcentaje del prestamo
         /// </summary>
+        [Required]
         [Display(Name = "Tasa")]
-        public int Porciento { get; set; }
+        public int? Porciento { get; set; }
 
         /// <summary>
         /// Monto prestado
         /// </summary>
+        [Required]
         public Dinero  Monto { get; set; }
 
         [Display(Name = "Forma de pago")]
@@ -43,35 +45,37 @@ namespace Prestamos.ViewModels.Prestamo
         /// <summary>
         /// Cantidad de cuotas a realizar
         /// </summary>
+        [Required]
         [Display(Name = "Cant. Cuotas")]
-        public int CantCuotas { get; set; }
+        public int? CantCuotas { get; set; }
 
         /// <summary>
         /// Fecha se entrego el dinero
         /// </summary>
         [Required]
         [Display(Name = "Fecha Desembolso")]
-        public DateTime FechaDesembolso { get; set; }
+        public DateTime? FechaDesembolso { get; set; }
 
         /// <summary>
         /// Fecha de inicio del prestamo
         /// </summary>
         [Required]
         [Display(Name = "Fecha inicio")]
-        public DateTime FechaInicio { get; set; }
+        public DateTime? FechaInicio { get; set; }
 
         /// <summary>
         /// Fecha final de prestamo
         /// </summary>
         [Required]
         [Display(Name = "Fecha fin")]
-        public DateTime FechaFin { get; set; }
+        public DateTime? FechaFin { get; set; }
 
         /// <summary>
         /// Porcentaje de mora
         /// </summary>
         [Display(Name = "Tasa mora")]
-        public int PorcMora { get; set; }
+        [Required]
+        public int? PorcMora { get; set; } = 10;
 
         //TODO Verificar si el viewModel o si el objeto normal
         /// <summary>
@@ -102,7 +106,7 @@ namespace Prestamos.ViewModels.Prestamo
         {
             get
             {
-                return (FechaFin - FechaInicio).Days;
+                return (FechaFin.Value - FechaInicio.Value).Days;
             }
         }
 
