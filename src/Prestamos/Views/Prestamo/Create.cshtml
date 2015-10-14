@@ -173,13 +173,13 @@
         <script type="text/javascript">
             requirejs.config({
                 map: {
-                    'Prestamo/prestamoViewModel': {
+                    'Prestamo/viewModel': {
                         'vuejs': 'lib/vue/dist/vue',
                         'accounting': 'lib/accounting/accounting'
                     }
                 },
                 config: {
-                    'Prestamo/prestamoViewModel': {
+                    'Prestamo/viewModel': {
                         deudorId: '@Model?.Deudor?.Id',
                         monto: '@Model?.Monto?.Monto',
                         tasa: '@Model?.Porciento',
@@ -190,7 +190,7 @@
                         deudorNombre: '@Model?.Deudor?.NombreTitular',
                         elModal: '#modalBuscarCliente'
                     },
-                    'Cliente/buscarClienteViewModel': {
+                    'Cliente/buscarViewModel': {
                         url: '@Url.Action("BuscarClientes", "Cliente")'
                     }
                 }

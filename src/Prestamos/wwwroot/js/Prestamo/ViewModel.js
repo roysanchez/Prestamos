@@ -10,6 +10,7 @@
 * @module module
 * @module vuejs
 * @module accounting
+* @module Cliente/buscarViewModel
 * @module Comun/pickadateConfig
 */
 define(['jquery', 'module', 'vuejs', 'accounting', 'Cliente/buscarViewModel', 'Comun/pickadateConfig'],
