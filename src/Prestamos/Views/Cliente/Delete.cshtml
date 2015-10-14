@@ -38,19 +38,19 @@
         <script type="text/javascript">
             requirejs.config({
                 map: {
-                    'Cliente/borrarClienteViewModel': {
+                    'Cliente/borrarViewModel': {
                         'vuejs': 'lib/vue/dist/vue'
                     }
                 },
                 config: {
-                    'Cliente/borrarClienteViewModel': {
+                    'Cliente/borrarViewModel': {
                         formaBorrar: '#borrarCliente',
                         mensajeBorrar: '¿Esta seguro que desea borrarlo?'
                     }
                 }
             });
 
-            requirejs(['Cliente/borrarClienteViewModel']);
+            requirejs(['Cliente/borrarViewModel']);
         </script>
     </environment>
     <environment names="Staging,Production">

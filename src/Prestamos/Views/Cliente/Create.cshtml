@@ -79,17 +79,17 @@
         <script type="text/javascript">
             requirejs.config({
                 map: {
-                    'Cliente/clienteViewModel': {
+                    'Cliente/viewModel': {
 
                     }
                 },
                 config: {
-                    'Cliente/clienteViewModel': {
+                    'Cliente/viewModel': {
                     }
                 }
             });
 
-            requirejs(['jquery.validation.unobtrusive.bootstrap', 'Cliente/clienteViewModel'], function (unobt) {
+            requirejs(['jquery.validation.unobtrusive.bootstrap', 'Cliente/viewModel'], function (unobt) {
                 unobt.parse(document);
             });
         </script>
