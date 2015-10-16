@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Prestamos.Extensions
@@ -14,7 +15,7 @@ namespace Prestamos.Extensions
             {
                 var priValue = pi.GetGetMethod().Invoke(primary, null);
                 var secValue = pi.GetGetMethod().Invoke(secondary, null);
-                if (secValue != null || (pi.PropertyType.IsValueType && priValue.Equals(Activator.CreateInstance(pi.PropertyType))))
+                if (secValue != null || (pi.PropertyType.GetTypeInfo().IsValueType && priValue.Equals(Activator.CreateInstance(pi.PropertyType))))
                 {
                     pi.GetSetMethod().Invoke(primary, new object[] { secValue });
                 }
