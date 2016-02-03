@@ -28,6 +28,14 @@ namespace Prestamos.Controllers
             return View();
         }
 
+        public IActionResult Prueba()
+        {
+
+
+
+            return Json(new { roy = "Es el mejor" });
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

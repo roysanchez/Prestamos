@@ -8,29 +8,28 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
 using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
 using Prestamos.Models;
 using Prestamos.ViewModels.Cliente;
 using Prestamos.ViewModels.Prestamo;
 using Prestamos.Services;
 using Negocios;
-using Microsoft.Dnx.Runtime.Infrastructure;
 using System.IO;
 using Microsoft.AspNet.Mvc.Razor;
 using Prestamos.Config.Views.LocationExpander;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Prestamos
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env)
         {
             // Setup configuration sources.
 
             var builder = new ConfigurationBuilder()
-                .SetBasePath(appEnv.ApplicationBasePath)
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
@@ -46,7 +45,7 @@ namespace Prestamos
             ConfigureMapper();
         }
 
-        public IConfiguration Configuration { get; set; }
+        public IConfigurationRoot Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -82,6 +81,7 @@ namespace Prestamos
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
+            //TODO borrar, ya que se usara una libreria js
             services.Configure<RazorViewEngineOptions>(c => c.ViewLocationExpanders.Add(new PrestamoLocationExpander()));
 
         }
@@ -89,8 +89,7 @@ namespace Prestamos
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.MinimumLevel = LogLevel.Information;
-            loggerFactory.AddConsole();
+            loggerFactory.AddConsole(Configuration.GetSection("Loggin"));
 
             if (env.IsDevelopment())
             {
@@ -102,19 +101,29 @@ namespace Prestamos
             // Add the following to the request pipeline only in development environment.
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
+                app.UseDatabaseErrorPage();
             }
             else
             {
                 // Add Error handling middleware which catches all application specific errors and
                 // sends the request to the following path or controller action.
                 app.UseExceptionHandler("/Home/Error");
+
+                try
+                {
+                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                    {
+                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                    }
+                }
+                catch { }
             }
 
+
             // Add the platform handler to the request pipeline.
-            app.UseIISPlatformHandler();
+            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             // Add static files to the request pipeline.
             app.UseStaticFiles();
@@ -151,5 +160,7 @@ namespace Prestamos
             AutoMapper.Mapper.CreateMap<ClienteViewModel, Cliente>().ReverseMap();
             AutoMapper.Mapper.CreateMap<PrestamoViewModel, Prestamo>().ReverseMap();
         }
+
+        public static void Main(string[] args) => WebApplication.Run<Startup>();
     }
 }

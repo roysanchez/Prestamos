@@ -10,174 +10,146 @@ using Prestamos.Models;
 
 namespace Prestamos.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("00000000000000_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    public partial class CreateIdentitySchema : Migration
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void Up(MigrationBuilder migrationBuilder)
         {
-            modelBuilder
-                .Annotation("ProductVersion", "7.0.0-beta8")
-                .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            migrationBuilder.CreateTable(
+                name: "AspNetRoles",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    NormalizedName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityRole", x => x.Id);
+                });
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NormalizedEmail = table.Column<string>(nullable: true),
+                    NormalizedUserName = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UserName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationUser", x => x.Id);
+                });
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                        //.Annotation("SqlServer:ValueGenerationStrategy", MigrationsSqlGenerator.IdentityColumn),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true),
+                    RoleId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityRoleClaim<string>", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_IdentityRoleClaim<string>_IdentityRole_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false),
+                        //.Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUserClaim<string>", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_IdentityUserClaim<string>_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUserLogin<string>", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_IdentityUserLogin<string>_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IdentityUserRole<string>", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_IdentityUserRole<string>_IdentityRole_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_IdentityUserRole<string>_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName");
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName");
+        }
 
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRole", b =>
-            {
-                b.Property<string>("Id");
-
-                b.Property<string>("ConcurrencyStamp")
-                    .IsConcurrencyToken();
-
-                b.Property<string>("Name")
-                    .Annotation("MaxLength", 256);
-
-                b.Property<string>("NormalizedName")
-                    .Annotation("MaxLength", 256);
-
-                b.HasKey("Id");
-
-                b.Index("NormalizedName")
-                    .Annotation("Relational:Name", "RoleNameIndex");
-
-                b.Annotation("Relational:TableName", "AspNetRoles");
-            });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd();
-
-                b.Property<string>("ClaimType");
-
-                b.Property<string>("ClaimValue");
-
-                b.Property<string>("RoleId");
-
-                b.HasKey("Id");
-
-                b.Annotation("Relational:TableName", "AspNetRoleClaims");
-            });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
-            {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd();
-
-                b.Property<string>("ClaimType");
-
-                b.Property<string>("ClaimValue");
-
-                b.Property<string>("UserId");
-
-                b.HasKey("Id");
-
-                b.Annotation("Relational:TableName", "AspNetUserClaims");
-            });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
-            {
-                b.Property<string>("LoginProvider");
-
-                b.Property<string>("ProviderKey");
-
-                b.Property<string>("ProviderDisplayName");
-
-                b.Property<string>("UserId");
-
-                b.HasKey("LoginProvider", "ProviderKey");
-
-                b.Annotation("Relational:TableName", "AspNetUserLogins");
-            });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
-            {
-                b.Property<string>("UserId");
-
-                b.Property<string>("RoleId");
-
-                b.HasKey("UserId", "RoleId");
-
-                b.Annotation("Relational:TableName", "AspNetUserRoles");
-            });
-
-            modelBuilder.Entity("WebApplication2.Models.ApplicationUser", b =>
-            {
-                b.Property<string>("Id");
-
-                b.Property<int>("AccessFailedCount");
-
-                b.Property<string>("ConcurrencyStamp")
-                    .IsConcurrencyToken();
-
-                b.Property<string>("Email")
-                    .Annotation("MaxLength", 256);
-
-                b.Property<bool>("EmailConfirmed");
-
-                b.Property<bool>("LockoutEnabled");
-
-                b.Property<DateTimeOffset?>("LockoutEnd");
-
-                b.Property<string>("NormalizedEmail")
-                    .Annotation("MaxLength", 256);
-
-                b.Property<string>("NormalizedUserName")
-                    .Annotation("MaxLength", 256);
-
-                b.Property<string>("PasswordHash");
-
-                b.Property<string>("PhoneNumber");
-
-                b.Property<bool>("PhoneNumberConfirmed");
-
-                b.Property<string>("SecurityStamp");
-
-                b.Property<bool>("TwoFactorEnabled");
-
-                b.Property<string>("UserName")
-                    .Annotation("MaxLength", 256);
-
-                b.HasKey("Id");
-
-                b.Index("NormalizedEmail")
-                    .Annotation("Relational:Name", "EmailIndex");
-
-                b.Index("NormalizedUserName")
-                    .Annotation("Relational:Name", "UserNameIndex");
-
-                b.Annotation("Relational:TableName", "AspNetUsers");
-            });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
-            {
-                b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
-                    .WithMany()
-                    .ForeignKey("RoleId");
-            });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
-            {
-                b.HasOne("WebApplication2.Models.ApplicationUser")
-                    .WithMany()
-                    .ForeignKey("UserId");
-            });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
-            {
-                b.HasOne("WebApplication2.Models.ApplicationUser")
-                    .WithMany()
-                    .ForeignKey("UserId");
-            });
-
-            modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
-            {
-                b.HasOne("Microsoft.AspNet.Identity.EntityFramework.IdentityRole")
-                    .WithMany()
-                    .ForeignKey("RoleId");
-
-                b.HasOne("WebApplication2.Models.ApplicationUser")
-                    .WithMany()
-                    .ForeignKey("UserId");
-            });
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable("AspNetRoleClaims");
+            migrationBuilder.DropTable("AspNetUserClaims");
+            migrationBuilder.DropTable("AspNetUserLogins");
+            migrationBuilder.DropTable("AspNetUserRoles");
+            migrationBuilder.DropTable("AspNetRoles");
+            migrationBuilder.DropTable("AspNetUsers");
         }
     }
 }

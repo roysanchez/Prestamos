@@ -30,8 +30,8 @@ namespace Prestamos.Models
                 .Required();
             */
             modelBuilder.Entity<Cliente>()
-                .Index(c => c.Cedula)
-                .Unique();
+                .HasIndex(c => c.Cedula)
+                .IsUnique();
             /*
             modelBuilder.Entity<Cliente>()
                 .Property(c => c.PrimerNombre)
