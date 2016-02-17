@@ -1,0 +1,20 @@
+{
+  "name": "Prestamos.Web",
+  "version": "0.0.0",
+  "description": "Prestamos.Web",
+  "main": "server.js",
+  "author": {
+    "name": "Roy",
+    "email": ""
+  },
+  "devDependencies": {
+    "jspm": "^0.16.27"
+  },
+  "jspm": {
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  }
+}
