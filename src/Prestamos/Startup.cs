@@ -20,6 +20,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using AutoMapper;
 
 namespace Prestamos
 {
@@ -41,8 +42,6 @@ namespace Prestamos
             }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-
-            ConfigureMapper();
         }
 
         public IConfigurationRoot Configuration { get; set; }
@@ -80,6 +79,16 @@ namespace Prestamos
             // Register application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddSingleton<IMapper>(c =>
+            {
+                var config =  new MapperConfiguration(d =>
+                {
+                    d.CreateMap<ClienteViewModel, Cliente>().ReverseMap();
+                    d.CreateMap<PrestamoViewModel, Prestamo>().ReverseMap();
+                });
+                return config.CreateMapper();
+            });
 
             //TODO borrar, ya que se usara una libreria js
             services.Configure<RazorViewEngineOptions>(c => c.ViewLocationExpanders.Add(new PrestamoLocationExpander()));
@@ -123,25 +132,19 @@ namespace Prestamos
 
 
             // Add the platform handler to the request pipeline.
-            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
+            //app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
 
             // Add static files to the request pipeline.
+            //https://github.com/aspnet/StaticFiles/issues/10
+            
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             // Add cookie-based authentication to the request pipeline.
             app.UseIdentity();
 
             // Add MVC to the request pipeline.
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                // Uncomment the following line to add a route for porting Web API 2 controllers.
-                // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
-            });
-
+            app.UseMvc();
         }
 
         string CrearDirectorio()
@@ -154,13 +157,7 @@ namespace Prestamos
 
             return di.FullName;
         }
-
-        void ConfigureMapper()
-        {
-            AutoMapper.Mapper.CreateMap<ClienteViewModel, Cliente>().ReverseMap();
-            AutoMapper.Mapper.CreateMap<PrestamoViewModel, Prestamo>().ReverseMap();
-        }
-
+        
         public static void Main(string[] args) => WebApplication.Run<Startup>();
     }
 }

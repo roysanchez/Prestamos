@@ -15,16 +15,19 @@ namespace Prestamos.Controllers
     public class PrestamoController : Controller
     {
         private readonly PrestamoContext db;
+        private readonly IMapper mapper;
 
-        public PrestamoController(PrestamoContext prestamoContext)
+        public PrestamoController(PrestamoContext prestamoContext, IMapper mapperConfig)
         {
             db = prestamoContext;
+            mapper = mapperConfig;
         }
 
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {
-            var prest = Mapper.Map<IEnumerable<PrestamoViewModel>>(await db.Prestamos.ToListAsync());
+            //var prest = Mapper.Map<IEnumerable<PrestamoViewModel>>(await db.Prestamos.ToListAsync());
+            var prest = mapper.Map<IEnumerable<PrestamoViewModel>>(await db.Prestamos.ToListAsync());
             return View(prest);
         }
 

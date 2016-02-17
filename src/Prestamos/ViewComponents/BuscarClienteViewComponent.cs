@@ -15,10 +15,12 @@ namespace Prestamos.ViewComponents
     public class BuscarClienteViewComponent : ViewComponent
     {
         private readonly PrestamoContext db;
+        private readonly IMapper mapper;
 
-        public BuscarClienteViewComponent(PrestamoContext context)
+        public BuscarClienteViewComponent(PrestamoContext context, IMapper mapperConfig)
         {
             db = context;
+            mapper = mapperConfig;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
@@ -40,7 +42,7 @@ namespace Prestamos.ViewComponents
             if (!String.IsNullOrEmpty(model.Apellido))
                 clientes = clientes.Where(c => c.PrimerApellido.Contains(model.Apellido) || c.SegundoApellido.Contains(model.Apellido));
 
-            ViewBag.clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync());
+            ViewBag.clientes = mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync());
             return View(model);
         }
 

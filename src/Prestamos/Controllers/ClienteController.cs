@@ -14,16 +14,28 @@ using Prestamos.Extensions;
 
 namespace Prestamos.Controllers
 {
+    [Route("api/[controller]")]
     public class ClienteController : Controller
     {
         private const string BaseBindString = "PrimerNombre, SegundoNombre, PrimerApellido, SegundoApellido, FechaNacimiento";
         private const string EditBindString = "Id, " + BaseBindString;
         private const string CreateBindString = "Cedula, " + BaseBindString;
         private readonly PrestamoContext db;
+        private readonly IMapper mapper;
 
-        public ClienteController(PrestamoContext prestamoContext)
+        public ClienteController(PrestamoContext prestamoContext, IMapper mapperConfig)
         {
             db = prestamoContext;
+            mapper = mapperConfig;
+        }
+
+        // GET: /<controller>/
+        [HttpGet]
+        public async Task<IEnumerable<ClienteViewModel>> Get()
+        {
+            //var clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
+            var clientes = mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
+            return clientes;
         }
 
         //TODO Sustituir todos los sitios donde se llame esto por Find, cuando se implemente
@@ -36,8 +48,8 @@ namespace Prestamos.Controllers
         {
             var cliente = await db.Clientes.Where(c => c.Cedula == cedula)
                                            .FirstOrDefaultAsync();
-
-            return Json(Mapper.Map<ClienteViewModel>(cliente));
+            
+            return Json(mapper.Map<ClienteViewModel>(cliente));
         }
 
         [HttpPost]
@@ -54,13 +66,14 @@ namespace Prestamos.Controllers
             if (!String.IsNullOrEmpty(model.Apellido))
                 clientes = clientes.Where(c => c.PrimerApellido.Contains(model.Apellido) || c.SegundoApellido.Contains(model.Apellido));
             
-            return Json(Mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync()));
+            return Json(mapper.Map<IEnumerable<ClienteViewModel>>(await clientes.ToListAsync()));
         }
 
         // GET: /<controller>/
         public async Task<IActionResult> Index()
         {
-            var clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
+            //var clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
+            var clientes = mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
             return View(clientes);
         }
 
@@ -72,7 +85,7 @@ namespace Prestamos.Controllers
                 if (cliente == null)
                     return base.HttpNotFound();
 
-                return View(Mapper.Map<ClienteViewModel>(cliente));
+                return View(mapper.Map<ClienteViewModel>(cliente));
             }
             else
             {
@@ -88,7 +101,7 @@ namespace Prestamos.Controllers
                 if (cliente == null)
                     return base.HttpNotFound();
 
-                return View(Mapper.Map<ClienteViewModel>(cliente));
+                return View(mapper.Map<ClienteViewModel>(cliente));
             }
             else
             {
@@ -103,7 +116,7 @@ namespace Prestamos.Controllers
             if (ModelState.IsValid)
             {
                 var cliente = await BuscarClienteId(model.Id);
-                cliente.MergeWith(Mapper.Map<Cliente>(model));
+                cliente.MergeWith(mapper.Map<Cliente>(model));
 
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -123,7 +136,7 @@ namespace Prestamos.Controllers
         {
             if (ModelState.IsValid)
             {
-                var cliente = Mapper.Map<Cliente>(model);
+                var cliente = mapper.Map<Cliente>(model);
                 db.Entry(cliente).State = EntityState.Added;
 
                 await db.SaveChangesAsync();
@@ -141,7 +154,7 @@ namespace Prestamos.Controllers
                 if (cliente == null)
                     return base.HttpNotFound();
 
-                return View(Mapper.Map<ClienteViewModel>(cliente));
+                return View(mapper.Map<ClienteViewModel>(cliente));
             }
             else
             {
