@@ -33,6 +33,7 @@ version.h
 node_modules/
 jspm_modules/
 src/*/wwwroot/lib/
+src/*/wwwroot/jspm_modules/
 publish/
 
 *.db
