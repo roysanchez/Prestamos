@@ -1,3 +1,22 @@
 ﻿<template>
-    <span>${message}</span>
+
+    <nav class="navbar navbar-light bg-faded"  role="navigation">
+        <div class="container">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand">Prestamos</a>
+            <ul class="nav navbar-nav">
+                <li repeat.for="row of router.navigation" class="nav-item"> <span class="sr-only">(actual)</span>
+                    <a href.bind="row.href" class="nav-link">${row.title}</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="loader" if.bind="router.isNavigating">
+                    <i class="fa fa-spinner fa-spin fa-2x"></i>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+        <div id="app" class="container page-host">
+            <router-view></router-view>
+        </div>
 </template>
