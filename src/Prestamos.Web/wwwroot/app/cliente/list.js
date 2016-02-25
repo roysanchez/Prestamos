@@ -9,8 +9,10 @@ class List {
     }
 
     activate(){
-        this.http.fetch('http://localhost:5001/api/Cliente').then(function(a){
-            alert(a);
+        this.http.fetch('http://localhost:5001/api/Cliente', { mode: 'cors' }).then(function(a){
+            a.json().then(function(b){
+                console.debug(b);
+            });
         });
     }
 }

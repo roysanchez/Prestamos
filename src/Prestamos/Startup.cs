@@ -49,6 +49,8 @@ namespace Prestamos
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+
             // Add Entity Framework services to the services container.
             var directory = CrearDirectorio();
             var filename = Configuration["Data:Sqlite:Filename"];
@@ -71,6 +73,7 @@ namespace Prestamos
 
             // Add MVC services to the services container.
             services.AddMvc();
+            services.AddCors();
 
             // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
             // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
@@ -98,6 +101,12 @@ namespace Prestamos
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                //builder.WithOrigins("*").AllowAnyHeader();
+            });
+
             loggerFactory.AddConsole(Configuration.GetSection("Loggin"));
 
             if (env.IsDevelopment())
@@ -142,9 +151,11 @@ namespace Prestamos
 
             // Add cookie-based authentication to the request pipeline.
             app.UseIdentity();
-
+            
             // Add MVC to the request pipeline.
             app.UseMvc();
+
+            
         }
 
         string CrearDirectorio()
