@@ -3,7 +3,33 @@
     <p>
         <a asp-action="Create"><i class="fa fa-plus-square-o fa-lg"></i> Crear cliente</a>
     </p>
-
-
-
+    <span>Cantidad de registros ${clientes.length}</span>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr repeat.for="cliente of clientes">
+                <td>
+                    ${cliente.Cedula}
+                </td>
+                <td>
+                    ${cliente.NombreCompleto}
+                </td>
+                <td>
+                    ${cliente.Edad}
+                </td>
+                <td class="espaciado">
+                    <a href="${cliente.Id}">A<i class="fa fa-pencil-square-o fa-2x"></i></a>
+                    <a href="${cliente.Id}">E<i class="fa fa-info fa-2x"></i></a>
+                    <a href="${cliente.Id}">I<i class="fa fa-trash-o fa-2x"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </template>

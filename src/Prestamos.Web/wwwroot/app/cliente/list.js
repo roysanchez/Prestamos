@@ -6,14 +6,13 @@ import {Cliente} from './cliente'
 class List {
     constructor(http){
         this.http = http;
+        this.clientes = [];
     }
 
     activate(){
-        this.http.fetch('http://localhost:5001/api/Cliente', { mode: 'cors' }).then(function(a){
-            a.json().then(function(b){
-                console.debug(b);
-            });
-        });
+        var addCliente = cl => this.clientes = cl.map(c => new Cliente(c));
+        return this.http.fetch('http://localhost:5001/api/Cliente', { mode: 'cors' })
+            .then(resp => resp.json().then(addCliente));
     }
 }
 

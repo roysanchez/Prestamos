@@ -101,12 +101,6 @@ namespace Prestamos
         // Configure is called after ConfigureServices is called.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
-                //builder.WithOrigins("*").AllowAnyHeader();
-            });
-
             loggerFactory.AddConsole(Configuration.GetSection("Loggin"));
 
             if (env.IsDevelopment())
@@ -151,7 +145,12 @@ namespace Prestamos
 
             // Add cookie-based authentication to the request pipeline.
             app.UseIdentity();
-            
+
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            });
+
             // Add MVC to the request pipeline.
             app.UseMvc();
 

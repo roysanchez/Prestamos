@@ -1,14 +1,17 @@
 ﻿class Cliente {
-    constructor(){
-        this.Cedula = '';
-        this.PrimerNombre = '';
-        this.SegundoNombre = '';
-        this.PrimerApellido = '';
-        this.SegundoApellido = '';
+    constructor(data){
+        this.Id = data.Id;
+        this.Cedula = data.Cedula;
+        this.PrimerNombre = data.PrimerNombre;
+        this.SegundoNombre = data.SegundoNombre;
+        this.PrimerApellido = data.PrimerApellido;
+        this.SegundoApellido = data.SegundoApellido;
+        this.Edad = data.Edad;
     }
 
     get NombreCompleto(){
-        return `${this.NombreCompleto} ${this.SegundoNombre} ${this.PrimerApellido} ${this.SegundoApellido}`;
+        let f = c => c || '';
+        return `${f(this.PrimerNombre)} ${f(this.SegundoNombre)} ${f(this.PrimerApellido)} ${f(this.SegundoApellido)}`;
     }
 }
 
