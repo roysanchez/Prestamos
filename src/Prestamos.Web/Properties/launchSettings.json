@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-{
-  "iisSettings": {
-    "windowsAuthentication": false,
-    "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:63081/",
-      "sslPort": 0
-    }
-  },
-  "profiles": {
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "environmentVariables": {
-        "Hosting:Environment": "Development"
-      }
-    },
-    "web": {
-      "commandName": "web",
-      "environmentVariables": {
-        "Hosting:Environment": "Development"
-      }
-    }
-  }
-=======
 {
   "iisSettings": {
     "windowsAuthentication": false,
@@ -48,5 +22,4 @@
       }
     }
   }
->>>>>>> da030e738d4051bd610bf486a912ab4b7dff8539
 }
