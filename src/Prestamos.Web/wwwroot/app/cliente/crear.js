@@ -1,11 +1,13 @@
 ﻿import { Cliente } from './cliente'
 
-class Create{
+class Create {
     constructor(){
         this.cliente = new Cliente();
     }
 
-    crear()
+    crear(){
+        alert(this.cliente.Cedula);
+    }
 }
 
 export { Create }

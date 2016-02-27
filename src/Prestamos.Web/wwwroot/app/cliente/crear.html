@@ -1,13 +1,13 @@
 ﻿<template>
     <h2>Crear cliente</h2>
-    <form method="post" submit.trigger="Crear" class="form-horizontal" role="form">
+    <form method="post" submit.trigger="crear()" class="form-horizontal" role="form" with.bind="cliente">
         <h4>Cliente</h4>
         <hr />
         <!--<div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>-->
         <fieldset class="form-group">
             <label for="Cedula" class="col-md-2 form-control-label">Cédula</label>
             <div class="col-md-4">
-                <input value.bind="Cedula" type="number" class="form-control" name="Cedula" />
+                <input value.bind="Cedula" type="text" class="form-control" name="Cedula" />
                 <!--<span asp-validation-for="Cedula" class="text-danger"></span>-->
             </div>
         </fieldset>
