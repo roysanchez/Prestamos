@@ -1,8 +1,10 @@
-﻿import { Cliente } from './cliente'
+﻿import {inject} from 'aurelia-framework';
+import { ClienteFactory } from './cliente';
 
+@inject(ClienteFactory)
 class Create {
-    constructor(){
-        this.cliente = new Cliente();
+    constructor(factory){
+        this.cliente = factory.Make();
     }
 
     crear(){

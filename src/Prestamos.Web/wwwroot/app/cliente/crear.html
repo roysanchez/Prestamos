@@ -1,49 +1,42 @@
 ﻿<template>
     <h2>Crear cliente</h2>
-    <form method="post" submit.trigger="crear()" class="form-horizontal" role="form" with.bind="cliente">
+    <form method="post" submit.delegate="crear()" class="form-horizontal" role="form" with.bind="cliente" validate.bind="validation">
         <h4>Cliente</h4>
         <hr />
-        <!--<div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>-->
         <fieldset class="form-group">
             <label for="Cedula" class="col-md-2 form-control-label">Cédula</label>
             <div class="col-md-4">
                 <input value.bind="Cedula" type="text" class="form-control" name="Cedula" />
-                <!--<span asp-validation-for="Cedula" class="text-danger"></span>-->
             </div>
         </fieldset>
         <fieldset class="form-group">
             <label for="PrimerNombre" class="col-md-2 form-control-label">Primer nombre</label>
             <div class="col-md-4">
                 <input value.bind="PrimerNombre" name="PrimerNombre" class="form-control" />
-                <!--<span asp-validation-for="PrimerNombre" class="text-danger"></span>-->
             </div>
         </fieldset>
         <fieldset class="form-group">
             <label for="SegundoNombre" class="col-md-2 form-control-label">Segundo nombre</label>
             <div class="col-md-4">
                 <input value.bind="SegundoNombre" class="form-control" />
-                <!--<span asp-validation-for="SegundoNombre" class="text-danger"></span>-->
             </div>
         </fieldset>
         <fieldset class="form-group">
             <label for="PrimerApellido" class="col-md-2 form-control-label">Primer apellido</label>
             <div class="col-md-4">
                 <input value.bind="PrimerApellido" class="form-control" />
-                <!--<span asp-validation-for="PrimerApellido" class="text-danger"></span>-->
             </div>
         </fieldset>
         <fieldset class="form-group">
             <label for="SegundoApellido" class="col-md-2 form-control-label">Segundo apellido</label>
             <div class="col-md-4">
                 <input value.bind="SegundoApellido" class="form-control" />
-                <!--<span asp-validation-for="SegundoApellido" class="text-danger"></span>-->
             </div>
         </fieldset>
         <fieldset class="form-group">
             <label for="FechaNacimiento" class="col-md-2 form-control-label">Fecha nacimiento</label>
             <div class="col-md-4">
                 <input value.bind="FechaNacimiento" type="date" class="form-control" />
-                <!--<span asp-validation-for="FechaNacimiento" class="text-danger"></span>-->
             </div>
         </fieldset>
         <div class="form-group">
@@ -53,6 +46,6 @@
         </div>
     </form>
     <div>
-        <!--<a asp-action="Index">Volver</a>-->
+        <a route-href="route: cliente">Volver</a>
     </div>
 </template>
