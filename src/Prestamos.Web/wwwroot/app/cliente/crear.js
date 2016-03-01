@@ -1,11 +1,17 @@
-﻿import { Cliente } from './cliente'
+﻿import {inject} from 'aurelia-framework';
+import { ClienteFactory } from './cliente';
 
-class Create{
-    constructor(){
-        this.cliente = new Cliente();
+@inject(ClienteFactory)
+class Create {
+    constructor(factory){
+        this.cliente = factory.Make();
     }
 
-    crear()
+    crear(){
+        this.cliente.validation.validate().then(c => {
+            alert(this.cliente.Cedula);
+        }).catch(() => {});;
+    }
 }
 
 export { Create }

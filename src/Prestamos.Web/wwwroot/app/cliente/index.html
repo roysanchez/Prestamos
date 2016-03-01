@@ -1,7 +1,7 @@
 ﻿<template>
     <h2>Listado de clientes</h2>
     <p>
-        <a asp-action="Create"><i class="fa fa-plus-square-o fa-lg"></i> Crear cliente</a>
+        <a route-href="route: cliente-crear"><i class="fa fa-plus-square-o fa-lg"></i> Crear cliente</a>
     </p>
     <span>Cantidad de registros ${clientes.length}</span>
     <table class="table">
@@ -25,7 +25,7 @@
                     ${cliente.Edad}
                 </td>
                 <td class="espaciado">
-                    <a href="${cliente.Id}">A<i class="fa fa-pencil-square-o fa-2x"></i></a>
+                    <a route-href="route: cliente-editar; params.bind: { id: cliente.Id }">Editar<i class="fa fa-pencil-square-o fa-2x"></i></a>
                     <a href="${cliente.Id}">E<i class="fa fa-info fa-2x"></i></a>
                     <a href="${cliente.Id}">I<i class="fa fa-trash-o fa-2x"></i></a>
                 </td>
