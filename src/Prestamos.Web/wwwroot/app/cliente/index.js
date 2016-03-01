@@ -1,19 +1,14 @@
 ﻿import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client'
 import {ClienteFactory} from './cliente' 
 
-@inject(HttpClient, ClienteFactory)
+@inject(ClienteFactory)
 class List {
-    constructor(http, factory){
-        this.http = http;
+    constructor(factory){
         this.factory = factory;
-        this.clientes = [];
     }
 
     activate(){
-        var addCliente = cl => this.clientes = cl.map(c => this.factory.Make(c));
-        return this.http.fetch('http://localhost:5001/api/Cliente', { mode: 'cors' })
-            .then(resp => resp.json().then(addCliente));
+        return this.factory.Get().then(cls => this.clientes = cls);
     }
 }
 
