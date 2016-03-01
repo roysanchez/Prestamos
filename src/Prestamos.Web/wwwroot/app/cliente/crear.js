@@ -8,7 +8,9 @@ class Create {
     }
 
     crear(){
-        alert(this.cliente.Cedula);
+        this.cliente.validation.validate().then(c => {
+            alert(this.cliente.Cedula);
+        }).catch(() => {});;
     }
 }
 
