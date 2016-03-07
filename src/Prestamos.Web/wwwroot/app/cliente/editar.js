@@ -8,7 +8,8 @@ class Editar {
     }
     //TODO; Cargar los datos del servicio de consulta
     activate(params) {
-        this.id = params.id;
+        return this.factory.GetById(params.id)
+                           .then(c => this.cliente = c);
     }
 }
 

@@ -31,11 +31,20 @@ namespace Prestamos.Controllers
 
         // GET: /<controller>/
         [HttpGet]
-        public async Task<IEnumerable<ClienteViewModel>> Get()
+        public async Task<IEnumerable<Cliente>> Get()
         {
-            //var clientes = Mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
-            var clientes = mapper.Map<IEnumerable<ClienteViewModel>>(await db.Clientes.ToListAsync());
-            return clientes;
+            return await db.Clientes.ToListAsync();
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var cliente =  await BuscarClienteId(id);
+
+            if (cliente == null)
+                return new HttpNotFoundResult();
+
+            return new ObjectResult(cliente);
         }
 
         //TODO Sustituir todos los sitios donde se llame esto por Find, cuando se implemente
@@ -43,7 +52,7 @@ namespace Prestamos.Controllers
         {
             return await db.Clientes.Where(c => c.Id == id).FirstOrDefaultAsync();
         }
-
+        /*
         public async Task<IActionResult> BuscarClienteCedula(string cedula)
         {
             var cliente = await db.Clientes.Where(c => c.Cedula == cedula)
@@ -180,5 +189,6 @@ namespace Prestamos.Controllers
                 return View(id);
             }
         }
+        */
     }
 }

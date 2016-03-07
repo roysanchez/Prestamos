@@ -4,20 +4,17 @@ import {jQuery} from 'jquery';
 import dataTable from 'datatables.net-bs4';
 import {ClienteFactory} from './cliente';
 
-@inject(HttpClient, ClienteFactory, jQuery)
+@inject(ClienteFactory, jQuery)
 class List {
-    constructor(http, factory, $){
-        this.http = http;
+    constructor(factory, $){
         this.factory = factory;
         this.$ = $;
         this.dt = dataTable(window, $);
         this.clientes = [];
     }
 
-    activate() {
-        var addCliente = cl => this.clientes = cl.map(c => this.factory.Make(c));
-        return this.http.fetch('http://localhost:5001/api/Cliente', { mode: 'cors' })
-            .then(resp => resp.json().then(addCliente));
+    activate(){
+        return this.factory.Get().then(cls => this.clientes = cls);
     }
 
     attached() {

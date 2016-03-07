@@ -1,4 +1,5 @@
 ﻿import {computedFrom, inject} from 'aurelia-framework';
+import {HttpClient} from 'aurelia-fetch-client'
 import {Validation} from 'aurelia-validation';
 
 
@@ -36,14 +37,30 @@ class Cliente {
     }
 }
 
-@inject(Validation)
+@inject(HttpClient, Validation)
 class ClienteFactory {
-    constructor(validation){
+    baseUrl = 'http://localhost:5001/api/Cliente';
+
+    constructor(http, validation){
+        this.http = http;
         this.validation = validation;
     }
 
     Make(data){
         return new Cliente(this.validation, data);
+    }
+
+    Get(){
+        let addClient = cl => cl.map(c => this.Make(c));
+        return this.http.fetch(this.baseUrl, { mode: 'cors' })
+                        .then(resp => resp.json())
+                        .then(addClient);
+    }
+
+    GetById(id){
+        return this.http.fetch(`${this.baseUrl}/${id}`, { mode: 'cors' })
+                        .then(resp => resp.json())
+                        .then(cl => this.Make(cl));
     }
 }
 
