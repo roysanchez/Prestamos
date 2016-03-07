@@ -14,7 +14,6 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
-
   map: {
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.1.2",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.0-beta.1.1.0",
@@ -24,6 +23,8 @@ System.config({
     "bootstrap": "npm:bootstrap@4.0.0-alpha.2",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.20",
+    "globaljquery": "npm:jquery@2.2.1",
+    "jquery": "resources/jquery",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -174,10 +175,10 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:bootstrap@4.0.0-alpha.2": {
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "jquery": "npm:jquery@2.2.1",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
+        "fs": "github:jspm/nodelibs-fs@0.1.2",
+        "jquery": "npm:jquery@2.2.1",
+        "path": "github:jspm/nodelibs-path@0.1.0",
+        "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:core-js@1.2.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
