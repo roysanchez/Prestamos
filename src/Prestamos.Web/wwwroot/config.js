@@ -20,7 +20,7 @@ System.config({
     "aurelia-validation": "npm:aurelia-validation@0.6.2",
     "babel": "npm:babel-core@5.8.35",
     "babel-runtime": "npm:babel-runtime@5.8.35",
-    "bootstrap": "npm:bootstrap@4.0.0-alpha.2",
+    "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.20",
     "globaljquery": "npm:jquery@2.2.1",
@@ -36,6 +36,10 @@ System.config({
     },
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
+    },
+    "github:twbs/bootstrap@4.0.0-alpha.2": {
+      "jquery": "github:components/jquery@2.2.1",
+      "tether": "github:HubSpot/tether@1.2.0"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
@@ -173,12 +177,6 @@ System.config({
     },
     "npm:babel-runtime@5.8.35": {
       "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:bootstrap@4.0.0-alpha.2": {
-        "fs": "github:jspm/nodelibs-fs@0.1.2",
-        "jquery": "npm:jquery@2.2.1",
-        "path": "github:jspm/nodelibs-path@0.1.0",
-        "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:core-js@1.2.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
