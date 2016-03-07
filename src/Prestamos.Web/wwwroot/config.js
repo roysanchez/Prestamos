@@ -23,6 +23,8 @@ System.config({
     "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
     "core-js": "npm:core-js@1.2.6",
     "css": "github:systemjs/plugin-css@0.1.20",
+    "datatables.net": "npm:datatables.net@1.10.11",
+    "datatables.net-bs": "npm:datatables.net-bs@1.10.11",
     "globaljquery": "npm:jquery@2.2.1",
     "jquery": "resources/jquery",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -189,6 +191,14 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:datatables.net-bs@1.10.11": {
+      "datatables.net": "npm:datatables.net@1.10.11",
+      "jquery": "npm:jquery@2.2.1"
+    },
+    "npm:datatables.net@1.10.11": {
+      "jquery": "npm:jquery@2.2.1",
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
