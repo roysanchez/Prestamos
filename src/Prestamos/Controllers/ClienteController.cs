@@ -42,7 +42,7 @@ namespace Prestamos.Controllers
             var cliente =  await BuscarClienteId(id);
 
             if (cliente == null)
-                return new HttpNotFoundResult();
+                return HttpNotFound();
 
             return new ObjectResult(cliente);
         }
@@ -52,6 +52,21 @@ namespace Prestamos.Controllers
         {
             return await db.Clientes.Where(c => c.Id == id).FirstOrDefaultAsync();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind(include: CreateBindString)]Cliente model)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(model).State = EntityState.Added;
+
+                await db.SaveChangesAsync();
+                return new HttpOkResult();
+            }
+
+            return HttpBadRequest(ModelState);
+        }
+
         /*
         public async Task<IActionResult> BuscarClienteCedula(string cedula)
         {
