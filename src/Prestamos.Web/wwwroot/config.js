@@ -14,11 +14,13 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   meta: {
-      'datatables.net-bs4': {
-          format: 'cjs'
-      }
+    "datatables.net-bs4": {
+      "format": "cjs"
+    }
   },
+
   map: {
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-beta.1.1.2",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.0-beta.1.1.0",
@@ -31,8 +33,10 @@ System.config({
     "datatables.net": "npm:datatables.net@1.10.11",
     "datatables.net-bs": "npm:datatables.net-bs@1.10.11",
     "datatables.net-bs4": "resources/datatables-bs4",
-    "globaljquery": "npm:jquery@2.2.1",
     "jquery": "resources/jquery",
+    "resources/jquery": {
+        "globaljquery": "npm:jquery@2.2.1"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
