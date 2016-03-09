@@ -54,7 +54,7 @@ namespace Prestamos.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind(include: CreateBindString)]Cliente model)
+        public async Task<IActionResult> Create([Bind(CreateBindString)][FromBody]Cliente model)
         {
             if (ModelState.IsValid)
             {
