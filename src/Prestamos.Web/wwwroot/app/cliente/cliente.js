@@ -14,7 +14,8 @@ class Cliente {
         this.PrimerApellido = data.PrimerApellido;
         this.SegundoApellido = data.SegundoApellido;
         this.Edad = data.Edad;
-
+        this.FechaNacimiento = data.FechaNacimiento;
+        
         this.validation = validation.on(this)
             .ensure('Cedula')
             .isNotEmpty()
@@ -35,14 +36,34 @@ class Cliente {
         let f = c => c || '';
         return `${f(this.PrimerNombre)} ${f(this.SegundoNombre)} ${f(this.PrimerApellido)} ${f(this.SegundoApellido)}`.trim();
     }
+
+    toJson(){
+        return JSON.stringify({
+            Id: this.Id,
+            Cedula: this.Cedula,
+            PrimerNombre: this.PrimerNombre,
+            SegundoNombre: this.SegundoNombre,
+            PrimerApellido: this.PrimerApellido,
+            SegundoApellido: this.SegundoApellido,
+            FechaNacimiento: this.FechaNacimiento
+        });
+    }
 }
 
 @inject(HttpClient, Validation)
 class ClienteFactory {
-    baseUrl = 'http://localhost:5001/api/Cliente';
-
     constructor(http, validation){
-        this.http = http;
+        this.http = http.configure(config => {
+            config
+                .useStandardConfiguration()
+                .withBaseUrl('http://localhost:5001/api/Cliente')
+                .withDefaults({
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    mode: 'cors'
+                });
+        });
         this.validation = validation;
     }
 
@@ -52,15 +73,20 @@ class ClienteFactory {
 
     Get(){
         let addClient = cl => cl.map(c => this.Make(c));
-        return this.http.fetch(this.baseUrl, { mode: 'cors' })
+        return this.http.fetch('')
                         .then(resp => resp.json())
                         .then(addClient);
     }
 
     GetById(id){
-        return this.http.fetch(`${this.baseUrl}/${id}`, { mode: 'cors' })
+        return this.http.fetch(`/${id}`)
                         .then(resp => resp.json())
                         .then(cl => this.Make(cl));
+    }
+
+    Create(cliente){
+        return this.http.fetch('', { method: 'post', body: cliente.toJson() })
+                        .then(resp => console.debug(resp));
     }
 }
 
