@@ -33,7 +33,7 @@ class Cliente {
     @computedFrom('PrimerNombre', 'SegundoNombre', 'PrimerApellido', 'SegundoApellido')
     get NombreCompleto(){
         let f = c => c || '';
-        return `${f(this.PrimerNombre)} ${f(this.SegundoNombre)} ${f(this.PrimerApellido)} ${f(this.SegundoApellido)}`;
+        return `${f(this.PrimerNombre)} ${f(this.SegundoNombre)} ${f(this.PrimerApellido)} ${f(this.SegundoApellido)}`.trim();
     }
 }
 

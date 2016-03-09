@@ -1,3 +1,51 @@
 ﻿<template>
-    <h1>Editar</h1>
+    <h2>Editar cliente "${cliente.NombreCompleto}"</h2>
+    <form method="post" submit.delegate="editar()" class="form-horizontal" role="form" with.bind="cliente" validate.bind="validation">
+        <h4>Cliente</h4>
+        <hr />
+        <fieldset class="form-group">
+            <label for="Cedula" class="col-md-2 form-control-label">Cédula</label>
+            <div class="col-md-4">
+                <input value.bind="Cedula" type="text" class="form-control" name="Cedula" disabled/>
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="PrimerNombre" class="col-md-2 form-control-label">Primer nombre</label>
+            <div class="col-md-4">
+                <input value.bind="PrimerNombre" name="PrimerNombre" class="form-control" />
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="SegundoNombre" class="col-md-2 form-control-label">Segundo nombre</label>
+            <div class="col-md-4">
+                <input value.bind="SegundoNombre" class="form-control" />
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="PrimerApellido" class="col-md-2 form-control-label">Primer apellido</label>
+            <div class="col-md-4">
+                <input value.bind="PrimerApellido" class="form-control" />
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="SegundoApellido" class="col-md-2 form-control-label">Segundo apellido</label>
+            <div class="col-md-4">
+                <input value.bind="SegundoApellido" class="form-control" />
+            </div>
+        </fieldset>
+        <fieldset class="form-group">
+            <label for="FechaNacimiento" class="col-md-2 form-control-label">Fecha nacimiento</label>
+            <div class="col-md-4">
+                <input value.bind="FechaNacimiento" type="date" class="form-control" />
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+    <div>
+        <a route-href="route: cliente">Volver</a>
+    </div>
 </template>
