@@ -122,16 +122,17 @@ namespace Prestamos
                 // Add Error handling middleware which catches all application specific errors and
                 // sends the request to the following path or controller action.
                 app.UseExceptionHandler("/Home/Error");
-
-                try
-                {
-                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                    {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
-                    }
-                }
-                catch { }
             }
+
+            try
+            {
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<PrestamoContext>().Database.Migrate();
+                }
+            }
+            catch { }
 
 
             // Add the platform handler to the request pipeline.
@@ -139,7 +140,7 @@ namespace Prestamos
 
             // Add static files to the request pipeline.
             //https://github.com/aspnet/StaticFiles/issues/10
-            
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
